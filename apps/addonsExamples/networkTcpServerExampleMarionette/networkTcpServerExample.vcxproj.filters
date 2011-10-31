@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxThread\src\ofxThread.cpp">
+      <Filter>addons\ofxThread\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileList.cpp" />
+    <ClCompile Include="src\GuiHandler.cpp" />
+    <ClCompile Include="src\GuiPanel.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Radio.cpp" />
+    <ClCompile Include="src\Slider.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="src\TextField.cpp" />
+    <ClCompile Include="src\UiObject.cpp" />
+    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxDirList\src\ofxDirList.cpp">
+      <Filter>addons\ofxDirList</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxJSON\lib\json_reader.cpp">
+      <Filter>addons\ofxJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxJSON\lib\json_value.cpp">
+      <Filter>addons\ofxJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxJSON\lib\json_writer.cpp">
+      <Filter>addons\ofxJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxTimer\ofxTimer.cpp">
+      <Filter>addons\ofxTimer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxThread\src\ofxThread.h">
+      <Filter>addons\ofxThread\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h">
+      <Filter>addons\ofxNetwork\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileList.h" />
+    <ClInclude Include="src\GuiHandler.h" />
+    <ClInclude Include="src\GuiPanel.h" />
+    <ClInclude Include="src\Radio.h" />
+    <ClInclude Include="src\Slider.h" />
+    <ClInclude Include="src\Spacer.h" />
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="src\TextField.h" />
+    <ClInclude Include="src\UiObject.h" />
+    <ClInclude Include="src\Button.h" />
+    <ClInclude Include="..\..\..\addons\ofxDirList\src\ofxDirList.h">
+      <Filter>addons\ofxDirList</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\lib\json_batchallocator.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\autolink.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\config.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\features.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\forwards.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\json.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\reader.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\value.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxJSON\include\json\writer.h">
+      <Filter>addons\ofxJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxTimer\ofxTimer.h">
+      <Filter>addons\ofxTimer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="addons">
+      <UniqueIdentifier>{d79abca0-5b91-4000-9e03-3b535f96d5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxNetwork">
+      <UniqueIdentifier>{1c7bb1b0-9ed3-4f3b-a662-e17f9aaffbbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxThread">
+      <UniqueIdentifier>{41ca78c6-26dd-454d-b5a6-d53fd9f1440e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxThread\src">
+      <UniqueIdentifier>{3c1294d2-dfbf-4279-9543-3bf672b99775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxNetwork\src">
+      <UniqueIdentifier>{526df9d7-c9b8-47b9-a5d8-0bd0f7abfabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDirList">
+      <UniqueIdentifier>{e322ffe2-e1fb-4c6e-8625-2c65b03f2be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxJSON">
+      <UniqueIdentifier>{84a08fe6-4f7d-407d-b2d9-8e55746e12b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTimer">
+      <UniqueIdentifier>{a056a637-f31b-491b-8cf4-e064f3267fdb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
