@@ -34,9 +34,10 @@
 #define ALL 3
 
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "cs"
 
 #define PnInterval 500
+#define secShift 83
 /*
 pn02
 pn05
@@ -61,7 +62,7 @@ void testApp::setup()
 	#ifdef _MOVIE_
 	fingerMovie.loadMovie("MVI_8225.MOV");
 	#else
-	vocals.loadSound("MVI_8225.mp3");
+	vocals.loadSound("MVI_0091.mp3");
 	vocals.setMultiPlay(false);
 	#endif
 	
@@ -258,49 +259,49 @@ void testApp::update(){
 						while((*it).at(0) != 'a')
 							it++;
 						trigIndex = 320;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 1:
 						while((*it).at(0) != 'b')
 							it++;
 						trigIndex = 321;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 3:
 						while((*it).at(0) != 'e')
 							it++;
 						trigIndex = 323;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 4:
 						while((*it).at(0) != 'g')
 							it++;
 						trigIndex = 324;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 5:
 						while((*it).at(0) != 'd')
 							it++;
 						trigIndex = 325;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 6:
 						while((*it).at(0) != 'f')
 							it++;
 						trigIndex = 326;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 7:
 						while((*it).at(0) != 'h')
 							it++;
 						trigIndex = 327;
-						//vocals.play();
+						vocals.play();
 						break;
 					case 8:
 						while((*it).at(0) != 'i')
 							it++;
 						trigIndex = 328;
-						//vocals.play();
+						vocals.play();
 						break;
 					}
 					ContinueTimer();
@@ -448,9 +449,8 @@ void testApp::update(){
 				fingerMovie.play();
 				fingerMovie.setPosition((float)totalSec/(float)243936);
 				#else
-				vocals.setLoop(true);
-				//vocals.play();
-				vocals.setPosition((float)totalSec/(float)243936);
+				vocals.play();
+				vocals.setPosition((double)(totalSec/1000+secShift)/(double)852);
 				#endif
 		}
 		#ifndef _ILAN_
@@ -704,7 +704,7 @@ void testApp::update(){
 			myValue54 = 0;
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-			reqBatch("pn23=50",ALL);
+			reqBatch("pn23=300",ALL);
 			ofSleepMillis(1500);
 			reqBatch("save",ALL);
 			ofSleepMillis(1500);
