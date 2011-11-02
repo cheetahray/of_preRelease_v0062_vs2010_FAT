@@ -76,7 +76,7 @@ void testApp::setup()
 	    Panel1->addRadioElement(54,"No");
 		Panel1->addRadioElement(54,"Yes");
 		Panel1->addButton("Get Axises",100,20,"TRIGGER"/*"SWITCH"*/,true, 52, &myValue52);
-	    Panel1->addTextField(INTERVAL,140,20, "", 62, &myValue62);
+	    Panel1->addTextField(INTERVAL,140,20, ofToString(root[FIRSTINDEX][INTERVAL].asInt() - 1), 62, &myValue62);
 		Panel1->addTextField("Motor Index",140,20, FIRSTINDEX, 55, &myValue55);
 		#endif	
 		Panel1->addButton("Action!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 53, &myValue53);
@@ -704,8 +704,27 @@ void testApp::update(){
 			myValue54 = 0;
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-			reqBatch("pn23=300",ALL);
-			ofSleepMillis(1500);
+
+			reqBatch("pn23=300",LEFT);
+			ofSleepMillis(500);
+			reqBatch("pn23=300",RIGHT);
+			ofSleepMillis(500);
+			
+			reqAT(T4,"pn23=300",UP);
+			ofSleepMillis(100);
+			reqAT(T5,"pn23=300",UP);
+			ofSleepMillis(100);
+			reqAT(T6,"pn23=300",UP);
+			ofSleepMillis(100);
+			reqAT(T0,"pn23=50",UP);
+			ofSleepMillis(100);
+			reqAT(T1,"pn23=50",UP);
+			ofSleepMillis(100);
+			reqAT(T2,"pn23=50",UP);
+			ofSleepMillis(100);
+			reqAT(T3,"pn23=50",UP);
+			ofSleepMillis(100);
+			
 			reqBatch("save",ALL);
 			ofSleepMillis(1500);
 			reqBatch("H",ALL);
