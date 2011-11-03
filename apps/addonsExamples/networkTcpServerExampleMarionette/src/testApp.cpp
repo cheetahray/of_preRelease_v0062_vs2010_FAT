@@ -34,7 +34,7 @@
 #define ALL 3
 
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "eh"
 
 #define PnInterval 500
 #define secShift 83
@@ -76,7 +76,7 @@ void testApp::setup()
 	    Panel1->addRadioElement(54,"No");
 		Panel1->addRadioElement(54,"Yes");
 		Panel1->addButton("Get Axises",100,20,"TRIGGER"/*"SWITCH"*/,true, 52, &myValue52);
-	    Panel1->addTextField(INTERVAL,140,20, ofToString(root[FIRSTINDEX][INTERVAL].asInt() - 1), 62, &myValue62);
+	    Panel1->addTextField(INTERVAL,140,20, ofToString(root[FIRSTINDEX][INTERVAL].asInt() + 1), 62, &myValue62);
 		Panel1->addTextField("Motor Index",140,20, FIRSTINDEX, 55, &myValue55);
 		#endif	
 		Panel1->addButton("Action!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 53, &myValue53);
@@ -427,7 +427,8 @@ void testApp::update(){
 		else if (gui->listenForTrigger(53) == true)
 		{
 				trigIndex = 53;
-				myValue54 = totalSec = 0;
+				myValue54 = 0;
+				totalSec = 0;
 				preventStupid = false;
 				motorMember = root.getMemberNames();
 				it = motorMember.begin();
@@ -440,7 +441,7 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asInt();
+						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -450,7 +451,7 @@ void testApp::update(){
 				fingerMovie.setPosition((float)totalSec/(float)243936);
 				#else
 				vocals.play();
-				vocals.setPosition((double)(totalSec/1000+secShift)/(double)852);
+				vocals.setPosition((double)(totalSec+secShift)/(double)852);
 				#endif
 		}
 		#ifndef _ILAN_
@@ -1669,7 +1670,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 31;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1688,7 +1689,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 31;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1703,17 +1704,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
+						timeInt /= 30; // 後退 << 2 掛點
+						break;
 					case '1':
-						timeInt /= 310; // 後退 << 2 掛點
+						timeInt /= 300; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 31; // 轉頭 >> 2 還是掛點
+						timeInt /= 30; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 31; // 轉身怕掉下來
+						timeInt /= 30; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 31;
+						timeInt /= 30;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)

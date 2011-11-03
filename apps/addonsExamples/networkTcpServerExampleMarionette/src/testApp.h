@@ -135,7 +135,7 @@ class testApp : public ofSimpleApp
 		ofSoundPlayer  vocals;
 		#endif
 		float 			synthPosition;
-		long			totalSec;
+		double			totalSec;
 
 		ofTrueTypeFont  franklinBook;
 		
