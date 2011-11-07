@@ -34,7 +34,7 @@
 #define ALL 3
 
 #define MIDDLE 0
-#define FIRSTINDEX "eh"
+#define FIRSTINDEX "a0"
 
 #define PnInterval 500
 #define secShift 83
@@ -60,10 +60,10 @@ void testApp::setup()
 	readJSON();
 
 	#ifdef _MOVIE_
-	fingerMovie.loadMovie("MVI_8225.MOV");
+	vocals.loadMovie("MVI_8225.mp4");
 	#else
 	vocals.loadSound("MVI_0091.mp3");
-	vocals.setMultiPlay(false);
+	//vocals.setMultiPlay(false);
 	#endif
 	
 	gui = new GuiHandler;
@@ -370,7 +370,7 @@ void testApp::update(){
 
 		//ACTIVATING FUNCTION FROM A BUTTON PRESS:
 		//ideally i would like to use an event, but for now:
-		
+		#ifndef _ILAN_
 		bool fireTrigger = gui->listenForTrigger(51);
 		while (fireTrigger == true)
 		{
@@ -386,17 +386,14 @@ void testApp::update(){
 			//reqBatch("mr-10000",RIGHT);
 			ofSleepMillis(5000);
 		}
-		
+		#endif
 		if (gui->listenForTrigger(2) == true)
 		{
 			myValue54 = 0;
 			trigIndex = -1;
-			#ifdef _MOVIE_
-			fingerMovie.stop();
-			fingerMovie.firstFrame();
-			#else
+			
 			vocals.stop();
-			#endif
+			
 			reqBatch(STOP_STR,ALL);
 			ofSleepMillis(1500);
 			if(false == preventStupid)
@@ -446,13 +443,10 @@ void testApp::update(){
 					}
 				}
 				ContinueTimer();
-				#ifdef _MOVIE_
-				fingerMovie.play();
-				fingerMovie.setPosition((float)totalSec/(float)243936);
-				#else
+				
 				vocals.play();
-				vocals.setPosition((double)(totalSec+secShift)/(double)852);
-				#endif
+				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
+
 		}
 		#ifndef _ILAN_
 		else if (gui->listenForTrigger(56) == true)
@@ -1139,7 +1133,7 @@ void testApp::update(){
 		}
 		*/
 		#ifdef _MOVIE_
-		fingerMovie.idleMovie();
+		vocals.idleMovie();
 		#else
 		ofSoundUpdate();
 		#endif
@@ -1336,9 +1330,9 @@ void testApp::draw(){
 	franklinBook.drawString(msgRx, 700, 150);
 	#ifdef _MOVIE_
 	#ifndef _ILAN_
-		fingerMovie.draw(700, 20);
+		vocals.draw(700, 20);
 	#else
-		fingerMovie.draw(350, 10);
+		vocals.draw(25, 10);
 	#endif
 	#endif	
 }
@@ -1357,12 +1351,9 @@ void testApp::keyReleased  (int key)
 	{
 		myValue54 = 0;
 		trigIndex = -1;
-		#ifdef _MOVIE_
-		fingerMovie.stop();
-		fingerMovie.firstFrame();
-		#else
+		
 		vocals.stop();
-		#endif
+		
 		reqBatch(STOP_STR,ALL);
 		ofSleepMillis(1500);
 	}

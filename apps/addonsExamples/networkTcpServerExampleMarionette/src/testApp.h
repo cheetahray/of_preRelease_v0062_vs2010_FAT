@@ -130,7 +130,7 @@ class testApp : public ofSimpleApp
 		ofxTimer timer;
 
 		#ifdef _MOVIE_
-		ofVideoPlayer 		fingerMovie;
+		ofVideoPlayer 		vocals;
 		#else
 		ofSoundPlayer  vocals;
 		#endif
