@@ -34,7 +34,7 @@
 #define ALL 3
 
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "dw"
 
 #define PnInterval 500
 #define secShift 83
@@ -1661,7 +1661,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 31;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1680,7 +1680,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 31;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1695,19 +1695,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 30; // 後退 << 2 掛點
+						timeInt /= 31; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 300; // 後退 << 2 掛點
+						timeInt /= 310; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 30; // 轉頭 >> 2 還是掛點
+						timeInt /= 31; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 30; // 轉身怕掉下來
+						timeInt /= 31; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 30;
+						timeInt /= 31;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
