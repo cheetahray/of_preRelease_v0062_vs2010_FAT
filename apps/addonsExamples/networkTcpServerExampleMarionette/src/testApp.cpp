@@ -34,7 +34,7 @@
 #define ALL 3
 
 #define MIDDLE 0
-#define FIRSTINDEX "dw"
+#define FIRSTINDEX "a0"
 
 #define PnInterval 500
 #define secShift 83
@@ -59,13 +59,15 @@ void testApp::setup()
 	ofBackground(127,127,127);
 	readJSON();
 
+	#ifdef _PLAY_
 	#ifdef _MOVIE_
 	vocals.loadMovie("MVI_8225.mp4");
 	#else
 	vocals.loadSound("MVI_0091.mp3");
 	//vocals.setMultiPlay(false);
 	#endif
-	
+	#endif
+
 	gui = new GuiHandler;
 	int idx = 0;
 
@@ -259,49 +261,65 @@ void testApp::update(){
 						while((*it).at(0) != 'a')
 							it++;
 						trigIndex = 320;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 1:
 						while((*it).at(0) != 'b')
 							it++;
 						trigIndex = 321;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 3:
 						while((*it).at(0) != 'e')
 							it++;
 						trigIndex = 323;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 4:
 						while((*it).at(0) != 'g')
 							it++;
 						trigIndex = 324;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 5:
 						while((*it).at(0) != 'd')
 							it++;
 						trigIndex = 325;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 6:
 						while((*it).at(0) != 'f')
 							it++;
 						trigIndex = 326;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 7:
 						while((*it).at(0) != 'h')
 							it++;
 						trigIndex = 327;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					case 8:
 						while((*it).at(0) != 'i')
 							it++;
 						trigIndex = 328;
+						#ifdef _PLAY_
 						vocals.play();
+						#endif
 						break;
 					}
 					ContinueTimer();
@@ -391,9 +409,9 @@ void testApp::update(){
 		{
 			myValue54 = 0;
 			trigIndex = -1;
-			
+			#ifdef _PLAY_
 			vocals.stop();
-			
+			#endif
 			reqBatch(STOP_STR,ALL);
 			ofSleepMillis(1500);
 			if(false == preventStupid)
@@ -443,10 +461,10 @@ void testApp::update(){
 					}
 				}
 				ContinueTimer();
-				
+				#ifdef _PLAY_
 				vocals.play();
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
-
+				#endif
 		}
 		#ifndef _ILAN_
 		else if (gui->listenForTrigger(56) == true)
@@ -1351,9 +1369,9 @@ void testApp::keyReleased  (int key)
 	{
 		myValue54 = 0;
 		trigIndex = -1;
-		
+		#ifdef _PLAY_
 		vocals.stop();
-		
+		#endif
 		reqBatch(STOP_STR,ALL);
 		ofSleepMillis(1500);
 	}
@@ -1661,7 +1679,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 31;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1680,7 +1698,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 31;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1695,19 +1713,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 31; // 後退 << 2 掛點
+						timeInt /= 30; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 310; // 後退 << 2 掛點
+						timeInt /= 300; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 31; // 轉頭 >> 2 還是掛點
+						timeInt /= 30; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 31; // 轉身怕掉下來
+						timeInt /= 30; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 31;
+						timeInt /= 30;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
@@ -1880,7 +1898,9 @@ void testApp::Interval(ofEventArgs &e)
 				preventStupid = true;
 			}
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.stop();
+			#endif
 		}
 		break;
 	case 320:
@@ -1891,7 +1911,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 321:
@@ -1902,7 +1924,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 322:
@@ -1913,19 +1937,25 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 323:
 		if((*it).at(0) == 'e')
 		{
 			PnMaExchange();
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 324:
@@ -1936,7 +1966,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 325:
@@ -1947,7 +1979,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 326:
@@ -1958,7 +1992,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 327:
@@ -1969,7 +2005,9 @@ void testApp::Interval(ofEventArgs &e)
 		else
 		{
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.setPaused(true);
+			#endif
 		}
 		break;
 	case 328:
@@ -2003,7 +2041,9 @@ void testApp::Interval(ofEventArgs &e)
 				preventStupid = true;
 			}
 			trigIndex = -1;
+			#ifdef _PLAY_
 			vocals.stop();
+			#endif
 		}
 		break;
 	}

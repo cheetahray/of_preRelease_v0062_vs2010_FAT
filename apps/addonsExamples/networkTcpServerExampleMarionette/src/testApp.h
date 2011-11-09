@@ -129,11 +129,14 @@ class testApp : public ofSimpleApp
 		ofstream ofout;
 		ofxTimer timer;
 
+		#ifdef _PLAY_
 		#ifdef _MOVIE_
 		ofVideoPlayer 		vocals;
 		#else
 		ofSoundPlayer  vocals;
 		#endif
+		#endif
+
 		float 			synthPosition;
 		double			totalSec;
 
