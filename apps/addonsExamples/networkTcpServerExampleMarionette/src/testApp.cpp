@@ -27,6 +27,7 @@
 #define LFCR "\r\n"
 #define INTERVAL "Interval"
 #define SPEEDIVIDER "SpeedDivider"
+#define JSON "json.txt"
 
 #define UP 0
 #define LEFT 1
@@ -1210,7 +1211,7 @@ void testApp::draw(){
 						{
 							if(ofout.is_open() == false )
 							{
-								ofout.open(ofToDataPath("json.txt", true).c_str());
+								ofout.open(ofToDataPath(JSON, true).c_str());
 							}
 							root[myValue55][INTERVAL] = ofToInt(myValue62);
 							//if(myValue50.empty() == false)
@@ -1312,7 +1313,7 @@ void testApp::draw(){
 						{
 							if(ofout.is_open() == false )
 							{
-								ofout.open(ofToDataPath("json.txt", true).c_str());
+								ofout.open(ofToDataPath(JSON, true).c_str());
 							}
 							root[myValue55][INTERVAL] = ofToInt(myValue62);
 							//if(myValue50.empty() == false)
@@ -1605,7 +1606,7 @@ void testApp::readJSON()
 {
 	string str,strTotal;
 	ifstream in;
-	in.open(ofToDataPath("json.txt", true).c_str());
+	in.open(ofToDataPath(JSON, true).c_str());
 	getline(in,str);
 	while ( in ) {
 		strTotal += str;
