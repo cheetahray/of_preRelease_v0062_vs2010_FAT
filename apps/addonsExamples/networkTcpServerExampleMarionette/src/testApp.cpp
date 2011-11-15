@@ -33,7 +33,7 @@
 #define LEFT 1
 #define RIGHT 2
 #define ALL 3
-
+//dl,dn,ds,ed
 #define MIDDLE 0
 #define FIRSTINDEX "a0"
 

@@ -14,6 +14,7 @@
 #define bytesRequired 1024
 #define _TWO_
 #define _UP_
+#define _PLAY_
 //#define _MOVIE_
 //#define _ILAN_
 #include "ofMain.h"
