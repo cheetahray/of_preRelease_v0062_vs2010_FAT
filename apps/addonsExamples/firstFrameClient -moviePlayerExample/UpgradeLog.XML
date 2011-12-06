@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="moviePlayerExample">
+</Property><Property Name="Solution File" Value="D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.sln">
+</Property><Property Name="User Options File" Value="D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.suo">
+</Property><Property Name="Date" Value="Tuesday, December 06, 2011">
+</Property><Property Name="Time" Value="10:47 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="moviePlayerExample.sln" Description="File successfully backed up as D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="moviePlayerExample.suo" Description="File successfully backed up as D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.suo.old">
+</Event><Event ErrorLevel="0" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="Converting project file 'D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.vcproj'.">
+</Event><Event ErrorLevel="1" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="MSB8012: $(TargetName) ('moviePlayerExample') does not match the Linker's OutputFile property value 'bin\moviePlayerExample_debug.exe' ('moviePlayerExample_debug') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetName) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="1" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="MSB8012: $(TargetPath) ('D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\bin\moviePlayerExample.exe') does not match the Linker's OutputFile property value 'bin\moviePlayerExample_debug.exe' ('D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\bin\moviePlayerExample_debug.exe') in project configuration 'Debug|Win32'. This may cause your project to build incorrectly. To correct this, please make sure that $(TargetPath) property value matches the value specified in %(Link.OutputFile).">
+</Event><Event ErrorLevel="0" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="Done converting to new project file 'D:\of_preRelease_v0062_vs2010_FAT\apps\addonsExamples\firstFrameClient -moviePlayerExample\moviePlayerExample.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="moviePlayerExample" Source="moviePlayerExample.vcproj" Description="Converted">
+</Event><Event ErrorLevel="3" Project="openframeworksLib" Source="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="moviePlayerExample.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="moviePlayerExample.sln" Description="Converted">
+</Event></UpgradeLog>
