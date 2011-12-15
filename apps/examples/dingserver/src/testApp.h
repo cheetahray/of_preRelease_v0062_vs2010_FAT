@@ -1,7 +1,6 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
-
 #include "ofMain.h"
 #include "ofxNetwork.h"
 #include "ofxXmlSettings.h"
@@ -21,13 +20,13 @@ class testApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void resized(int w, int h);
-		void ultostr(char *buf, unsigned long uval, int base, int uppercase);
+		//void ultostr(char *buf, unsigned long uval, int base, int uppercase);
 		ofVideoPlayer 		fingerMovie;
-		bool                frameByframe, index[2];
-		int					firstTime, miniSeconds;
+		bool                frameByframe, index[12], iftcp;
+		int					firstTime, miniSeconds, lastFrame, nowFrame, count, howmuch;
 		ofxTCPServer		TCP;
         ofxXmlSettings XML;
-
+        float xx, yy;
 };
 
 #endif

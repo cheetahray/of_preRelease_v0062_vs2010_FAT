@@ -21,17 +21,14 @@ class testApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void resized(int w, int h);
-		void ultostr(char *buf, unsigned long uval, int base , int uppercase);
+		//void ultostr(char *buf, unsigned long uval, int base , int uppercase);
 		ofVideoPlayer 		fingerMovie;
-		bool                frameByframe;
+		bool                frameByframe, iftcp, weConnected;
         string  Server;
 		ofxTCPClient tcpClient;
         ofxXmlSettings XML;
-		int connectTime, miniSeconds;
-		int deltaTime;
-		int firstTime;
-		bool weConnected;
-	
+		int connectTime, miniSeconds, deltaTime, firstTime, lastFrame, nowFrame;
+        float xx, yy;
 };
 
 #endif

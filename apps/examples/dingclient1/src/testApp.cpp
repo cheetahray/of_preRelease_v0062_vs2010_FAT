@@ -12,18 +12,31 @@ void testApp::setup(){
     {
 		miniSeconds = XML.getValue("CONFIG:miniSeconds", mini);
         Server = XML.getValue("CONFIG:IP", SERVER);
+        xx = XML.getValue("CONFIG:x", 1024);
+        yy = XML.getValue("CONFIG:y", 768);
+        fingerMovie.loadMovie(XML.getValue("CONFIG:file", "fingers.mov"));
+        iftcp = XML.getValue("CONFIG:iftcp", true);
 	}
     else{
 		miniSeconds = mini;
         Server = SERVER;
+        xx = 1024;
+        yy = 768;
+        fingerMovie.loadMovie("fingers.mov");
+        iftcp = false;
 	}
-	fingerMovie.loadMovie("fingers.mov");
-	
-	connectTime = 0;
-	deltaTime = 0;
-	firstTime = 0;
-	weConnected = tcpClient.setup(Server, 11999);
-	tcpClient.setVerbose(true);
+	lastFrame = nowFrame = 0;
+	if(true == iftcp)
+    {   
+        connectTime = deltaTime = firstTime = 0;
+        weConnected = tcpClient.setup(Server, 11999);
+        tcpClient.setVerbose(true);
+    }
+    else
+    {
+        fingerMovie.play();
+        fingerMovie.setLoopState(OF_LOOP_NORMAL);
+    }
 
 }
 
@@ -32,55 +45,67 @@ void testApp::update() {
 	
     fingerMovie.idleMovie();
 	
-	if(true == weConnected)
-	{
-		if(0 == firstTime)
-		{
-			tcpClient.send("1");
-		}
-		else if(1 == firstTime && fingerMovie.getIsMovieDone())
-		{
-			tcpClient.send("1");
-			firstTime = 2;
-		}
+    if(true == iftcp)
+    {   
+        if(true == weConnected)
+        {
+            nowFrame = fingerMovie.getCurrentFrame();
+            
+            if(0 == firstTime)
+            {
+                tcpClient.send("1");
+            }
+            else if(1 == firstTime)
+            {
+                if( true == (nowFrame < lastFrame) )
+                {
+                    //fingerMovie.firstFrame();
+                    fingerMovie.setPaused(true);
+                    tcpClient.send("1");
+                    firstTime = 2;
+                }
+            }
 	
-		//if data has been sent lets update our text
-		string str = tcpClient.receive();
+            //if data has been sent lets update our text
+            string str = tcpClient.receive();
 		
-		if( str.length() > 0 )
-		{
+            if( str.length() > 0 )
+            {
 			
-			if(5 == ofToInt(str))
-			{
-				ofSleepMillis(miniSeconds);
+                if(5 == ofToInt(str))
+                {
+                    ofSleepMillis(miniSeconds);
 				
-				if(0 == firstTime)
-				{
-		
-					fingerMovie.play();
-					fingerMovie.setLoopState(OF_LOOP_NONE);
-				}
-				else
-					fingerMovie.firstFrame();
+                    if(0 == firstTime)
+                    {
+                    
+                        fingerMovie.play();
+                        fingerMovie.setLoopState(OF_LOOP_NORMAL);
+                    }
+                    else
+                    {
+                        fingerMovie.setPaused(false);
+                    }
+                    
+                    firstTime = 1;
 
-				firstTime = 1;
-
-			}
+                }
 			
-		}
-
-	}
-	else
-	{
-		//if we are not connected lets try and reconnect every 5 seconds
-		deltaTime = ofGetElapsedTimeMillis() - connectTime;
+            }
+            lastFrame = nowFrame;
+        }
+        else
+        {
+            //if we are not connected lets try and reconnect every 5 seconds
+            deltaTime = ofGetElapsedTimeMillis() - connectTime;
 		
-		if( deltaTime > 3000 ){
-			weConnected = tcpClient.setup(SERVER, PORT);
-			connectTime = ofGetElapsedTimeMillis();
-		}
+            if( deltaTime > 3000 ){
+                weConnected = tcpClient.setup(SERVER, PORT);
+                connectTime = ofGetElapsedTimeMillis();
+            }
 		
-	}
+        }
+    }
 
 }
 
@@ -89,7 +114,7 @@ void testApp::draw(){
 
 	//ofSetColor(0xFFFFFF);
 
-    fingerMovie.draw(0,0);
+    fingerMovie.draw(0,0,xx,yy);
     
 	/*
 	ofSetColor(0x000000);
@@ -127,7 +152,7 @@ void testApp::draw(){
 	*/
 	//ofDrawBitmapString(ofToString(fingerMovie.getCurrentFrame()),1240,10);
 }
-
+/*
 void testApp::ultostr(char *buf, unsigned long uval, int base , int uppercase)
 {
 	int digit;
@@ -146,7 +171,7 @@ void testApp::ultostr(char *buf, unsigned long uval, int base , int uppercase)
 		}
 	} while (uval);
 }
-
+*/
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){
     switch(key){

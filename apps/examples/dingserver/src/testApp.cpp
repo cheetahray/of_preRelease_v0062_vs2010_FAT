@@ -10,62 +10,113 @@ void testApp::setup(){
     if( XML.loadFile("mySettings.xml") )
     {
 		miniSeconds = XML.getValue("CONFIG:miniSeconds", mini);
+        fingerMovie.loadMovie(XML.getValue("CONFIG:file", "fingers.mp4"));
+        xx = XML.getValue("CONFIG:x", 1024);
+        yy = XML.getValue("CONFIG:y", 768);
+        iftcp = XML.getValue("CONFIG:iftcp", false);
+        howmuch = XML.getValue("CONFIG:howmany", 3);
 	}
     else{
 		miniSeconds = mini;
+        fingerMovie.loadMovie("fingers.mp4");
+        xx = 1024;
+        yy = 768;
+        iftcp = false;
+        howmuch = 3;
 	}
-    
-	fingerMovie.loadMovie("fingers.mov");
-	firstTime = 0;
-	index[0] = index[1] = false;//= index[2] = index[3] = false;
-	TCP.setup(PORT);
+   
+    count = lastFrame = nowFrame = firstTime = 0;
+	while(count < howmuch)
+    {
+        index[count++] = false;
+    }
+    if(true == iftcp)
+    {                          
+        TCP.setup(PORT);
+    }
+    else
+    {
+        fingerMovie.play();
+        fingerMovie.setLoopState(OF_LOOP_NORMAL);                          
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
     fingerMovie.idleMovie();
 	
-	for(int i = 0; i < TCP.getNumClients(); i++)
-	{
-		if(0 == firstTime || fingerMovie.getIsMovieDone())
-		{
-			string str = TCP.receive(i);
+    if(true == iftcp)
+    {
+    
+        nowFrame = fingerMovie.getCurrentFrame();
+        
+        if( 1 == firstTime && ( nowFrame < lastFrame ) )
+        {    
+            //fingerMovie.firstFrame();
+            fingerMovie.setPaused(true);
+            firstTime = 2;
+        }
+        
+        //if( 0 == firstTime || nowFrame < 300 || (nowFrame > totalFrame - 300) )
+        {
+            for(int i = 0; i < TCP.getNumClients(); i++)
+            {
+                string str = TCP.receive(i);
 		 
-			if( str.length() > 0 )
-			{
-				if(1 == ofToInt(str))
-				{
-					index[i] = true; 
-				}
-			}	
-		}
+                if( str.length() > 0 )
+                {
+                    if(1 == ofToInt(str))
+                    {
+                        index[i] = true;
+                    }
+                }	
+            }
 
-	}
+        }
+        
+        bool totalBool = true;
+        count = 0;
+        while (count < howmuch) {
+            if(false == index[count++])
+            {
+                totalBool = false;
+                break;
+            }
+        }
+        
+        if(true == totalBool)
+        {
+            
+            count = 0;
+            while(count < howmuch)
+            {
+                TCP.send(count++, "5");
+            }
+            
+            ofSleepMillis(miniSeconds);
 
-	if(true == index[0] && true == index[1])// && true == index[2] && true == index[3])
-	{
-        /*
-		TCP.send(3, "5");
-		TCP.send(2, "5");
-		*/
-        TCP.send(1, "5");
-		TCP.send(0, "5");
-
-		ofSleepMillis(miniSeconds);
-
-		if(firstTime == 0)
-		{
-			fingerMovie.play();
-			fingerMovie.setLoopState(OF_LOOP_NONE);
-			firstTime = 1;
-		}
-		else
-		{
-			fingerMovie.firstFrame();
-		}
-		index[0] = index[1] = false; //index[2] = index[3] = false;
-	}
-	
+            if(firstTime == 0)
+            {
+                fingerMovie.play();
+                fingerMovie.setLoopState(OF_LOOP_NORMAL);
+            }
+            else
+            {
+                fingerMovie.setPaused(false);
+            }
+            firstTime = 1;
+        
+            count = 0;
+            while(count < howmuch)
+            {
+                index[count++] = false;
+            }
+            
+        }
+        
+        lastFrame = nowFrame;
+    }
 }
 
 //--------------------------------------------------------------
@@ -76,7 +127,7 @@ void testApp::draw(){
 
 
 
-    fingerMovie.draw(0, 0);//.draw(0,0,1920,1080);
+    fingerMovie.draw(0,0,xx,yy);
     /*
 	ofSetColor(0x000000);
     unsigned char * pixels = fingerMovie.getPixels();
@@ -113,7 +164,7 @@ void testApp::draw(){
 	//ofDrawBitmapString(ofToString(fingerMovie.getCurrentFrame()),0,10);
 	
 }
-
+/*
 void testApp::ultostr(char *buf, unsigned long uval, int base, int uppercase)
 {
 	int digit;
@@ -132,7 +183,7 @@ void testApp::ultostr(char *buf, unsigned long uval, int base, int uppercase)
 		}
 	} while (uval);
 }
-
+*/
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){
     switch(key){

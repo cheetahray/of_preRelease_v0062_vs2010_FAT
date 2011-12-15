@@ -1,4 +1,8 @@
 <CONFIG>
-        <IP>192.168.11.162</IP>
-        <miniSeconds>50</miniSeconds>
+        <IP>192.168.11.35</IP>
+        <miniSeconds>0</miniSeconds>
+        <x>1920</x>
+        <y>1080</y>
+        <file>fingers.mov</file>
+        <iftcp>1</iftcp>
 </CONFIG>
