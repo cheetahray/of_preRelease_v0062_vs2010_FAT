@@ -43,12 +43,12 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update() {
 	
-    fingerMovie.idleMovie();
-	
     if(true == iftcp)
     {   
         if(true == weConnected)
         {
+            fingerMovie.idleMovie();
+            
             nowFrame = fingerMovie.getCurrentFrame();
             
             if(0 == firstTime)
@@ -106,6 +106,8 @@ void testApp::update() {
 		
         }
     }
+    else
+        fingerMovie.idleMovie();
 
 }
 
@@ -113,8 +115,9 @@ void testApp::update() {
 void testApp::draw(){
 
 	//ofSetColor(0xFFFFFF);
-
-    fingerMovie.draw(0,0,xx,yy);
+    
+    if(true == weConnected || false == iftcp)
+        fingerMovie.draw(0,0,xx,yy);
     
 	/*
 	ofSetColor(0x000000);
