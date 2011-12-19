@@ -12,9 +12,10 @@
 //#define OF_ADDON_USING_OFXXMLSETTINGS
 
 #define bytesRequired 1024
-#define _TWO_
-#define _UP_
-#define _PLAY_
+//#define _TWO_
+//#define _UP_
+#define _IR_
+//#define _PLAY_
 //#define _MOVIE_
 //#define _ILAN_
 #include "ofMain.h"
@@ -113,7 +114,9 @@ class testApp : public ofSimpleApp
 		#ifdef _TWO_
 		ofSerial	serialL,serialR;
 		#endif	
-
+		#ifdef _IR_
+		ofSerial serialA;
+		#endif
 		string msgRx, myValue50, myValue55, myValue62, lastss, myValue63, myValue38;
 		unsigned char bytes[bytesRequired];
 		char tmpBytes[bytesRequired];

@@ -195,13 +195,16 @@ void testApp::setup()
 	// arduino users check in arduino app....
 
 	#ifdef _TWO_
-	serialL.setup(/**/"\\\\.\\COM13",9600);  						  // windows example
-	serialR.setup(/**/"\\\\.\\COM19",9600);  						  // windows example
+	serialL.setup(/**/"\\\\.\\COM5",9600);  						  // windows example
+	serialR.setup(/**/"\\\\.\\COM3",9600);  						  // windows example
 	#endif
 	#ifdef _UP_
 	//serial.setup(/**/"\\\\.\\COM15",9600);  						  // windows example
-	serial.setup(/**/"\\\\.\\COM18",9600);  						  // windows example
+	serial.setup(/**/"\\\\.\\COM4",9600);  						  // windows example
 	#endif
+	#ifdef _IR_
+	serialA.setup(/**/"\\\\.\\COM6",9600);
+	#endif 
 	cptr = bytes;
 	upValue0=ouValue0=upValue1=ouValue1=upValue2=ouValue2=upValue3=ouValue3=upValue4=ouValue4=upValue5=ouValue5=upValue6=ouValue6=lValue0=olValue0=lValue1=olValue1=lValue2=olValue2=lValue3=olValue3=lValue4=olValue4=lValue5=olValue5=lValue6=olValue6=lValue7=olValue7=lValue8=olValue8=lValue9=olValue9=lValue10=olValue10=rValue0=orValue0=rValue1=orValue1=rValue2=orValue2=rValue3=orValue3=rValue4=orValue4=rValue5=orValue5=rValue6=orValue6=rValue7=orValue7=rValue8=orValue8=rValue9=orValue9=rValue10=orValue10=0;
 	weConnected = tcpClient.setup("127.0.0.1", 11999);
@@ -1185,6 +1188,32 @@ void testApp::draw(){
     ofDrawBitmapString(temp, 10,150);
     //ofDrawBitmapString(myString3, 10,170);
 	*/
+	#ifdef _IR_
+	if ( serialA.available() > 0)
+	{
+		if (trigIndex == -1 )
+		{
+			franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
+			/*
+			if(65 == serialA.readByte())
+			{
+				trigIndex = 53;
+				myValue54 = 0;
+				totalSec = 0;
+				preventStupid = false;
+				motorMember = root.getMemberNames();
+				it = motorMember.begin();
+				ContinueTimer();
+				#ifdef _PLAY_
+				vocals.play();
+				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
+				#endif
+			}
+			*/
+		}
+		serialA.flush();
+	}
+	#endif
 	#ifdef _UP_
 	if ( serial.available() > 0)
 	{
