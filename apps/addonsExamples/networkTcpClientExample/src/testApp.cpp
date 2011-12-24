@@ -1,7 +1,8 @@
 #include "testApp.h"
 
 #define RECONNECT_TIME 400
-
+#define SERVER "192.168.11.40"
+#define PORT 90123
 //--------------------------------------------------------------
 void testApp::setup(){
 
@@ -26,7 +27,7 @@ void testApp::setup(){
 
 	//are we connected to the server - if this fails we
 	//will check every few seconds to see if the server exists
-	weConnected = tcpClient.setup("192.168.11.40", 90123);
+	weConnected = tcpClient.setup(SERVER,PORT);
 
 	connectTime = 0;
 	deltaTime = 0;
@@ -52,7 +53,7 @@ void testApp::update(){
 		deltaTime = ofGetElapsedTimeMillis() - connectTime;
 
 		if( deltaTime > 5000 ){
-			weConnected = tcpClient.setup("192.168.11.40", 90123);
+			weConnected = tcpClient.setup(SERVER,PORT);
 			connectTime = ofGetElapsedTimeMillis();
 		}
 
@@ -70,7 +71,7 @@ void testApp::draw(){
 		monosm.drawString(msgTx, 85, 55);
 	}
 	else{
-		if(weConnected)monosm.drawString("status: type something to send data to port 11999", 15, 55);
+		if(weConnected)monosm.drawString("status: type something to send data to port " + ofToString(PORT), 15, 55);
 		else monosm.drawString("status: server not found. launch server app and check ports!\n\nreconnecting in "+ofToString( (5000 - deltaTime) / 1000 )+" seconds", 15, 55);
 	}
 
