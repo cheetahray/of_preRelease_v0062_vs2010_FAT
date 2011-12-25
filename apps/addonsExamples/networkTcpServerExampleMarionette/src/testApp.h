@@ -18,6 +18,7 @@
 #define _PLAY_
 //#define _MOVIE_
 #define _ILAN_
+#define _TCP_
 #include "ofMain.h"
 #include "ofAddons.h"
 #include "GuiHandler.h"
@@ -99,15 +100,17 @@ class testApp : public ofSimpleApp
 		int     rValue9,orValue9;
 		int     rValue10,orValue10;
 		
-        int which, connectTime, deltaTime, myValue54, myValue58, trigIndex, myValue40;
+        int which, myValue54, myValue58, trigIndex, myValue40;
 
 		/*
         bool toggle1a;
         bool toggle1b;
 		string  myString3;
 		*/
-
+		#ifdef _TCP_
+		int connectTime, deltaTime;
 		ofxTCPClient tcpClient;
+		#endif
 		#ifdef _UP_
 		ofSerial	serial;
 		#endif
