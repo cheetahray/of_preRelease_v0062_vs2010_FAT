@@ -35,7 +35,7 @@
 #define ALL 3
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "ch"
 
 #define PnInterval 500
 #define secShift 83
@@ -195,12 +195,12 @@ void testApp::setup()
 	// arduino users check in arduino app....
 
 	#ifdef _TWO_
-	serialL.setup(/**/"\\\\.\\COM5",9600);  						  // windows example
-	serialR.setup(/**/"\\\\.\\COM3",9600);  						  // windows example
+	serialL.setup(/**/"\\\\.\\COM7",9600);  						  // windows example
+	serialR.setup(/**/"\\\\.\\COM5",9600);  						  // windows example
 	#endif
 	#ifdef _UP_
 	//serial.setup(/**/"\\\\.\\COM15",9600);  						  // windows example
-	serial.setup(/**/"\\\\.\\COM4",9600);  						  // windows example
+	serial.setup(/**/"\\\\.\\COM8",9600);  						  // windows example
 	#endif
 	#ifdef _IR_
 	serialA.setup(/**/"\\\\.\\COM6",9600);
@@ -1497,11 +1497,13 @@ void testApp::reqQuestion(string a, int which){
 void testApp::reqAT(string realCmd, string b, int which){
 	//reqflush(which);
 	realCmd.append(b);
+	int guan = 0;
 	switch(which)
 	{
 	case UP:
 		#ifdef _TWO_
-		if( realCmd.at(1) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(2) != '0' )
 		#endif
@@ -1518,7 +1520,8 @@ void testApp::reqAT(string realCmd, string b, int which){
 		request(realCmd,RIGHT);
 		break;
 	case ALL:
-		if( realCmd.at(1) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(2) != '0' )
 				request(realCmd,UP);
@@ -1533,10 +1536,12 @@ void testApp::reqAT(string realCmd, string b, int which){
 
 void testApp::resAT(string realCmd, string b, int which){
 	realCmd.append(b);
+	int guan = 0;
 	switch(which)
 	{
 	case UP:
-		if( realCmd.at(1) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(2) != '0' )
 				cmdQuene.push_back(realCmd);
@@ -1553,7 +1558,8 @@ void testApp::resAT(string realCmd, string b, int which){
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
 			cmdQueneL.push_back(realCmd);
 		cmdQueneR.push_back(realCmd);
-		if( realCmd.at(1) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(2) != '0' )
 				cmdQuene.push_back(realCmd);
@@ -1565,10 +1571,12 @@ void testApp::resAT(string realCmd, string b, int which){
 
 void testApp::reqFAQ(string realCmd, string b, int which){
 	realCmd.append(b);
+	int guan = 0;
 	switch(which)
 	{
 	case UP:
-		if( realCmd.at(2) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(3) != '0' )
 				cmdQuene.push_back(realCmd);
@@ -1585,7 +1593,8 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
 			cmdQueneL.push_back(realCmd);
 		cmdQueneR.push_back(realCmd);
-		if( realCmd.at(2) - '0' <= 6 )
+		guan = realCmd.at(1) - '0'; 
+		if( guan <= 6 && guan >= 2 )
 		{
 			if( realCmd.at(3) != '0' )
 				cmdQuene.push_back(realCmd);
@@ -1888,6 +1897,7 @@ void testApp::MaTimer()
 		timer.startTimer();
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
+		
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
 	}

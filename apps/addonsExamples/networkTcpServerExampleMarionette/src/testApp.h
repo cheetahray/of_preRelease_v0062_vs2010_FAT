@@ -15,9 +15,9 @@
 //#define _TWO_
 //#define _UP_
 #define _IR_
-//#define _PLAY_
+#define _PLAY_
 //#define _MOVIE_
-//#define _ILAN_
+#define _ILAN_
 #include "ofMain.h"
 #include "ofAddons.h"
 #include "GuiHandler.h"
