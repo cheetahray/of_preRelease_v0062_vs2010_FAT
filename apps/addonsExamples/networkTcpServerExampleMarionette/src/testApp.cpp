@@ -211,10 +211,14 @@ void testApp::setup()
 	upValue0=ouValue0=upValue1=ouValue1=upValue2=ouValue2=upValue3=ouValue3=upValue4=ouValue4=upValue5=ouValue5=upValue6=ouValue6=lValue0=olValue0=lValue1=olValue1=lValue2=olValue2=lValue3=olValue3=lValue4=olValue4=lValue5=olValue5=lValue6=olValue6=lValue7=olValue7=lValue8=olValue8=lValue9=olValue9=lValue10=olValue10=rValue0=orValue0=rValue1=orValue1=rValue2=orValue2=rValue3=orValue3=rValue4=orValue4=rValue5=orValue5=rValue6=orValue6=rValue7=orValue7=rValue8=orValue8=rValue9=orValue9=rValue10=orValue10=0;
 	preventStupid = readyBreak = waitRes = false;	
 	trigIndex = -1;
-	#ifdef _TCP_
+	#ifdef _LUMI_
 	deltaTime = connectTime = 0;
 	weConnected = tcpClient.setup(SERVER,PORT);
 	tcpClient.setVerbose(true);
+	#endif
+	#ifdef _KINECT_
+	kinectConnected = kinectClient.setup("127.0.0.1",11999);
+	kinectClient.setVerbose(true);
 	#endif
 	InPn = true;
 	timer.setup(0,false);
@@ -227,13 +231,20 @@ void testApp::update(){
 
 		int found;
 		//we are connected - lets send our text and check what we get back
-		#ifdef _TCP_
-		if(weConnected)
+		#ifdef _KINECT_
+		if(kinectConnected)
 		{
-			//tcpClient.send(msgTx);
-
+			//kinectClient.send(msgTx);
+			#ifdef _LUMI_
+			if(true == weConnected)
+			{
+				tcpClient.send("setdmx(1,255)");
+				//ofSleepMillis(500);
+			}
+			#endif
+				
 			//if data has been sent lets update our text
-			string str = tcpClient.receive();
+			string str = kinectClient.receive();
 			if( str.length() > 0 ){
 				msgRx = str;
 				if(trigIndex == -1)
@@ -340,7 +351,7 @@ void testApp::update(){
 			deltaTime = ofGetElapsedTimeMillis() - connectTime;
 
 			if( deltaTime > 5000 ){
-				weConnected = tcpClient.setup(SERVER,PORT);
+				weConnected = kinectClient.setup(SERVER,PORT);
 				connectTime = ofGetElapsedTimeMillis();
 			}
 
@@ -449,7 +460,7 @@ void testApp::update(){
 		}
 		else if (gui->listenForTrigger(53) == true)
 		{
-				#ifdef _TCP_
+				#ifdef _LUMI_
 				if(true == weConnected)
 				{
 					tcpClient.send("setdmx(1,255)");
@@ -1204,19 +1215,14 @@ void testApp::draw(){
 		if ( -1 == trigIndex )
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
-			int AN = 78;
-
-			while(78 == AN)
+			
+			if(65 == serialA.readByte())
 			{
-				AN = serialA.readByte();
-			}
-
-			if(65 == AN)
-			{
-				#ifdef _TCP_
+				#ifdef _LUMI_
 				if(true == weConnected)
 				{
 					tcpClient.send("setdmx(1,255)");
+					ofSleepMillis(500);
 				}
 				#endif
 				trigIndex = 53;
@@ -1919,7 +1925,7 @@ void testApp::MaTimer()
 		timer.startTimer();
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
-		#ifdef _TCP_
+		#ifdef _LUMI_
 		tcpClient.send("setdmx(" + ofToString((int)ofRandom(2,4)) + "," + ofToString((int)ofRandom(0,255)) + ")");
 		#endif    
 		//else
@@ -1938,7 +1944,7 @@ void testApp::Interval(ofEventArgs &e)
 		}
 		else
 		{
-			#ifdef _TCP_
+			#ifdef _LUMI_
 			if(true == weConnected)
 			{
 				tcpClient.send("setdmx(1,0)");
@@ -2087,7 +2093,7 @@ void testApp::Interval(ofEventArgs &e)
 		}
 		else
 		{
-			#ifdef _TCP_
+			#ifdef _LUMI_
 			if(true == weConnected)
 			{
 				tcpClient.send("setdmx(1,0)");

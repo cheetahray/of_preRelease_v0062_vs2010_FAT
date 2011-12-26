@@ -15,10 +15,13 @@
 //#define _TWO_
 //#define _UP_
 #define _IR_
+#ifndef _IR_
+#define _KINECT_
+#endif
 #define _PLAY_
 //#define _MOVIE_
 #define _ILAN_
-#define _TCP_
+#define _LUMI_
 #include "ofMain.h"
 #include "ofAddons.h"
 #include "GuiHandler.h"
@@ -67,7 +70,7 @@ class testApp : public ofSimpleApp
 
 		GuiHandler*         gui;
 
-        bool    myValue1,myValue2,myValue3,myValue4,myValue5,weConnected, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, InPn;
+        bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, InPn;
 		bool	myValue34, myValue35, myValue36, myValue37, myValue60, myValue61, readyBreak, waitRes, timeOutContinue, myValue64, myValue32, myValue33, myValue39, myValue42;
         
 		int     upValue0,ouValue0;
@@ -107,9 +110,14 @@ class testApp : public ofSimpleApp
         bool toggle1b;
 		string  myString3;
 		*/
-		#ifdef _TCP_
+		#ifdef _LUMI_
 		int connectTime, deltaTime;
 		ofxTCPClient tcpClient;
+		bool weConnected;
+		#endif
+		#ifdef _KINECT_
+		ofxTCPClient kinectClient;
+		bool kinectConnected;
 		#endif
 		#ifdef _UP_
 		ofSerial	serial;
