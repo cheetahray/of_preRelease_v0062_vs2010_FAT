@@ -235,13 +235,6 @@ void testApp::update(){
 		if(kinectConnected)
 		{
 			//kinectClient.send(msgTx);
-			#ifdef _LUMI_
-			if(true == weConnected)
-			{
-				tcpClient.send("setdmx(1,255)");
-				//ofSleepMillis(500);
-			}
-			#endif
 				
 			//if data has been sent lets update our text
 			string str = kinectClient.receive();
@@ -249,6 +242,14 @@ void testApp::update(){
 				msgRx = str;
 				if(trigIndex == -1)
 				{
+					#ifdef _LUMI_
+					if(true == weConnected)
+					{
+						tcpClient.send("!");
+						RGB = 2;
+						//tcpClient.send("setdmx(1,255)");
+					}
+					#endif
 					int myValueHere = -1;
 					if (msgRx.find("01")!=string::npos)
 					{
@@ -463,7 +464,8 @@ void testApp::update(){
 				#ifdef _LUMI_
 				if(true == weConnected)
 				{
-					tcpClient.send("setdmx(1,255)");
+					tcpClient.send("!");
+					RGB = 2;
 				}
 				#endif
 				trigIndex = 53;
@@ -1221,8 +1223,9 @@ void testApp::draw(){
 				#ifdef _LUMI_
 				if(true == weConnected)
 				{
-					tcpClient.send("setdmx(1,255)");
-					ofSleepMillis(500);
+					tcpClient.send("!");
+					RGB = 2;
+					//tcpClient.send("setdmx(1,255)");
 				}
 				#endif
 				trigIndex = 53;
@@ -1236,10 +1239,21 @@ void testApp::draw(){
 				vocals.play();
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
+				connectTime = ofGetElapsedTimeMillis();
 			}
 
 		}
 		serialA.flush();
+	}
+	if(53 == trigIndex && thatInt > 0)
+	{
+		deltaTime = ofGetElapsedTimeMillis() - connectTime;
+		if(abs(now1 - deltaTime * 255 / thatInt) > 10)
+		{
+			now1 = deltaTime * 255 / thatInt;
+			if(now1 <= 255)
+				tcpClient.send("setdmx(1," + ofToString(255 - now1) + ")");
+		}
 	}
 	#endif
 	#ifdef _UP_
@@ -1918,15 +1932,18 @@ void testApp::ContinueTimer()
 void testApp::MaTimer()
 {
 
-	int thisInt = root[*it][INTERVAL].asInt();
-	if(thisInt > 0)
+	thatInt = root[*it][INTERVAL].asInt();
+	if(thatInt > 0)
 	{
-		timer.setTimer(thisInt-PnInterval);
+		timer.setTimer(thatInt-PnInterval);
 		timer.startTimer();
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
 		#ifdef _LUMI_
-		tcpClient.send("setdmx(" + ofToString((int)ofRandom(2,4)) + "," + ofToString((int)ofRandom(0,255)) + ")");
+		if(5 == RGB)
+			RGB = 2;
+		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(0,255)) + ")");
+		connectTime = ofGetElapsedTimeMillis();
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );

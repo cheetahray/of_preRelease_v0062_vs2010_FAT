@@ -103,7 +103,7 @@ class testApp : public ofSimpleApp
 		int     rValue9,orValue9;
 		int     rValue10,orValue10;
 		
-        int which, myValue54, myValue58, trigIndex, myValue40;
+        int which, myValue54, myValue58, trigIndex, myValue40, thatInt;
 
 		/*
         bool toggle1a;
@@ -111,7 +111,7 @@ class testApp : public ofSimpleApp
 		string  myString3;
 		*/
 		#ifdef _LUMI_
-		int connectTime, deltaTime;
+		int connectTime, deltaTime, now1, RGB;
 		ofxTCPClient tcpClient;
 		bool weConnected;
 		#endif
