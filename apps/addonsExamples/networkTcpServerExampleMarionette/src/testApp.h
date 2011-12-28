@@ -12,15 +12,16 @@
 //#define OF_ADDON_USING_OFXXMLSETTINGS
 
 #define bytesRequired 1024
-//#define _TWO_
-//#define _UP_
+#define _TWO_
+#define _UP_
 #define _IR_
+#define _GUAN_
 #ifndef _IR_
 #define _KINECT_
 #endif
 #define _PLAY_
 //#define _MOVIE_
-#define _ILAN_
+//#define _ILAN_
 #define _LUMI_
 #include "ofMain.h"
 #include "ofAddons.h"
