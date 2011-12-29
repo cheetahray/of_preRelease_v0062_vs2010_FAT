@@ -247,7 +247,7 @@ void testApp::update(){
 					{
 						tcpClient.send("!");
 						RGB = 2;
-						tcpClient.send("setdmx(3,255)");
+						//tcpClient.send("setdmx(3,255)");
 					}
 					#endif
 					int myValueHere = -1;
@@ -1225,7 +1225,7 @@ void testApp::draw(){
 				{
 					tcpClient.send("!");
 					RGB = 2;
-					tcpClient.send("setdmx(3,255)");
+					//tcpClient.send("setdmx(3,255)");
 				}
 				#endif
 				trigIndex = 53;
@@ -1239,7 +1239,7 @@ void testApp::draw(){
 				vocals.play();
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
-				connectTime = ofGetElapsedTimeMillis();
+				//connectTime = ofGetElapsedTimeMillis();
 			}
 
 		}
@@ -1248,11 +1248,13 @@ void testApp::draw(){
 	if(53 == trigIndex && thatInt > 0)
 	{
 		deltaTime = ofGetElapsedTimeMillis() - connectTime;
-		if(abs(now1 - deltaTime * 255 / thatInt) > 5)
+		if(abs(now1 - (deltaTime * 255) / thatInt) > 5)
 		{
-			now1 = deltaTime * 255 / thatInt;
-			if(now1 <= 255)
-				tcpClient.send("setdmx(1," + ofToString(255 - now1) + ")");
+			now1 = (deltaTime * 255) / thatInt;
+			if( now1 < 128 )
+				tcpClient.send("setdmx(1," + ofToString(now1 << 1) + ")");
+			else if( now1 < 256)
+				tcpClient.send("setdmx(1," + ofToString( (256 - now1) << 1 ) + ")");
 		}
 	}
 	#endif
@@ -1966,12 +1968,12 @@ void testApp::MaTimer()
 		#ifdef _LUMI_
 		if(5 == RGB)
 			RGB = 2;
-		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(0,255)) + ")");
-		connectTime = ofGetElapsedTimeMillis();
+		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(127,255)) + ")");
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
 	}
+	connectTime = ofGetElapsedTimeMillis();
 }
 
 void testApp::Interval(ofEventArgs &e)
