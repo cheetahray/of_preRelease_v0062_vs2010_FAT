@@ -35,7 +35,7 @@
 #define ALL 3
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "ch"
+#define FIRSTINDEX "a0"
 
 #define PnInterval 500
 #define secShift 83
@@ -211,10 +211,12 @@ void testApp::setup()
 	upValue0=ouValue0=upValue1=ouValue1=upValue2=ouValue2=upValue3=ouValue3=upValue4=ouValue4=upValue5=ouValue5=upValue6=ouValue6=lValue0=olValue0=lValue1=olValue1=lValue2=olValue2=lValue3=olValue3=lValue4=olValue4=lValue5=olValue5=lValue6=olValue6=lValue7=olValue7=lValue8=olValue8=lValue9=olValue9=lValue10=olValue10=rValue0=orValue0=rValue1=orValue1=rValue2=orValue2=rValue3=orValue3=rValue4=orValue4=rValue5=orValue5=rValue6=orValue6=rValue7=orValue7=rValue8=orValue8=rValue9=orValue9=rValue10=orValue10=0;
 	preventStupid = readyBreak = waitRes = false;	
 	trigIndex = -1;
-	#ifdef _LUMI_
 	deltaTime = connectTime = 0;
+	#ifdef _LUMI_
 	weConnected = tcpClient.setup(SERVER,PORT);
 	tcpClient.setVerbose(true);
+	#else
+	DMX.setup(/**/"\\\\.\\COM16",9600);
 	#endif
 	#ifdef _KINECT_
 	kinectConnected = kinectClient.setup("127.0.0.1",11999);
@@ -245,10 +247,12 @@ void testApp::update(){
 					#ifdef _LUMI_
 					if(true == weConnected)
 					{
-						tcpClient.send("!");
+						//tcpClient.send("!");
 						RGB = 2;
 						//tcpClient.send("setdmx(3,255)");
 					}
+					#else
+						RGB = 2;
 					#endif
 					int myValueHere = -1;
 					if (msgRx.find("01")!=string::npos)
@@ -464,9 +468,11 @@ void testApp::update(){
 				#ifdef _LUMI_
 				if(true == weConnected)
 				{
-					tcpClient.send("!");
+					//tcpClient.send("!");
 					RGB = 2;
 				}
+				#else
+					RGB = 2;
 				#endif
 				trigIndex = 53;
 				myValue54 = 0;
@@ -490,7 +496,7 @@ void testApp::update(){
 				ContinueTimer();
 				#ifdef _PLAY_
 				vocals.play();
-				vocals.setLoop(OF_LOOP_NORMAL);
+				vocals.setSpeed(185.0/237.0);
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
 		}
@@ -518,7 +524,7 @@ void testApp::update(){
 			ofSleepMillis(750);
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-			reqBatch("pn11=13",ALL);
+			reqBatch("pn11=10",ALL);
 			ofSleepMillis(1500);
 			reqBatch("pn24=2000",ALL);
 			ofSleepMillis(1500);
@@ -1224,10 +1230,12 @@ void testApp::draw(){
 				#ifdef _LUMI_
 				if(true == weConnected)
 				{
-					tcpClient.send("!");
+					//tcpClient.send("!");
 					RGB = 2;
 					//tcpClient.send("setdmx(3,255)");
 				}
+				#else
+					RGB = 2;
 				#endif
 				trigIndex = 53;
 				myValue54 = 0;
@@ -1238,7 +1246,7 @@ void testApp::draw(){
 				ContinueTimer();
 				#ifdef _PLAY_
 				vocals.play();
-				vocals.setLoop(OF_LOOP_NORMAL);
+				vocals.setSpeed(185.0/237.0);
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
 				//connectTime = ofGetElapsedTimeMillis();
@@ -1251,14 +1259,17 @@ void testApp::draw(){
 	if(53 == trigIndex && thatInt > 0)
 	{
 		deltaTime = ofGetElapsedTimeMillis() - connectTime;
-		if(abs(now1 - (deltaTime * 255) / thatInt) > 2)
+		if(abs(now1 - (deltaTime * 256) / thatInt) > 2)
 
 		{
-			now1 = (deltaTime * 255) / thatInt;
-			if( now1 < 128 )
-				tcpClient.send("setdmx(1," + ofToString(now1 << 1) + ")");
-			else if( now1 < 256)
-				tcpClient.send("setdmx(1," + ofToString( (255 - now1) << 1 ) + ")");
+			now1 = (deltaTime * 256) / thatInt;
+			if( now1 > 10 )
+			{
+				if( now1 < 128 )
+					tcpClient.send("setdmx(1," + ofToString(now1 << 1) + ")");
+				else if( now1 < 256)
+					tcpClient.send("setdmx(1," + ofToString( (255 - now1) << 1 ) + ")");
+			}
 		}
 	}
 	#endif
@@ -1791,7 +1802,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 32;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1810,7 +1821,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 32;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1825,19 +1836,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 30; // 後退 << 2 掛點
+						timeInt /= 32; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 300; // 後退 << 2 掛點
+						timeInt /= 320; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 30; // 轉頭 >> 2 還是掛點
+						timeInt /= 32; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 30; // 轉身怕掉下來
+						timeInt /= 32; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 30;
+						timeInt /= 32;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
@@ -1960,7 +1971,8 @@ void testApp::ContinueTimer()
 		#ifdef _LUMI_
 		if(5 == RGB)
 			RGB = 2;
-		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(32,255)) + ")");
+		rgbValue = ofRandom(32,255);
+		tcpClient.send("setdmx(" + ofToString(RGB) + "," + ofToString(rgbValue) + ")");
 		#endif    
 	}
 }
@@ -1976,9 +1988,12 @@ void testApp::MaTimer()
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
 		#ifdef _LUMI_
+		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString(rgbValue) + ")");
+		#else
 		if(5 == RGB)
 			RGB = 2;
-		tcpClient.send("setdmx(" + ofToString(RGB) + "," + ofToString((int)ofRandom(127,255)) + ")");
+		string bufferDMX = "t" + ofToString(thatInt) + "c" + ofToString(RGB++) + "w";
+		DMX.writeBytes((unsigned char *)bufferDMX.c_str(),bufferDMX.length());
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );

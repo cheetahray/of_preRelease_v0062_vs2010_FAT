@@ -22,7 +22,7 @@
 #define _PLAY_
 //#define _MOVIE_
 //#define _ILAN_
-#define _LUMI_
+//#define _LUMI_
 #include "ofMain.h"
 #include "ofAddons.h"
 #include "GuiHandler.h"
@@ -111,10 +111,12 @@ class testApp : public ofSimpleApp
         bool toggle1b;
 		string  myString3;
 		*/
+		int connectTime, deltaTime, now1, RGB, rgbValue;
 		#ifdef _LUMI_
-		int connectTime, deltaTime, now1, RGB;
 		ofxTCPClient tcpClient;
 		bool weConnected;
+		#else
+		ofSerial	DMX;
 		#endif
 		#ifdef _KINECT_
 		ofxTCPClient kinectClient;
