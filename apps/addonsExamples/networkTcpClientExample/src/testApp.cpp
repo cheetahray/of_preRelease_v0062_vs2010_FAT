@@ -33,7 +33,8 @@ void testApp::setup(){
 	deltaTime = 0;
 
 	tcpClient.setVerbose(true);
-
+	//ofSleepMillis(10000);
+	//tcpClient.send("setdmx(1,0)");
 }
 
 //--------------------------------------------------------------

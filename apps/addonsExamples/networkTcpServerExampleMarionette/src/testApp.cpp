@@ -35,7 +35,7 @@
 #define ALL 3
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "ch"
 
 #define PnInterval 500
 #define secShift 83
@@ -490,6 +490,7 @@ void testApp::update(){
 				ContinueTimer();
 				#ifdef _PLAY_
 				vocals.play();
+				vocals.setLoop(OF_LOOP_NORMAL);
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
 		}
@@ -517,7 +518,7 @@ void testApp::update(){
 			ofSleepMillis(750);
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-			reqBatch("pn11=25",ALL);
+			reqBatch("pn11=13",ALL);
 			ofSleepMillis(1500);
 			reqBatch("pn24=2000",ALL);
 			ofSleepMillis(1500);
@@ -1237,6 +1238,7 @@ void testApp::draw(){
 				ContinueTimer();
 				#ifdef _PLAY_
 				vocals.play();
+				vocals.setLoop(OF_LOOP_NORMAL);
 				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
 				#endif
 				//connectTime = ofGetElapsedTimeMillis();
@@ -1245,18 +1247,21 @@ void testApp::draw(){
 		}
 		serialA.flush();
 	}
+	#ifdef _LUMI_
 	if(53 == trigIndex && thatInt > 0)
 	{
 		deltaTime = ofGetElapsedTimeMillis() - connectTime;
-		if(abs(now1 - (deltaTime * 255) / thatInt) > 5)
+		if(abs(now1 - (deltaTime * 255) / thatInt) > 2)
+
 		{
 			now1 = (deltaTime * 255) / thatInt;
 			if( now1 < 128 )
 				tcpClient.send("setdmx(1," + ofToString(now1 << 1) + ")");
 			else if( now1 < 256)
-				tcpClient.send("setdmx(1," + ofToString( (256 - now1) << 1 ) + ")");
+				tcpClient.send("setdmx(1," + ofToString( (255 - now1) << 1 ) + ")");
 		}
 	}
+	#endif
 	#endif
 	#ifdef _UP_
 	if ( serial.available() > 0)
@@ -1952,6 +1957,11 @@ void testApp::ContinueTimer()
 			parsePnJSON(*it, thisInt);
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
+		#ifdef _LUMI_
+		if(5 == RGB)
+			RGB = 2;
+		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(32,255)) + ")");
+		#endif    
 	}
 }
 
@@ -1968,7 +1978,7 @@ void testApp::MaTimer()
 		#ifdef _LUMI_
 		if(5 == RGB)
 			RGB = 2;
-		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString((int)ofRandom(127,255)) + ")");
+		tcpClient.send("setdmx(" + ofToString(RGB) + "," + ofToString((int)ofRandom(127,255)) + ")");
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
@@ -1990,7 +2000,7 @@ void testApp::Interval(ofEventArgs &e)
 			#ifdef _LUMI_
 			if(true == weConnected)
 			{
-				tcpClient.send("setdmx(1,0)");
+				tcpClient.send("setdmx(1,255)");
 			}
 			#endif
 			if(false == preventStupid)
@@ -2139,7 +2149,7 @@ void testApp::Interval(ofEventArgs &e)
 			#ifdef _LUMI_
 			if(true == weConnected)
 			{
-				tcpClient.send("setdmx(1,0)");
+				tcpClient.send("setdmx(1,255)");
 			}
 			#endif
 			if(false == preventStupid)
