@@ -217,6 +217,7 @@ void testApp::setup()
 	tcpClient.setVerbose(true);
 	#else
 	DMX.setup(/**/"\\\\.\\COM16",9600);
+	sendDMX("o");		
 	#endif
 	#ifdef _KINECT_
 	kinectConnected = kinectClient.setup("127.0.0.1",11999);
@@ -494,11 +495,6 @@ void testApp::update(){
 					}
 				}
 				ContinueTimer();
-				#ifdef _PLAY_
-				vocals.play();
-				vocals.setSpeed(185.0/237.0);
-				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
-				#endif
 		}
 		#ifndef _ILAN_
 		else if (gui->listenForTrigger(56) == true)
@@ -1244,11 +1240,6 @@ void testApp::draw(){
 				motorMember = root.getMemberNames();
 				it = motorMember.begin();
 				ContinueTimer();
-				#ifdef _PLAY_
-				vocals.play();
-				vocals.setSpeed(185.0/237.0);
-				vocals.setPosition((double)(totalSec+secShift)/(double)1094);
-				#endif
 				//connectTime = ofGetElapsedTimeMillis();
 			}
 
@@ -1687,7 +1678,13 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 	}
 	
 }
-
+#ifndef _LUMI_
+void testApp::sendDMX(string buffer)
+{
+	//buffer.append(LFCR);
+	DMX.writeBytes((unsigned char *)buffer.c_str(),buffer.length());		
+}
+#endif
 void testApp::request(string buffer, int which)
 {
 
@@ -1886,8 +1883,13 @@ void testApp::parseMaJSON(string ss) {
 	msgRx = ss;
 	unsigned int ii;
 	
+	#ifdef _PLAY_
+	if (msgRx.find("ch")!=string::npos)
+	{
+		vocals.play();
+	}
+	#endif
 	//vector<string>::iterator it;
-	
 	//seq = root[ss][SEQUENCE].asString();
 
 	//for( it = motorMember.begin() ; it < motorMember.end() ; ++it)
@@ -1992,8 +1994,7 @@ void testApp::MaTimer()
 		#else
 		if(5 == RGB)
 			RGB = 2;
-		string bufferDMX = "t" + ofToString(thatInt) + "c" + ofToString(RGB++) + "w";
-		DMX.writeBytes((unsigned char *)bufferDMX.c_str(),bufferDMX.length());
+		sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(32,255)) + "w");
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
@@ -2017,6 +2018,8 @@ void testApp::Interval(ofEventArgs &e)
 			{
 				tcpClient.send("setdmx(1,255)");
 			}
+			#else
+			sendDMX("o");		
 			#endif
 			if(false == preventStupid)
 			{
@@ -2166,6 +2169,8 @@ void testApp::Interval(ofEventArgs &e)
 			{
 				tcpClient.send("setdmx(1,255)");
 			}
+			#else
+			sendDMX("o");		
 			#endif
 			if(false == preventStupid)
 			{

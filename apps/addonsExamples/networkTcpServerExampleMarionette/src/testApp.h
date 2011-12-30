@@ -59,6 +59,7 @@ class testApp : public ofSimpleApp
 		void reqBatch(string a, int which);
 		void resBatch(string a, int which);
 		void reqQuestion(string a, int which);
+		void sendDMX(string buffer);
 		void request(string cmd, int which);
 		void reqFAQ(string a, string b, int which);
 		void Interval(ofEventArgs &e);
