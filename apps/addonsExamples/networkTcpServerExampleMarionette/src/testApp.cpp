@@ -1221,7 +1221,7 @@ void testApp::draw(){
 		timeinfo = localtime ( &rawtime );
 		strftime (timebuffer,8,"%H",timeinfo);
 
-		if ( -1 == trigIndex && ofToInt(timebuffer) < 19 )
+		if ( -1 == trigIndex /*&& ofToInt(timebuffer) < 19*/ )
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
 			
@@ -2000,8 +2000,16 @@ void testApp::MaTimer()
 			RGB = 2;
 		if ((*it).find("zz")!=string::npos)
 			sendDMX("o");
+		else if(true == oneTwentySeven)
+		{
+			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(0,127)) + "w");
+			oneTwentySeven != oneTwentySeven;
+		}
 		else
-			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(32,255)) + "w");
+		{
+			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(128,255)) + "w");
+			oneTwentySeven != oneTwentySeven;
+		}
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );

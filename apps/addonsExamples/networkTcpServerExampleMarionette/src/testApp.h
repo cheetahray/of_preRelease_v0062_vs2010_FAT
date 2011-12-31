@@ -14,10 +14,10 @@
 #define bytesRequired 1024
 #define _TWO_
 #define _UP_
-#define _IR_
+//#define _IR_
 #define _GUAN_
 #ifndef _IR_
-#define _KINECT_
+//#define _KINECT_
 #endif
 #define _PLAY_
 //#define _MOVIE_
@@ -72,7 +72,7 @@ class testApp : public ofSimpleApp
 
 		GuiHandler*         gui;
 
-        bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, InPn;
+        bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, InPn, oneTwentySeven;
 		bool	myValue34, myValue35, myValue36, myValue37, myValue60, myValue61, readyBreak, waitRes, timeOutContinue, myValue64, myValue32, myValue33, myValue39, myValue42;
         
 		int     upValue0,ouValue0;
