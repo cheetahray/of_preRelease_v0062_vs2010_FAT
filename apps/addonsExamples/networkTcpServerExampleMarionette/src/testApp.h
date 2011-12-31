@@ -21,7 +21,7 @@
 #endif
 #define _PLAY_
 //#define _MOVIE_
-//#define _ILAN_
+#define _ILAN_
 //#define _LUMI_
 #include "ofMain.h"
 #include "ofAddons.h"
@@ -160,6 +160,10 @@ class testApp : public ofSimpleApp
 		double			totalSec;
 
 		ofTrueTypeFont  franklinBook;
+
+		time_t rawtime;
+		struct tm * timeinfo;
+		char timebuffer [8];
 		
 };
 

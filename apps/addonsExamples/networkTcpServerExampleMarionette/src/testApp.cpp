@@ -1215,9 +1215,13 @@ void testApp::draw(){
     //ofDrawBitmapString(myString3, 10,170);
 	*/
 	#ifdef _IR_
-	if ( serialA.available() > 0)
+	if ( serialA.available() > 0 )
 	{
-		if ( -1 == trigIndex )
+		time ( &rawtime );
+		timeinfo = localtime ( &rawtime );
+		strftime (timebuffer,8,"%H",timeinfo);
+
+		if ( -1 == trigIndex && ofToInt(timebuffer) < 19 )
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
 			
@@ -1799,7 +1803,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 32;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1818,7 +1822,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 32;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1833,19 +1837,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 32; // 後退 << 2 掛點
+						timeInt /= 30; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 320; // 後退 << 2 掛點
+						timeInt /= 300; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 32; // 轉頭 >> 2 還是掛點
+						timeInt /= 30; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 32; // 轉身怕掉下來
+						timeInt /= 30; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 32;
+						timeInt /= 30;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
@@ -1994,7 +1998,10 @@ void testApp::MaTimer()
 		#else
 		if(5 == RGB)
 			RGB = 2;
-		sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(32,255)) + "w");
+		if ((*it).find("zz")!=string::npos)
+			sendDMX("o");
+		else
+			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(32,255)) + "w");
 		#endif    
 		//else
 			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
@@ -2018,8 +2025,6 @@ void testApp::Interval(ofEventArgs &e)
 			{
 				tcpClient.send("setdmx(1,255)");
 			}
-			#else
-			sendDMX("o");		
 			#endif
 			if(false == preventStupid)
 			{
@@ -2169,8 +2174,6 @@ void testApp::Interval(ofEventArgs &e)
 			{
 				tcpClient.send("setdmx(1,255)");
 			}
-			#else
-			sendDMX("o");		
 			#endif
 			if(false == preventStupid)
 			{
