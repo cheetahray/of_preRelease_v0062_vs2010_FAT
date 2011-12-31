@@ -1803,7 +1803,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 29;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1822,7 +1822,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= 29;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1837,19 +1837,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 30; // 後退 << 2 掛點
+						timeInt /= 29; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 300; // 後退 << 2 掛點
+						timeInt /= 290; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 30; // 轉頭 >> 2 還是掛點
+						timeInt /= 29; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 30; // 轉身怕掉下來
+						timeInt /= 29; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 30;
+						timeInt /= 29;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
