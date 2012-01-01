@@ -1222,7 +1222,7 @@ void testApp::draw(){
 		strftime (timebuffer[0],4,"%H",timeinfo);
 		strftime (timebuffer[1],4,"%w",timeinfo);
 		int opening = ofToInt(timebuffer[0]);
-		if ( -1 == trigIndex /*&& opening < 21 && opening >= 18 && ofToInt(timebuffer[1]) != 1 */)
+		if ( -1 == trigIndex && opening < 17 && ofToInt(timebuffer[1]) != 1 )
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
 			

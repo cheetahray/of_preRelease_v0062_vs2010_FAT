@@ -17,7 +17,7 @@
 #define _UP_
 //#define _ILAN_
 
-#define _IR_
+//#define _IR_
 //#define _NOTURN_
 #define _GUAN_
 
