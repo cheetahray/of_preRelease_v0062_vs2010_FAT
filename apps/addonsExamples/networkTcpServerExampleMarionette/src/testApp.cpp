@@ -1219,9 +1219,10 @@ void testApp::draw(){
 	{
 		time ( &rawtime );
 		timeinfo = localtime ( &rawtime );
-		strftime (timebuffer,8,"%H",timeinfo);
-
-		if ( -1 == trigIndex /*&& ofToInt(timebuffer) < 19*/ )
+		strftime (timebuffer[0],4,"%H",timeinfo);
+		strftime (timebuffer[1],4,"%w",timeinfo);
+		int opening = ofToInt(timebuffer[0]);
+		if ( -1 == trigIndex /*&& opening < 21 && opening >= 18 && ofToInt(timebuffer[1]) != 1 */)
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
 			
@@ -1562,6 +1563,9 @@ void testApp::reqAT(string realCmd, string b, int which){
 			#ifdef _GUAN_
 			&& guan >= 2 
 			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
+			#endif
 			)
 		{
 			if( realCmd.at(2) != '0' )
@@ -1583,6 +1587,9 @@ void testApp::reqAT(string realCmd, string b, int which){
 		if( guan <= 6 
 			#ifdef _GUAN_
 			&& guan >= 2 
+			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
 			#endif
 			)
 		{
@@ -1608,6 +1615,9 @@ void testApp::resAT(string realCmd, string b, int which){
 			#ifdef _GUAN_
 			&& guan >= 2 
 			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
+			#endif
 			)
 		{
 			if( realCmd.at(2) != '0' )
@@ -1630,6 +1640,9 @@ void testApp::resAT(string realCmd, string b, int which){
 			#ifdef _GUAN_
 			&& guan >= 2 
 			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
+			#endif
 			)
 		{
 			if( realCmd.at(2) != '0' )
@@ -1650,6 +1663,9 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 		if( guan <= 6 
 			#ifdef _GUAN_
 			&& guan >= 2 
+			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
 			#endif
 			)
 		{
@@ -1672,6 +1688,9 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 		if( guan <= 6 
 			#ifdef _GUAN_
 			&& guan >= 2 
+			#endif
+			#ifdef _NOTURN_
+			&& guan != 3 
 			#endif
 			)
 		{
@@ -1803,7 +1822,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 29;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1822,7 +1841,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 29;
+					timeInt /= 30;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
@@ -1837,19 +1856,19 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 29; // 後退 << 2 掛點
+						timeInt /= 30; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 290; // 後退 << 2 掛點
+						timeInt /= 300; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 29; // 轉頭 >> 2 還是掛點
+						timeInt /= 30; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 29; // 轉身怕掉下來
+						timeInt /= 30; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 29;
+						timeInt /= 30;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
@@ -2003,12 +2022,12 @@ void testApp::MaTimer()
 		else if(true == oneTwentySeven)
 		{
 			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(0,127)) + "w");
-			oneTwentySeven != oneTwentySeven;
+			oneTwentySeven = !oneTwentySeven;
 		}
 		else
 		{
 			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(128,255)) + "w");
-			oneTwentySeven != oneTwentySeven;
+			oneTwentySeven = !oneTwentySeven;
 		}
 		#endif    
 		//else

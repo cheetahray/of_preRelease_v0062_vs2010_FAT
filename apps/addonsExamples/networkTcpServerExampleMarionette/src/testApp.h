@@ -12,17 +12,24 @@
 //#define OF_ADDON_USING_OFXXMLSETTINGS
 
 #define bytesRequired 1024
+
 #define _TWO_
 #define _UP_
-//#define _IR_
+//#define _ILAN_
+
+#define _IR_
+//#define _NOTURN_
 #define _GUAN_
+
 #ifndef _IR_
 //#define _KINECT_
 #endif
+
 #define _PLAY_
 //#define _MOVIE_
-#define _ILAN_
+
 //#define _LUMI_
+
 #include "ofMain.h"
 #include "ofAddons.h"
 #include "GuiHandler.h"
@@ -163,7 +170,7 @@ class testApp : public ofSimpleApp
 
 		time_t rawtime;
 		struct tm * timeinfo;
-		char timebuffer [8];
+		char timebuffer [2][4];
 		
 };
 
