@@ -15,7 +15,7 @@
 
 #define _TWO_
 #define _UP_
-#define _ILAN_
+//#define _ILAN_
 
 #define _IR_
 #define _NOTURN_
