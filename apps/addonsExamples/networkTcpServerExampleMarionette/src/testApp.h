@@ -17,9 +17,11 @@
 #define _UP_
 //#define _ILAN_
 
-//#define _IR_
-//#define _NOTURN_
+#define _IR_
+#define _NOTURN_
 #define _GUAN_
+//#define _LUMI_
+
 
 #ifndef _IR_
 //#define _KINECT_
@@ -27,8 +29,6 @@
 
 #define _PLAY_
 //#define _MOVIE_
-
-//#define _LUMI_
 
 #include "ofMain.h"
 #include "ofAddons.h"

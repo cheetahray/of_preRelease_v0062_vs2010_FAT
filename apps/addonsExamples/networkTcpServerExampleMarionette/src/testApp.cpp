@@ -1189,9 +1189,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+	#ifndef _ILAN_
 	ofSetColor(0xffffff);
 	gui->draw();
+	#endif
 	/*
 	if (myValue1 == true)
 	{    ofDrawBitmapString("Effect On", 10,10);	}
@@ -1222,7 +1223,7 @@ void testApp::draw(){
 		strftime (timebuffer[0],4,"%H",timeinfo);
 		strftime (timebuffer[1],4,"%w",timeinfo);
 		int opening = ofToInt(timebuffer[0]);
-		if ( -1 == trigIndex && opening < 17 && ofToInt(timebuffer[1]) != 1 )
+		if ( -1 == trigIndex && opening > 9 && opening < 19 && ofToInt(timebuffer[1]) != 1 )
 		{
 			//franklinBook.drawString(ofToString(serialA.readByte()), 700, 150); // A 65, N 78
 			
