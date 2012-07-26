@@ -15,11 +15,11 @@
 
 #define _TWO_
 #define _UP_
-#define _ILAN_
+//#define _ILAN_
 
-#define _IR_
+//#define _IR_
 //#define _NOTURN_
-#define _GUAN_
+//#define _GUAN_
 //#define _LUMI_
 
 
@@ -67,6 +67,7 @@ class testApp : public ofSimpleApp
 		void resBatch(string a, int which);
 		void reqQuestion(string a, int which);
 		void sendDMX(string buffer);
+		void tenSix(string realCmd, int frontback, int baseIdx);
 		void request(string cmd, int which);
 		void reqFAQ(string a, string b, int which);
 		void Interval(ofEventArgs &e);
@@ -123,7 +124,7 @@ class testApp : public ofSimpleApp
 		#ifdef _LUMI_
 		ofxTCPClient tcpClient;
 		bool weConnected;
-		#else
+		#elif _DMX_
 		ofSerial	DMX;
 		#endif
 		#ifdef _KINECT_
@@ -131,7 +132,7 @@ class testApp : public ofSimpleApp
 		bool kinectConnected;
 		#endif
 		#ifdef _UP_
-		ofSerial	serial;
+		ofSerial	serial,serialH;
 		#endif
 		#ifdef _TWO_
 		ofSerial	serialL,serialR;
@@ -143,7 +144,7 @@ class testApp : public ofSimpleApp
 		unsigned char bytes[bytesRequired];
 		char tmpBytes[bytesRequired];
 		char jsonBytes[bytesRequired];
-		float xxxx[30],yyyy[30],zzzz[30];
+		//float xxxx[30],yyyy[30],zzzz[30];
 		unsigned char * cptr;
 		vector<string> cmdQuene;
 		vector<string> cmdQueneL;

@@ -32,11 +32,12 @@
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
-#define ALL 3
+#define UPHEAD 3
+#define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
 #define FIRSTINDEX "a0"
-
+#define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
 /*
@@ -187,22 +188,14 @@ void testApp::setup()
 		#else
 		Panel3->addButton(STOP_STR,100,20,"TRIGGER"/*"SWITCH"*/,true, 2, &myValue2);
 		#endif
-	//serial.enumerateDevices();
-	//----------------------------------- note:
-	// < this should be set
-	// to whatever com port
-	// your serial device is
-	// connected to.
-	// (ie, COM4 on a pc, /dev/tty.... on linux, /dev/tty... on a mac)
-	// arduino users check in arduino app....
-
+	
 	#ifdef _TWO_
-	serialL.setup(/**/"\\\\.\\COM13",9600);  						  // windows example
-	serialR.setup(/**/"\\\\.\\COM5",9600);  						  // windows example
+	serialL.setup(/**/"\\\\.\\COM24",9600);  						  // windows example
+	serialR.setup(/**/"\\\\.\\COM22",9600);  						  // windows example
 	#endif
 	#ifdef _UP_
-	//serial.setup(/**/"\\\\.\\COM15",9600);  						  // windows example
-	serial.setup(/**/"\\\\.\\COM14",9600);  						  // windows example
+	serialH.setup(/**/"\\\\.\\COM21",9600);  						  // windows example
+	serial.setup(/**/"\\\\.\\COM23",9600);  						  // windows example
 	#endif
 	#ifdef _IR_
 	serialA.setup(/**/"\\\\.\\COM6",9600);
@@ -215,7 +208,7 @@ void testApp::setup()
 	#ifdef _LUMI_
 	weConnected = tcpClient.setup(SERVER,PORT);
 	tcpClient.setVerbose(true);
-	#else
+	#elif _DMX_
 	DMX.setup(/**/"\\\\.\\COM16",9600);
 	sendDMX("o");		
 	#endif
@@ -520,8 +513,10 @@ void testApp::update(){
 			ofSleepMillis(750);
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
+			/*
 			reqBatch("pn11=10",ALL);
 			ofSleepMillis(1500);
+			*/
 			reqBatch("pn24=2000",ALL);
 			ofSleepMillis(1500);
 			reqBatch("save",ALL);
@@ -1272,6 +1267,39 @@ void testApp::draw(){
 	#endif
 	#endif
 	#ifdef _UP_
+	if ( serialH.available() > 0)
+	{
+		int result;
+		while(result = serialH.readByte())
+		{
+			*cptr++ = result;
+			if(true == readyBreak && 10 == result)
+			{
+				*(cptr-2) = 0;
+				cptr = bytes;
+				if(1 == myValue54)
+				{
+					if('?' == *cptr)
+					{
+						strcpy(tmpBytes,(char *)bytes);
+					}
+					else
+					{
+						root[myValue55][tmpBytes].append(ofToInt((char *)bytes));
+						waitRes = false;
+								
+					}
+				}
+				else
+					waitRes = false;
+			}
+			if(13 == result)
+			{
+				readyBreak = true;
+			}
+		}
+
+	}
 	if ( serial.available() > 0)
 	{
 		int result;
@@ -1318,24 +1346,6 @@ void testApp::draw(){
 
 		}
 
-		/*
-		int result = serial.readBytes( bytes, bytesRequired );
-		bytes[bytesRequired - 1] = 0;
-		// check for error code
-		if ( result == OF_SERIAL_ERROR )
-		{
-			//error handling
-			ofLog( OF_LOG_ERROR, "unrecoverable error reading from serial" );
-		}
-		else if ( result == OF_SERIAL_NO_DATA )
-		{
-			//error handling
-		}
-		else
-		{
-			bytes[result] = 0;
-		}
-		*/	
 	}
 	#endif
 	#ifdef _TWO_
@@ -1393,7 +1403,7 @@ void testApp::draw(){
 					{
 						root[myValue55][tmpBytes].append(ofToInt((char *)bytes));
 						waitRes = false;
-						
+								
 						#ifndef _UP_
 						if(strncmp(tmpBytes, "?t0pe", 5) == 0 )
 						{
@@ -1423,16 +1433,7 @@ void testApp::draw(){
 	}
 	#endif
 	
-	/*
-	if(!myString.empty())
-	{stop
-		ofDrawBitmapString(myString, 400 ,10);
-	}
-	ofDrawBitmapString(ofToString(zzzz[9]), 700 ,30);
-	ofDrawBitmapString(ofToString(zzzz[15]), 700 ,10);
-
-	*/
-	franklinBook.drawString(msgRx, 700, 150);
+	franklinBook.drawString(msgRx, 700, 150);	
 	#ifdef _MOVIE_
 	#ifndef _ILAN_
 		vocals.draw(700, 20);
@@ -1551,30 +1552,74 @@ void testApp::reqQuestion(string a, int which){
 	reqFAQ(QT10,a,which);
 }
 
+void testApp::tenSix(string realCmd, int frontback, int baseIdx)
+{
+	int guan = realCmd.at(baseIdx) - '0'; 
+	switch(guan)
+	{
+	case 0:
+		realCmd.replace(1,1,"1");
+		if(0 == frontback)
+			request(realCmd,UP);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	case 1:
+		if( realCmd.at(baseIdx+1) != '0' )
+		{
+			realCmd.replace(1,1,"2");
+			if(0 == frontback)
+				request(realCmd,UP);
+			else
+				cmdQuene.push_back(realCmd);
+		}
+		break;
+	case 2:
+		realCmd.replace(1,1,"0");
+		if(0 == frontback)
+			request(realCmd,UP);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	case 3:
+		realCmd.replace(1,1,"0");
+		if(0 == frontback)
+			request(realCmd,UPHEAD);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	case 4:
+		realCmd.replace(1,1,"1");
+		if(0 == frontback)
+			request(realCmd,UPHEAD);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	case 5:
+		realCmd.replace(1,1,"2");
+		if(0 == frontback)
+			request(realCmd,UPHEAD);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	case 6:
+		realCmd.replace(1,1,"3");
+		if(0 == frontback)
+			request(realCmd,UPHEAD);
+		else
+			cmdQuene.push_back(realCmd);
+		break;
+	}
+		
+}
+
 void testApp::reqAT(string realCmd, string b, int which){
 	//reqflush(which);
 	realCmd.append(b);
-	int guan = 0;
 	switch(which)
 	{
 	case UP:
-		#ifdef _TWO_
-		guan = realCmd.at(1) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(2) != '0' )
-		#endif
-				request(realCmd,UP);
-		#ifdef _TWO_
-		}
-		#endif
+		tenSix(realCmd,0,1);
 		break;
 	case LEFT:
 		//if( realCmd.at(1) != '1' || realCmd.at(2) == '0')
@@ -1584,19 +1629,7 @@ void testApp::reqAT(string realCmd, string b, int which){
 		request(realCmd,RIGHT);
 		break;
 	case ALL:
-		guan = realCmd.at(1) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(2) != '0' )
-			request(realCmd,UP);
-		}
+		tenSix(realCmd,0,1);
 		//if( realCmd.at(1) != '1' || realCmd.at(2) == '0' )
 			request(realCmd,LEFT);
 		request(realCmd,RIGHT);
@@ -1611,19 +1644,7 @@ void testApp::resAT(string realCmd, string b, int which){
 	switch(which)
 	{
 	case UP:
-		guan = realCmd.at(1) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(2) != '0' )
-				cmdQuene.push_back(realCmd);
-		}
+		tenSix(realCmd,1,1);
 		break;
 	case LEFT:
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
@@ -1636,19 +1657,7 @@ void testApp::resAT(string realCmd, string b, int which){
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
 			cmdQueneL.push_back(realCmd);
 		cmdQueneR.push_back(realCmd);
-		guan = realCmd.at(1) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(2) != '0' )
-				cmdQuene.push_back(realCmd);
-		}
+		tenSix(realCmd,1,1);
 		break;
 	}
 	
@@ -1660,19 +1669,7 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 	switch(which)
 	{
 	case UP:
-		guan = realCmd.at(2) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(3) != '0' )
-				cmdQuene.push_back(realCmd);
-		}
+		tenSix(realCmd,1,2);
 		break;
 	case LEFT:
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
@@ -1685,24 +1682,12 @@ void testApp::reqFAQ(string realCmd, string b, int which){
 		//if( realCmd.at(2) != '1' || realCmd.at(3) == '0')
 			cmdQueneL.push_back(realCmd);
 		cmdQueneR.push_back(realCmd);
-		guan = realCmd.at(2) - '0'; 
-		if( guan <= 6 
-			#ifdef _GUAN_
-			&& guan >= 2 
-			#endif
-			#ifdef _NOTURN_
-			&& guan != 3 
-			#endif
-			)
-		{
-			if( realCmd.at(3) != '0' )
-				cmdQuene.push_back(realCmd);
-		}
+		tenSix(realCmd,1,2);
 		break;
 	}
 	
 }
-#ifndef _LUMI_
+#ifdef _DMX_
 void testApp::sendDMX(string buffer)
 {
 	//buffer.append(LFCR);
@@ -1719,16 +1704,21 @@ void testApp::request(string buffer, int which)
 	case UP:
 		serial.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
 		break;
+	case UPHEAD:
+		serialH.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
+		break;
 	#endif
 	#ifdef _TWO_
 	case LEFT:
 		serialL.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
 		break;
 	case RIGHT:
+		/*
 		if (buffer.find("t0")!=string::npos)
 		{
 			which = which;
 		}
+		*/
 		serialR.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
 		break;
 	#endif
@@ -1739,6 +1729,7 @@ void testApp::request(string buffer, int which)
 		#endif
 		#ifdef _UP_
 		serial.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
+		serialH.writeBytes((unsigned char *)buffer.c_str(),buffer.length());
 		#endif
 		break;
 	}
@@ -1766,15 +1757,6 @@ void testApp::readJSON()
 
 void testApp::parsePnJSON(string ss, int thisInt) {
 	
-	// See this page for all of the ways to access data in a Json::Value
-	// http://jsoncpp.sourceforge.net/class_json_1_1_value.html
-	
-	/*
-	Json::Value text = root["widget"]["text"];
-	result += "text members: " + ofToString((int)text.size()) + "\n";
-	result += "data: " + text["data"].asString() + "\n";
-
-	*/
 	Json::Value::Members motorMember = root[ss].getMemberNames();
 	Json::Value plugins, lastplugins;
 	string iiit, strsub, seq;
@@ -1823,12 +1805,12 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= TIMEINT;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
+						//_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), LEFT);
 					}
@@ -1842,12 +1824,12 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						strsub = iiit.substr(1,2);
 					}
-					timeInt /= 30;
+					timeInt /= TIMEINT;
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
+						//_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), RIGHT);
 					}
@@ -1857,26 +1839,26 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 30; // 後退 << 2 掛點
+						timeInt /= TIMEINT; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 300; // 後退 << 2 掛點
+						timeInt /= TIMEINT * 10; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 30; // 轉頭 >> 2 還是掛點
+						timeInt /= TIMEINT; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 30; // 轉身怕掉下來
+						timeInt /= TIMEINT; // 轉身怕掉下來
 						break;
 					default:
-						timeInt /= 30;
+						timeInt /= TIMEINT;
 						break;
 					}
 					if(lastss.empty() == false && timeInt != 0)
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 50 && _pn > 0 ? 50 : _pn;
+						//_pn = _pn < 50 && _pn > 0 ? 50 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), UP);
 					}
@@ -1892,15 +1874,6 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 
 void testApp::parseMaJSON(string ss) {
 	
-	// See this page for all of the ways to access data in a Json::Value
-	// http://jsoncpp.sourceforge.net/class_json_1_1_value.html
-	
-	/*
-	Json::Value text = root["widget"]["text"];
-	result += "text members: " + ofToString((int)text.size()) + "\n";
-	result += "data: " + text["data"].asString() + "\n";
-
-	*/
 	Json::Value::Members motorMember = root[ss].getMemberNames();
 	Json::Value plugins, lastplugins;
 	string iiit, strsub, seq;
@@ -2015,7 +1988,7 @@ void testApp::MaTimer()
 			parseMaJSON(*it);
 		#ifdef _LUMI_
 		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString(rgbValue) + ")");
-		#else
+		#elif _DMX_
 		if(5 == RGB)
 			RGB = 2;
 		if ((*it).find("zz")!=string::npos)
@@ -2282,6 +2255,8 @@ void testApp::reqflush(int which)
 	case UP:
 		if ( serial.available() > 0 )
 			serial.flush(true,true);
+		if ( serialH.available() > 0 )
+			serialH.flush(true,true);
 		break;
 	#endif
 	#ifdef _TWO_
@@ -2304,6 +2279,8 @@ void testApp::reqflush(int which)
 		#ifdef _UP_
 		if ( serial.available() > 0 )
 			serial.flush(true,true);
+		if ( serialH.available() > 0 )
+			serialH.flush(true,true);
 		#endif
 		break;
 	}
