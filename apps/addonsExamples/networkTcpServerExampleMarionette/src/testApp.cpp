@@ -154,7 +154,7 @@ void testApp::setup()
         Panel3->addIntSlider("4. Knee", 300, 10, root[FIRSTINDEX]["?t4pe"][idx].asInt(), 140000, 15, &lValue4);
         Panel3->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][idx].asInt(), 100000, 16, &lValue5);
         Panel3->addIntSlider("6. Hand Left/Right", 300, 10, root[FIRSTINDEX]["?t6pe"][idx].asInt(), 100000, 17, &lValue6);
-        Panel3->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][idx].asInt(), 200000, 18, &lValue7);
+        Panel3->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][idx].asInt(), 150000, 18, &lValue7);
         Panel3->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][idx].asInt(), 90000, 19, &lValue8);
         Panel3->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][idx].asInt(), 115000, 20, &lValue9);
         Panel3->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][idx].asInt(), 160000, 41, &lValue10);
@@ -176,7 +176,7 @@ void testApp::setup()
         Panel4->addIntSlider("4. Knee", 300, 10, root[FIRSTINDEX]["?t4pe"][1].asInt(), 140000, 25, &rValue4);
         Panel4->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][1].asInt(), 100000, 26, &rValue5);
 		Panel4->addIntSlider("6. Hand Left/Right", 300, 10, root[FIRSTINDEX]["?t6pe"][1].asInt(), 100000, 27, &rValue6);
-        Panel4->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][1].asInt(), 200000, 28, &rValue7);
+        Panel4->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][1].asInt(), 150000, 28, &rValue7);
         Panel4->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][1].asInt(), 90000, 29, &rValue8);
         Panel4->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][1].asInt(), 115000, 30, &rValue9);
         Panel4->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][1].asInt(), 160000, 31, &rValue10);
@@ -1577,14 +1577,14 @@ void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 	case 2:
 		realCmd.replace(1,1,"0");
 		if(0 == frontback)
-			request(realCmd,UP);
+			request(realCmd,UPHEAD);
 		else
 			cmdQuene.push_back(realCmd);
 		break;
 	case 3:
 		realCmd.replace(1,1,"0");
 		if(0 == frontback)
-			request(realCmd,UPHEAD);
+			request(realCmd,UP);
 		else
 			cmdQuene.push_back(realCmd);
 		break;
@@ -1610,8 +1610,8 @@ void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 		else
 			cmdQuene.push_back(realCmd);
 		break;
-	}
 	*/	
+	}
 }
 
 void testApp::reqAT(string realCmd, string b, int which){
