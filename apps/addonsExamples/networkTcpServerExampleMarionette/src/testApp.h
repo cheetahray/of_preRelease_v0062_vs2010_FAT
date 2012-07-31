@@ -147,6 +147,7 @@ class testApp : public ofSimpleApp
 		//float xxxx[30],yyyy[30],zzzz[30];
 		unsigned char * cptr;
 		vector<string> cmdQuene;
+		vector<string> cmdQueneH;
 		vector<string> cmdQueneL;
 		vector<string> cmdQueneR;
 		Json::Value root;   // will contains the root value after parsing.

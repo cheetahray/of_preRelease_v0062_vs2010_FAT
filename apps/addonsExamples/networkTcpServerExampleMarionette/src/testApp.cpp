@@ -100,9 +100,9 @@ void testApp::setup()
         Panel2->addIntSlider("1. Vertical", 300, 10, root[FIRSTINDEX]["?t1pe"][2].asInt(), 297719, 5, &upValue1);
 		Panel2->addIntSlider("2. Head Rotation", 300, 10, root[FIRSTINDEX]["?t2pe"][2].asInt(), 9997, 6, &upValue2);
         Panel2->addIntSlider("3. Body Rotation", 300, 10, root[FIRSTINDEX]["?t3pe"][2].asInt(), 118832, 7, &upValue3);
-		Panel2->addIntSlider("4. Right Head", 300, 10, root[FIRSTINDEX]["?t4pe"][2].asInt(), root[FIRSTINDEX]["?t4pe"][2].asInt() << 1, 8, &upValue4);
-		Panel2->addIntSlider("5. Left Head", 300, 10, root[FIRSTINDEX]["?t5pe"][2].asInt(), root[FIRSTINDEX]["?t5pe"][2].asInt() << 1, 9, &upValue5);
-		Panel2->addIntSlider("6. Back Head", 300, 10, root[FIRSTINDEX]["?t6pe"][2].asInt(), root[FIRSTINDEX]["?t6pe"][2].asInt() << 1, 10, &upValue6);
+		Panel2->addIntSlider("4. Right Head", 300, 10, root[FIRSTINDEX]["?t4pe"][2].asInt(), 200000, 8, &upValue4);
+		Panel2->addIntSlider("5. Left Head", 300, 10, root[FIRSTINDEX]["?t5pe"][2].asInt(), 200000, 9, &upValue5);
+		Panel2->addIntSlider("6. Back Head", 300, 10, root[FIRSTINDEX]["?t6pe"][2].asInt(), 200000, 10, &upValue6);
         //Panel2->addButton("Reset H",100,20,"TRIGGER"/*"SWITCH"*/,true, 33, &myValue33);
 		Panel2->addButton("NOP",100,20,"TRIGGER"/*"SWITCH"*/,true, 64, &myValue64);
 	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
@@ -1156,6 +1156,12 @@ void testApp::update(){
 		}
 		#endif
 		#ifdef _UP_
+		if(cmdQueneH.empty() == false && false == waitRes)
+		{
+			waitRes = true;
+			request(cmdQueneH.back(), UPHEAD);
+			cmdQueneH.pop_back();
+		}
 		if(cmdQuene.empty() == false && false == waitRes)
 		{
 			waitRes = true;
@@ -1285,9 +1291,26 @@ void testApp::draw(){
 					}
 					else
 					{
+						int guan = tmpBytes[2] - '0'; 
+						switch(guan)
+						{
+						case 0:
+							tmpBytes[2] = '2';
+							break;
+						case 1:
+							tmpBytes[2] = '4';
+							break;
+						case 2:
+							tmpBytes[2] = '5';
+							break;
+						case 3:
+							tmpBytes[2] = '6';
+							break;
+						}
+
 						root[myValue55][tmpBytes].append(ofToInt((char *)bytes));
 						waitRes = false;
-								
+						
 					}
 				}
 				else
@@ -1318,6 +1341,17 @@ void testApp::draw(){
 					}
 					else
 					{
+						int guan = tmpBytes[2] - '0'; 
+						switch(guan)
+						{
+						case 0:
+							tmpBytes[2] = '3';
+							break;
+						case 2:
+							tmpBytes[2] = '0';
+							break;
+						}
+
 						root[myValue55][tmpBytes].append(ofToInt((char *)bytes));
 						waitRes = false;
 
@@ -1333,7 +1367,7 @@ void testApp::draw(){
 							ofout << root;
 							ofout.close();
 						}
-						
+
 					}
 				}
 				else
@@ -1558,7 +1592,7 @@ void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 	switch(guan)
 	{
 	case 0:
-		realCmd.replace(1,1,"2");
+		realCmd.replace(baseIdx,1,"2");
 		if(0 == frontback)
 			request(realCmd,UP);
 		else
@@ -1575,42 +1609,40 @@ void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 		}
 		break;
 	case 2:
-		realCmd.replace(1,1,"0");
+		realCmd.replace(baseIdx,1,"0");
 		if(0 == frontback)
 			request(realCmd,UPHEAD);
 		else
-			cmdQuene.push_back(realCmd);
+			cmdQueneH.push_back(realCmd);
 		break;
 	case 3:
-		realCmd.replace(1,1,"0");
+		realCmd.replace(baseIdx,1,"0");
 		if(0 == frontback)
 			request(realCmd,UP);
 		else
 			cmdQuene.push_back(realCmd);
 		break;
-	/*
 	case 4:
-		realCmd.replace(1,1,"1");
+		realCmd.replace(baseIdx,1,"1");
 		if(0 == frontback)
 			request(realCmd,UPHEAD);
 		else
-			cmdQuene.push_back(realCmd);
+			cmdQueneH.push_back(realCmd);
 		break;
 	case 5:
-		realCmd.replace(1,1,"2");
+		realCmd.replace(baseIdx,1,"2");
 		if(0 == frontback)
 			request(realCmd,UPHEAD);
 		else
-			cmdQuene.push_back(realCmd);
+			cmdQueneH.push_back(realCmd);
 		break;
 	case 6:
-		realCmd.replace(1,1,"3");
+		realCmd.replace(baseIdx,1,"3");
 		if(0 == frontback)
 			request(realCmd,UPHEAD);
 		else
-			cmdQuene.push_back(realCmd);
+			cmdQueneH.push_back(realCmd);
 		break;
-	*/	
 	}
 }
 
@@ -1641,7 +1673,6 @@ void testApp::reqAT(string realCmd, string b, int which){
 
 void testApp::resAT(string realCmd, string b, int which){
 	realCmd.append(b);
-	int guan = 0;
 	switch(which)
 	{
 	case UP:
@@ -1666,7 +1697,6 @@ void testApp::resAT(string realCmd, string b, int which){
 
 void testApp::reqFAQ(string realCmd, string b, int which){
 	realCmd.append(b);
-	int guan = 0;
 	switch(which)
 	{
 	case UP:
