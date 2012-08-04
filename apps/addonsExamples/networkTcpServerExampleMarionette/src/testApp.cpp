@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "ab"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -147,17 +147,17 @@ void testApp::setup()
 	GuiPanel*  Panel3 = gui->addPanel("LEFT", 0,0,350,500);
 		#ifndef _ILAN_
         //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
-        Panel3->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][idx].asInt(), 100000, 11, &lValue0);
-        Panel3->addIntSlider("1. But", 300, 10, root[FIRSTINDEX]["?t1pe"][idx].asInt(), 96500, 12, &lValue1);
-        Panel3->addIntSlider("2. Shoulder", 300, 10, root[FIRSTINDEX]["?t2pe"][idx].asInt(), 170000, 13, &lValue2);
-        Panel3->addIntSlider("3. Chest", 300, 10, root[FIRSTINDEX]["?t3pe"][idx].asInt(), 160000, 14, &lValue3);
+        Panel3->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][idx].asInt(), 136666, 11, &lValue0);
+        Panel3->addIntSlider("1. But", 300, 10, root[FIRSTINDEX]["?t1pe"][idx].asInt(), 205215, 12, &lValue1);
+        Panel3->addIntSlider("2. Shoulder", 300, 10, root[FIRSTINDEX]["?t2pe"][idx].asInt(), 162302, 13, &lValue2);
+        Panel3->addIntSlider("3. Chest", 300, 10, root[FIRSTINDEX]["?t3pe"][idx].asInt(), 152000, 14, &lValue3);
         Panel3->addIntSlider("4. Knee", 300, 10, root[FIRSTINDEX]["?t4pe"][idx].asInt(), 140000, 15, &lValue4);
-        Panel3->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][idx].asInt(), 100000, 16, &lValue5);
+        Panel3->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][idx].asInt(), 115000, 16, &lValue5);
         Panel3->addIntSlider("6. Hand Left/Right", 300, 10, root[FIRSTINDEX]["?t6pe"][idx].asInt(), 100000, 17, &lValue6);
-        Panel3->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][idx].asInt(), 150000, 18, &lValue7);
-        Panel3->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][idx].asInt(), 90000, 19, &lValue8);
+        Panel3->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][idx].asInt(), 186999, 18, &lValue7);
+        Panel3->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][idx].asInt(), 168700, 19, &lValue8);
         Panel3->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][idx].asInt(), 115000, 20, &lValue9);
-        Panel3->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][idx].asInt(), 160000, 41, &lValue10);
+        Panel3->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][idx].asInt(), 203000, 41, &lValue10);
 		Panel3->addRadio("UP/LEFT/RIGHT",25, 4, 40, &myValue40);
             Panel3->addRadioElement(40,"UP");
             Panel3->addRadioElement(40,"LEFT");
@@ -169,17 +169,17 @@ void testApp::setup()
 	GuiPanel*  Panel4 = gui->addPanel("RIGHT", 350, 0,350,500);
 
         //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
-        Panel4->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][1].asInt(), 100000, 21, &rValue0);
-        Panel4->addIntSlider("1. But", 300, 10, root[FIRSTINDEX]["?t1pe"][1].asInt(), 96500, 22, &rValue1);
+        Panel4->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][1].asInt(), 125666, 21, &rValue0);
+        Panel4->addIntSlider("1. But", 300, 10, root[FIRSTINDEX]["?t1pe"][1].asInt(), 148180, 22, &rValue1);
         Panel4->addIntSlider("2. Shoulder", 300, 10, root[FIRSTINDEX]["?t2pe"][1].asInt(), 170000, 23, &rValue2);
-        Panel4->addIntSlider("3. Body Back", 300, 10, root[FIRSTINDEX]["?t3pe"][1].asInt(), 160000, 24, &rValue3);
+        Panel4->addIntSlider("3. Body Back", 300, 10, root[FIRSTINDEX]["?t3pe"][1].asInt(), 162400, 24, &rValue3);
         Panel4->addIntSlider("4. Knee", 300, 10, root[FIRSTINDEX]["?t4pe"][1].asInt(), 140000, 25, &rValue4);
-        Panel4->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][1].asInt(), 100000, 26, &rValue5);
+        Panel4->addIntSlider("5. Foot Front", 300, 10, root[FIRSTINDEX]["?t5pe"][1].asInt(), 148712, 26, &rValue5);
 		Panel4->addIntSlider("6. Hand Left/Right", 300, 10, root[FIRSTINDEX]["?t6pe"][1].asInt(), 100000, 27, &rValue6);
-        Panel4->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][1].asInt(), 150000, 28, &rValue7);
-        Panel4->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][1].asInt(), 90000, 29, &rValue8);
+        Panel4->addIntSlider("7. Elbow", 300, 10, root[FIRSTINDEX]["?t7pe"][1].asInt(), 164500, 28, &rValue7);
+        Panel4->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][1].asInt(), 168700, 29, &rValue8);
         Panel4->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][1].asInt(), 115000, 30, &rValue9);
-        Panel4->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][1].asInt(), 160000, 31, &rValue10);
+        Panel4->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][1].asInt(), 216000, 31, &rValue10);
 		Panel4->addButton("Get DownII",100,20,"TRIGGER"/*"SWITCH"*/,true, 60, &myValue60);
 		Panel4->addButton("Get UpII",100,20,"TRIGGER"/*"SWITCH"*/,true, 37, &myValue37);
 	    Panel4->addButton("Get UpIII",100,20,"TRIGGER"/*"SWITCH"*/,true, 59, &myValue59);

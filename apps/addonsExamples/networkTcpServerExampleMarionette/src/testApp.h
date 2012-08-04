@@ -27,7 +27,7 @@
 //#define _KINECT_
 #endif
 
-#define _PLAY_
+//#define _PLAY_
 //#define _MOVIE_
 
 #include "ofMain.h"
