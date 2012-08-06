@@ -113,7 +113,7 @@ class testApp : public ofSimpleApp
 		int     rValue9,orValue9;
 		int     rValue10,orValue10;
 		
-        int which, myValue54, myValue58, trigIndex, myValue40, thatInt;
+        int which, myValue54, myValue58, myValue65, myValue66, myValue67, myValue68, trigIndex, myValue40, thatInt;
 
 		/*
         bool toggle1a;

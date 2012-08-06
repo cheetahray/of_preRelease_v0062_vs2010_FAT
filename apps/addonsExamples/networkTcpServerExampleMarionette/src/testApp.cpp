@@ -189,6 +189,33 @@ void testApp::setup()
 		Panel3->addButton(STOP_STR,100,20,"TRIGGER"/*"SWITCH"*/,true, 2, &myValue2);
 		#endif
 	
+	GuiPanel*  Panel5 = gui->addPanel("Single", 700,0,350,500);
+		Panel5->addRadio("LeftI",25, 7, 65, &myValue65);
+			Panel5->addRadioElement(65,"ankle");
+            Panel5->addRadioElement(65,"but");
+            Panel5->addRadioElement(65,"shoulder");
+			Panel5->addRadioElement(65,"chest");
+            Panel5->addRadioElement(65,"knee");
+            Panel5->addRadioElement(65,"foot");
+		Panel5->addRadio("LeftII",25, 7, 66, &myValue66);
+			Panel5->addRadioElement(66,"elbow");
+            Panel5->addRadioElement(66,"leg");
+            Panel5->addRadioElement(66,"hand");
+			Panel5->addRadioElement(66,"L brain");
+            Panel5->addRadioElement(66,"R brain");
+		Panel5->addRadio("RightI",25, 7, 67, &myValue67);
+			Panel5->addRadioElement(67,"ankle");
+            Panel5->addRadioElement(67,"but");
+            Panel5->addRadioElement(67,"shoulder");
+			Panel5->addRadioElement(67,"back");
+            Panel5->addRadioElement(67,"knee");
+            Panel5->addRadioElement(67,"foot");
+		Panel5->addRadio("RightII",25, 7, 68, &myValue68);
+			Panel5->addRadioElement(68,"elbow");
+            Panel5->addRadioElement(68,"leg");
+            Panel5->addRadioElement(68,"hand");
+            Panel5->addRadioElement(68,"B brain");
+			
 	#ifdef _TWO_
 	serialL.setup(/**/"\\\\.\\COM24",9600);  						  // windows example
 	serialR.setup(/**/"\\\\.\\COM22",9600);  						  // windows example
