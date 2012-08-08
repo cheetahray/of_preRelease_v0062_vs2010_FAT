@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "ab"
+#define FIRSTINDEX "bb"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -197,12 +197,16 @@ void testApp::setup()
 			Panel5->addRadioElement(65,"chest");
             Panel5->addRadioElement(65,"knee");
             Panel5->addRadioElement(65,"foot");
+			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 69, &myValue69);
+			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 73, &myValue73);
 		Panel5->addRadio("LeftII",25, 7, 66, &myValue66);
 			Panel5->addRadioElement(66,"elbow");
             Panel5->addRadioElement(66,"leg");
             Panel5->addRadioElement(66,"hand");
-			Panel5->addRadioElement(66,"L brain");
-            Panel5->addRadioElement(66,"R brain");
+			Panel5->addRadioElement(66,"R brain");
+            Panel5->addRadioElement(66,"L brain");
+			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 70, &myValue70);
+			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 74, &myValue74);
 		Panel5->addRadio("RightI",25, 7, 67, &myValue67);
 			Panel5->addRadioElement(67,"ankle");
             Panel5->addRadioElement(67,"but");
@@ -210,12 +214,16 @@ void testApp::setup()
 			Panel5->addRadioElement(67,"back");
             Panel5->addRadioElement(67,"knee");
             Panel5->addRadioElement(67,"foot");
+			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 71, &myValue71);
+			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 75, &myValue75);
 		Panel5->addRadio("RightII",25, 7, 68, &myValue68);
 			Panel5->addRadioElement(68,"elbow");
             Panel5->addRadioElement(68,"leg");
             Panel5->addRadioElement(68,"hand");
             Panel5->addRadioElement(68,"B brain");
-			
+			Panel5->addRadioElement(68,"R brain");
+			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 72, &myValue72);
+			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 76, &myValue76);
 	#ifdef _TWO_
 	serialL.setup(/**/"\\\\.\\COM24",9600);  						  // windows example
 	serialR.setup(/**/"\\\\.\\COM22",9600);  						  // windows example
@@ -810,8 +818,10 @@ void testApp::update(){
 		{
 			myValue54 = 0;
 			preventStupid = false;
+			/*
 			motorMember = root.getMemberNames();
 			it = motorMember.begin();
+			*/
 			switch(myValue58)
 			{
 			case 0:
@@ -902,14 +912,16 @@ void testApp::update(){
 				*/
 				break;
 			}
-			ContinueTimer();		
+			//ContinueTimer();		
 		}
 		else if (gui->listenForTrigger(42) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
+			/*
 			motorMember = root.getMemberNames();
 			it = motorMember.begin();
+			*/
 			switch(myValue58)
 			{
 			case 0:
@@ -1000,7 +1012,251 @@ void testApp::update(){
 				*/
 				break;
 			}
-			ContinueTimer();		
+			//ContinueTimer();		
+		}
+		else if (gui->listenForTrigger(69) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue65)
+			{
+			case 0:
+				reqAT(T0,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T1,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T2,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T3,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T4,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				reqAT(T5,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(73) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue65)
+			{
+			case 0:
+				reqAT(T0,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T1,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T2,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T3,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T4,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				reqAT(T5,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(70) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue66)
+			{
+			case 0:
+				reqAT(T7,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T8,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T10,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T4,"mr-2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T5,"mr-2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(74) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue66)
+			{
+			case 0:
+				reqAT(T7,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T8,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T10,"mr2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T4,"mr2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T5,"mr2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(71) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue67)
+			{
+			case 0:
+				reqAT(T0,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T1,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T2,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T3,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T4,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				reqAT(T5,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(75) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue67)
+			{
+			case 0:
+				reqAT(T0,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T1,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T2,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T3,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T4,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 5:
+				reqAT(T5,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(72) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue68)
+			{
+			case 0:
+				reqAT(T7,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T8,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T10,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T6,"mr-2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T2,"mr-2000",UP);
+				ofSleepMillis(100);
+				break;
+			}
+		}
+		else if (gui->listenForTrigger(76) == true)
+		{
+			myValue54 = 0;
+			preventStupid = false;
+			switch(myValue68)
+			{
+			case 0:
+				reqAT(T7,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 1:
+				reqAT(T8,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 2:
+				reqAT(T10,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				break;
+			case 3:
+				reqAT(T6,"mr2000",UP);
+				ofSleepMillis(100);
+				break;
+			case 4:
+				reqAT(T2,"mr2000",UP);
+				ofSleepMillis(100);
+				break;
+			}
 		}
 		else if (gui->listenForTrigger(52) == true)
 		{
@@ -1494,7 +1750,7 @@ void testApp::draw(){
 	}
 	#endif
 	
-	franklinBook.drawString(msgRx, 700, 150);	
+	franklinBook.drawString(msgRx, 1000, 650);	
 	#ifdef _MOVIE_
 	#ifndef _ILAN_
 		vocals.draw(700, 20);
@@ -1644,6 +1900,7 @@ void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 		break;
 	case 3:
 		realCmd.replace(baseIdx,1,"0");
+		//realCmd.substr(realCmd.find(IMA_STR));
 		if(0 == frontback)
 			request(realCmd,UP);
 		else
@@ -1900,7 +2157,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 						timeInt /= TIMEINT; // 癶 << 2 本翴
 						break;
 					case '1':
-						timeInt /= TIMEINT * 10; // 癶 << 2 本翴
+						timeInt /= TIMEINT * 8; // 癶 << 2 本翴
 						break;
 					case '2':
 						timeInt /= TIMEINT; // 锣繷 >> 2 临琌本翴
