@@ -36,8 +36,8 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "bb"
-#define TIMEINT 30
+#define FIRSTINDEX "ab"
+#define TIMEINT 29.5
 #define PnInterval 500
 #define secShift 83
 /*
@@ -2157,7 +2157,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 						timeInt /= TIMEINT; // 癶 << 2 本翴
 						break;
 					case '1':
-						timeInt /= TIMEINT * 8; // 癶 << 2 本翴
+						timeInt /= TIMEINT; // 癶 << 2 本翴
 						break;
 					case '2':
 						timeInt /= TIMEINT; // 锣繷 >> 2 临琌本翴
