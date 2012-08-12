@@ -560,8 +560,8 @@ void testApp::update(){
 		else if (gui->listenForTrigger(59) == true)
 		{
 			myValue54 = 0;
-			reqBatch("mr-2000",ALL);
-			/*		
+			//reqBatch("mr-2000",ALL);
+			
 			reqAT(T4,"mr-2000",UP);
 			reqAT(T5,"mr-2000",UP);
 			reqAT(T6,"mr-2000",UP);
@@ -584,7 +584,6 @@ void testApp::update(){
 			reqAT(T8,"mr-2000",RIGHT);
 			reqAT(T10,"mr-2000",LEFT);
 			reqAT(T10,"mr-2000",RIGHT);
-			*/
 		}
 		else if (gui->listenForTrigger(36) == true)
 		{
