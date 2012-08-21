@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "ab"
+#define FIRSTINDEX "ah"
 #define TIMEINT 29.5
 #define PnInterval 500
 #define secShift 83
@@ -666,47 +666,47 @@ void testApp::update(){
 		else if (gui->listenForTrigger(60) == true)
 		{
 			myValue54 = 0;
-			reqAT(T4,"mr2000",UP);
+			reqAT(T4,"mr20000",UP);
 			ofSleepMillis(100);
-			reqAT(T5,"mr2000",UP);
+			reqAT(T5,"mr20000",UP);
 			ofSleepMillis(100);
-			reqAT(T6,"mr2000",UP);
+			reqAT(T6,"mr20000",UP);
 			ofSleepMillis(100);
-			reqAT(T0,"mr2000",LEFT);
+			reqAT(T0,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T0,"mr2000",RIGHT);
+			reqAT(T0,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T1,"mr2000",LEFT);
+			reqAT(T1,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T1,"mr2000",RIGHT);
+			reqAT(T1,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T2,"mr2000",LEFT);
+			reqAT(T2,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T2,"mr2000",RIGHT);
+			reqAT(T2,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T3,"mr2000",LEFT);
+			reqAT(T3,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T3,"mr2000",RIGHT);
+			reqAT(T3,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T4,"mr2000",LEFT);
+			reqAT(T4,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T4,"mr2000",RIGHT);
+			reqAT(T4,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T5,"mr2000",LEFT);
+			reqAT(T5,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T5,"mr2000",RIGHT);
+			reqAT(T5,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T7,"mr2000",LEFT);
+			reqAT(T7,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T7,"mr2000",RIGHT);
+			reqAT(T7,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T8,"mr2000",LEFT);
+			reqAT(T8,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T8,"mr2000",RIGHT);
+			reqAT(T8,"mr20000",RIGHT);
 			ofSleepMillis(100);
-			reqAT(T10,"mr2000",LEFT);
+			reqAT(T10,"mr20000",LEFT);
 			ofSleepMillis(100);
-			reqAT(T10,"mr2000",RIGHT);
+			reqAT(T10,"mr20000",RIGHT);
 
 		}
 		else if (gui->listenForTrigger(34) == true)
