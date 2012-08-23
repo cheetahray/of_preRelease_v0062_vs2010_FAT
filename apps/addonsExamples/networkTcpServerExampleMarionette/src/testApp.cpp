@@ -36,8 +36,8 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "be"
-#define TIMEINT 29.5
+#define FIRSTINDEX "ci"
+#define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
 /*
@@ -546,14 +546,14 @@ void testApp::update(){
 			ofSleepMillis(750);
 			reqBatch(myValue50,RIGHT);
 			ofSleepMillis(750);
+			/*
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-			/*
 			reqBatch("pn11=10",ALL);
 			ofSleepMillis(1500);
-			*/
 			reqBatch("pn24=2000",ALL);
 			ofSleepMillis(1500);
+			*/
 			reqBatch("save",ALL);
 			preventStupid = true;
 		}
