@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "dh"
+#define FIRSTINDEX "dx"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
