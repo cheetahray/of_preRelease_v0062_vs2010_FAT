@@ -28,7 +28,7 @@
 #define INTERVAL "Interval"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-
+#define DownDown "mr20000"
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "ci"
+#define FIRSTINDEX "dh"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -666,47 +666,47 @@ void testApp::update(){
 		else if (gui->listenForTrigger(60) == true)
 		{
 			myValue54 = 0;
-			reqAT(T4,"mr20000",UP);
+			reqAT(T4,DownDown,UP);
 			ofSleepMillis(100);
-			reqAT(T5,"mr20000",UP);
+			reqAT(T5,DownDown,UP);
 			ofSleepMillis(100);
-			reqAT(T6,"mr20000",UP);
+			reqAT(T6,DownDown,UP);
 			ofSleepMillis(100);
-			reqAT(T0,"mr20000",LEFT);
+			reqAT(T0,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T0,"mr20000",RIGHT);
+			reqAT(T0,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T1,"mr20000",LEFT);
+			reqAT(T1,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T1,"mr20000",RIGHT);
+			reqAT(T1,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T2,"mr20000",LEFT);
+			reqAT(T2,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T2,"mr20000",RIGHT);
+			reqAT(T2,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T3,"mr20000",LEFT);
+			reqAT(T3,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T3,"mr20000",RIGHT);
+			reqAT(T3,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T4,"mr20000",LEFT);
+			reqAT(T4,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T4,"mr20000",RIGHT);
+			reqAT(T4,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T5,"mr20000",LEFT);
+			reqAT(T5,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T5,"mr20000",RIGHT);
+			reqAT(T5,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T7,"mr20000",LEFT);
+			reqAT(T7,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T7,"mr20000",RIGHT);
+			reqAT(T7,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T8,"mr20000",LEFT);
+			reqAT(T8,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T8,"mr20000",RIGHT);
+			reqAT(T8,DownDown,RIGHT);
 			ofSleepMillis(100);
-			reqAT(T10,"mr20000",LEFT);
+			reqAT(T10,DownDown,LEFT);
 			ofSleepMillis(100);
-			reqAT(T10,"mr20000",RIGHT);
+			reqAT(T10,DownDown,RIGHT);
 
 		}
 		else if (gui->listenForTrigger(34) == true)
@@ -883,6 +883,8 @@ void testApp::update(){
 				ofSleepMillis(100);
 				reqAT(T5,"mr2000",UP);
 				ofSleepMillis(100);
+				reqAT(T6,"mr2000",UP);
+				ofSleepMillis(100);
 				/*
 				while((*it).at(0) != 'd')
 					it++;
@@ -982,6 +984,8 @@ void testApp::update(){
 				reqAT(T4,"mr-2000",UP);
 				ofSleepMillis(100);
 				reqAT(T5,"mr-2000",UP);
+				ofSleepMillis(100);
+				reqAT(T6,"mr-2000",UP);
 				ofSleepMillis(100);
 				/*
 				while((*it).at(0) != 'd')
