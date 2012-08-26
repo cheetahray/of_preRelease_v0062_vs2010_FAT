@@ -28,7 +28,7 @@
 #define INTERVAL "Interval"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define DownDown "mr20000"
+#define DownDown "mr2000"
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "dx"
+#define FIRSTINDEX "8ab"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -777,16 +777,16 @@ void testApp::update(){
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
 
-			reqBatch("pn23=300",LEFT);
+			reqBatch("pn23=50",LEFT);
 			ofSleepMillis(500);
-			reqBatch("pn23=300",RIGHT);
+			reqBatch("pn23=50",RIGHT);
 			ofSleepMillis(500);
 			
-			reqAT(T4,"pn23=300",UP);
+			reqAT(T4,"pn23=50",UP);
 			ofSleepMillis(100);
-			reqAT(T5,"pn23=300",UP);
+			reqAT(T5,"pn23=50",UP);
 			ofSleepMillis(100);
-			reqAT(T6,"pn23=300",UP);
+			reqAT(T6,"pn23=50",UP);
 			ofSleepMillis(100);
 			reqAT(T0,"pn23=50",UP);
 			ofSleepMillis(100);
@@ -1100,11 +1100,11 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 3:
-				reqAT(T4,"mr-2000",UP);
+				reqAT(T4,"mr-500",UP);
 				ofSleepMillis(100);
 				break;
 			case 4:
-				reqAT(T5,"mr-2000",UP);
+				reqAT(T5,"mr-500",UP);
 				ofSleepMillis(100);
 				break;
 			case 5:
@@ -1130,11 +1130,11 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 3:
-				reqAT(T4,"mr2000",UP);
+				reqAT(T4,"mr500",UP);
 				ofSleepMillis(100);
 				break;
 			case 4:
-				reqAT(T5,"mr2000",UP);
+				reqAT(T5,"mr500",UP);
 				ofSleepMillis(100);
 				break;
 			case 5:
@@ -1228,7 +1228,7 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 4:
-				reqAT(T2,"mr-2000",UP);
+				reqAT(T2,"mr-500",UP);
 				ofSleepMillis(100);
 				break;
 			}
@@ -1256,7 +1256,7 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 4:
-				reqAT(T2,"mr2000",UP);
+				reqAT(T2,"mr500",UP);
 				ofSleepMillis(100);
 				break;
 			}
@@ -1753,7 +1753,7 @@ void testApp::draw(){
 	}
 	#endif
 	
-	franklinBook.drawString(msgRx, 1000, 650);	
+	franklinBook.drawString(msgRx, 800, 650);	
 	#ifdef _MOVIE_
 	#ifndef _ILAN_
 		vocals.draw(700, 20);
