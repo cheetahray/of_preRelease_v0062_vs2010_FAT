@@ -28,7 +28,7 @@
 #define INTERVAL "Interval"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define DownDown "mr2000"
+#define DownDown "mr19000"
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "8ab"
+#define FIRSTINDEX "za"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
