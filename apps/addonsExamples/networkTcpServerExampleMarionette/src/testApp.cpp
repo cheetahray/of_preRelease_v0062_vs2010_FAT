@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "za"
+#define FIRSTINDEX "8ab"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -67,7 +67,7 @@ void testApp::setup()
 	#ifdef _MOVIE_
 	vocals.loadMovie("MVI_8225.mp4");
 	#else
-	vocals.loadSound("MVI_0091.mp3");
+	vocals.loadSound("1228M001.mp3");
 	//vocals.setMultiPlay(false);
 	#endif
 	#endif
@@ -2199,7 +2199,7 @@ void testApp::parseMaJSON(string ss) {
 	unsigned int ii;
 	
 	#ifdef _PLAY_
-	if (msgRx.find("ch")!=string::npos)
+	if (msgRx.find("a0c")!=string::npos)
 	{
 		vocals.play();
 	}
