@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "8ab"
+#define FIRSTINDEX "a0c"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -509,7 +509,7 @@ void testApp::update(){
 				preventStupid = false;
 				motorMember = root.getMemberNames();
 				it = motorMember.begin();
-				while( (*it).find(myValue55)==string::npos )
+				while( (*it).find(myValue55)==string::npos || (*it).length() != myValue55.length() )
 				{
 					if(it == motorMember.end())
 					{
@@ -2202,6 +2202,14 @@ void testApp::parseMaJSON(string ss) {
 	if (msgRx.find("a0c")!=string::npos)
 	{
 		vocals.play();
+	}
+	else if (msgRx.find("dn")!=string::npos)
+	{
+		if(vocals.getIsPlaying() == false)
+		{
+			vocals.play();
+		}
+		vocals.setPosition(0.785939);
 	}
 	#endif
 	//vector<string>::iterator it;
