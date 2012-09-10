@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "a0"
+#define FIRSTINDEX "7bca"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -473,7 +473,7 @@ void testApp::update(){
 				ofSleepMillis(100);
 				reqAT(T1,"pn10=50",UP);
 				ofSleepMillis(100);
-				reqAT(T2,"pn10=50",UP);
+				reqAT(T2,"pn10=25",UP);
 				ofSleepMillis(100);
 				reqAT(T3,"pn10=50",UP);
 				ofSleepMillis(100);
@@ -532,7 +532,7 @@ void testApp::update(){
 			ofSleepMillis(100);
 			reqAT(T1,"pn10=50",UP);
 			ofSleepMillis(100);
-			reqAT(T2,"pn10=50",UP);
+			reqAT(T2,"pn10=25",UP);
 			ofSleepMillis(100);
 			reqAT(T3,"pn10=50",UP);
 			ofSleepMillis(100);
@@ -2359,7 +2359,7 @@ void testApp::Interval(ofEventArgs &e)
 				ofSleepMillis(100);
 				reqAT(T1,"pn10=50",UP);
 				ofSleepMillis(100);
-				reqAT(T2,"pn10=50",UP);
+				reqAT(T2,"pn10=25",UP);
 				ofSleepMillis(100);
 				reqAT(T3,"pn10=50",UP);
 				ofSleepMillis(100);
@@ -2508,7 +2508,7 @@ void testApp::Interval(ofEventArgs &e)
 				ofSleepMillis(100);
 				reqAT(T1,"pn10=50",UP);
 				ofSleepMillis(100);
-				reqAT(T2,"pn10=50",UP);
+				reqAT(T2,"pn10=25",UP);
 				ofSleepMillis(100);
 				reqAT(T3,"pn10=50",UP);
 				ofSleepMillis(100);
