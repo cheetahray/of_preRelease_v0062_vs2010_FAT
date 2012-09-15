@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "7bca"
+#define FIRSTINDEX "zmg"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -126,9 +126,9 @@ void testApp::setup()
             Panel2->addRadioElement(58,"Hand");
             Panel2->addRadioElement(58,"Head");
 			
-			Panel2->addRadioElement(58,"None");
-			Panel2->addRadioElement(58,"None");
-			Panel2->addRadioElement(58,"None");
+			Panel2->addRadioElement(58,"LFoot");
+			Panel2->addRadioElement(58,"RFoot");
+			Panel2->addRadioElement(58,"FHead");
 
 		Panel2->bindKey(58,OF_KEY_RIGHT);
         Panel2->bindKey2(58,OF_KEY_LEFT);
@@ -892,25 +892,26 @@ void testApp::update(){
 				*/
 				break;
 			case 6:
-				/*
-				while((*it).at(0) != 'f')
-					it++;
-				trigIndex = 326;
-				*/
+				reqAT(T0,"mr2000",LEFT);
+				ofSleepMillis(100);
+				reqAT(T5,"mr2000",LEFT);
+				ofSleepMillis(100);
+				reqAT(T8,"mr2000",LEFT);
+				ofSleepMillis(100);
 				break;
 			case 7:
-				/*
-				while((*it).at(0) != 'h')
-					it++;
-				trigIndex = 327;
-				*/
+				reqAT(T0,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				reqAT(T5,"mr2000",RIGHT);
+				ofSleepMillis(100);
+				reqAT(T8,"mr2000",RIGHT);
+				ofSleepMillis(100);
 				break;
 			case 8:
-				/*
-				while((*it).at(0) != 'i')
-					it++;
-				trigIndex = 328;
-				*/
+				reqAT(T4,"mr2000",UP);
+				ofSleepMillis(100);
+				reqAT(T5,"mr2000",UP);
+				ofSleepMillis(100);
 				break;
 			}
 			//ContinueTimer();		
@@ -994,25 +995,26 @@ void testApp::update(){
 				*/
 				break;
 			case 6:
-				/*
-				while((*it).at(0) != 'f')
-					it++;
-				trigIndex = 326;
-				*/
+				reqAT(T0,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				reqAT(T5,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				reqAT(T8,"mr-2000",LEFT);
+				ofSleepMillis(100);
 				break;
 			case 7:
-				/*
-				while((*it).at(0) != 'h')
-					it++;
-				trigIndex = 327;
-				*/
+				reqAT(T0,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				reqAT(T5,"mr-2000",RIGHT);
+				ofSleepMillis(100);
+				reqAT(T8,"mr-2000",RIGHT);
+				ofSleepMillis(100);
 				break;
 			case 8:
-				/*
-				while((*it).at(0) != 'i')
-					it++;
-				trigIndex = 328;
-				*/
+				reqAT(T4,"mr-2000",UP);
+				ofSleepMillis(100);
+				reqAT(T5,"mr-2000",UP);
+				ofSleepMillis(100);
 				break;
 			}
 			//ContinueTimer();		
