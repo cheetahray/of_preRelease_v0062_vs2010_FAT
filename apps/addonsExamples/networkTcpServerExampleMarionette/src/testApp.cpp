@@ -25,7 +25,7 @@
 #define QT10 "?t10"
 #define STOP_STR "STOP"
 #define LFCR "\r\n"
-#define INTERVAL "Interval"
+#define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
 #define DownDown "mr2000"
@@ -653,7 +653,8 @@ void testApp::update(){
 			switch(myValue40)
 			{
 			case 0:
-				request(myValue38, UP);
+				tenSix(myValue38,0,1);
+				//request(myValue38, UP);
 				break;
 			case 1:
 				request(myValue38, LEFT);
@@ -776,7 +777,7 @@ void testApp::update(){
 			myValue54 = 0;
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
-
+			/*
 			reqBatch("pn23=50",LEFT);
 			ofSleepMillis(500);
 			reqBatch("pn23=50",RIGHT);
@@ -796,7 +797,7 @@ void testApp::update(){
 			ofSleepMillis(100);
 			reqAT(T3,"pn23=50",UP);
 			ofSleepMillis(100);
-			
+			*/
 			reqBatch("save",ALL);
 			ofSleepMillis(1500);
 			reqBatch("H",ALL);
@@ -1785,7 +1786,7 @@ void testApp::keyReleased  (int key)
 		reqBatch(STOP_STR,ALL);
 		ofSleepMillis(1500);
 	}
-	else if(key == 'u')
+	else if(key == 'U')
 	{
 		myValue54 = 0;
 		reqBatch("mr-2000",ALL);
@@ -2130,7 +2131,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						//_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
+						_pn = _pn < 25 && _pn > 0  ? 25 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), LEFT);
 					}
@@ -2149,7 +2150,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						//_pn = _pn < 50 && _pn > 0  ? 50 : _pn;
+						_pn = _pn < 25 && _pn > 0  ? 25 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), RIGHT);
 					}
@@ -2178,7 +2179,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						//_pn = _pn < 50 && _pn > 0 ? 50 : _pn;
+						_pn = _pn < 25 && _pn > 0 ? 25 : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), UP);
 					}
@@ -2201,6 +2202,7 @@ void testApp::parseMaJSON(string ss) {
 	unsigned int ii;
 	
 	#ifdef _PLAY_
+	/*
 	if (msgRx.find("a0c")!=string::npos)
 	{
 		vocals.play();
@@ -2212,6 +2214,16 @@ void testApp::parseMaJSON(string ss) {
 			vocals.play();
 		}
 		vocals.setPosition(0.785939);
+	}
+	else */if (msgRx.find("zb")!=string::npos)
+	{
+		trigIndex = -1;
+		myValue55 = msgRx;
+	}
+	else if (msgRx.find("zkk")!=string::npos)
+	{
+		trigIndex = -1;
+		myValue55 = msgRx;
 	}
 	#endif
 	//vector<string>::iterator it;
