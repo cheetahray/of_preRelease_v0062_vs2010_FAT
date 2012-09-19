@@ -2215,12 +2215,17 @@ void testApp::parseMaJSON(string ss) {
 		}
 		vocals.setPosition(0.785939);
 	}
-	else */if (msgRx.find("zb")!=string::npos)
+	else */if (msgRx.length() == 2 && msgRx.find("zb")!=string::npos)
 	{
 		trigIndex = -1;
 		myValue55 = msgRx;
 	}
-	else if (msgRx.find("zkk")!=string::npos)
+	else if (msgRx.length() == 3 && msgRx.find("zfa")!=string::npos)
+	{
+		trigIndex = -1;
+		myValue55 = msgRx;
+	}
+	else if (msgRx.length() == 3 && msgRx.find("zkk")!=string::npos)
 	{
 		trigIndex = -1;
 		myValue55 = msgRx;
