@@ -36,7 +36,7 @@
 #define ALL 4
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "zmg"
+#define FIRSTINDEX "br"
 #define TIMEINT 30
 #define PnInterval 500
 #define secShift 83
@@ -2202,7 +2202,6 @@ void testApp::parseMaJSON(string ss) {
 	unsigned int ii;
 	
 	#ifdef _PLAY_
-	/*
 	if (msgRx.find("a0c")!=string::npos)
 	{
 		vocals.play();
@@ -2215,7 +2214,7 @@ void testApp::parseMaJSON(string ss) {
 		}
 		vocals.setPosition(0.785939);
 	}
-	else */if (msgRx.length() == 2 && msgRx.find("zb")!=string::npos)
+	else if (msgRx.length() == 2 && msgRx.find("zb")!=string::npos)
 	{
 		trigIndex = -1;
 		myValue55 = msgRx;
