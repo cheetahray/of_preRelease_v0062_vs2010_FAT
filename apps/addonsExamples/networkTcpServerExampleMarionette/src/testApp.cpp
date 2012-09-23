@@ -28,7 +28,7 @@
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define DownDown "mr2000"
+#define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
