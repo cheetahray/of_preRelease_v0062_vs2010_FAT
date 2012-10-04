@@ -82,7 +82,7 @@ class testApp : public ofSimpleApp
 
         bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, InPn, oneTwentySeven, myValue73, myValue74, myValue75, myValue76;
 		bool	myValue34, myValue35, myValue36, myValue37, myValue60, myValue61, readyBreak, waitRes, timeOutContinue, myValue64, myValue32, myValue33, myValue39, myValue42, myValue69, myValue70, myValue71, myValue72;
-        
+        bool	myValue78;
 		int     upValue0,ouValue0;
         int     upValue1,ouValue1;
         int     upValue2,ouValue2;
@@ -114,7 +114,7 @@ class testApp : public ofSimpleApp
 		int     rValue10,orValue10;
 		
         int which, myValue54, myValue58, myValue65, myValue66, myValue67, myValue68, trigIndex, myValue40, thatInt;
-
+		int myValue77;
 		/*
         bool toggle1a;
         bool toggle1b;

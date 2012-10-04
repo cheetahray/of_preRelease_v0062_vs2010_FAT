@@ -135,6 +135,12 @@ void testApp::setup()
 		//Panel2->addButton("Do it!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 32, &myValue32);
 		Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 32, &myValue32);
 		Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 42, &myValue42);
+		Panel2->addRadio("Segments",25, 11, 77, &myValue77);
+			Panel2->addRadioElement(77,"I");
+			Panel2->addRadioElement(77,"II");
+			Panel2->addRadioElement(77,"III");
+			Panel2->addRadioElement(77,"IV");
+		Panel2->addButton("Go",100,20,"TRIGGER"/*"SWITCH"*/,true, 78, &myValue78);
 		#endif	
 		/*
         GuiPanel*  Panel3 = gui->addPanel("panel 3",640,70,250,250);
@@ -814,6 +820,66 @@ void testApp::update(){
 			request("reset h",ALL);
 		}
 		*/
+		else if (gui->listenForTrigger(78) == true)
+		{
+			trigIndex = 53;
+			myValue54 = 0;
+			totalSec = 0;
+			preventStupid = false;
+			motorMember = root.getMemberNames();
+			it = motorMember.begin();
+			switch(myValue77)
+			{
+			case 1:
+				while( (*it).find("zb0")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
+						it++;
+					}
+				}
+				ContinueTimer();
+				break;
+			case 2:
+				while( (*it).find("zfa0")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
+						it++;
+					}
+				}
+				ContinueTimer();
+				break;
+			case 3:
+				while( (*it).find("zkk0")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
+						it++;
+					}
+				}
+				ContinueTimer();
+				break;
+			}
+		}	
 		else if (gui->listenForTrigger(32) == true)
 		{
 			myValue54 = 0;
@@ -1790,6 +1856,12 @@ void testApp::keyReleased  (int key)
 	{
 		myValue54 = 0;
 		reqBatch("mr-2000",ALL);
+		/*
+		reqAT(T1,"mr-2000",LEFT);
+		ofSleepMillis(100);
+		reqAT(T1,"mr-2000",RIGHT);
+		ofSleepMillis(100);
+		*/
 	}
 }
 
