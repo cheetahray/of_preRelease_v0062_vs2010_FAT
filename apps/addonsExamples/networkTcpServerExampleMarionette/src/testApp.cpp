@@ -34,6 +34,7 @@
 #define RIGHT 2
 #define UPHEAD 3
 #define ALL 4
+#define LOWLIMIT 3
 //dl,dn,ds,ed
 #define MIDDLE 0
 #define FIRSTINDEX "br"
@@ -2203,7 +2204,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 25 && _pn > 0  ? 25 : _pn;
+						_pn = _pn < LOWLIMIT && _pn > 0  ? LOWLIMIT : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), LEFT);
 					}
@@ -2222,7 +2223,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 25 && _pn > 0  ? 25 : _pn;
+						_pn = _pn < LOWLIMIT && _pn > 0  ? LOWLIMIT : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), RIGHT);
 					}
@@ -2251,7 +2252,7 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					{
 						difference = ABS( plugins[index].asInt() - lastplugins[index].asInt() );
 						int _pn = difference / timeInt;
-						_pn = _pn < 25 && _pn > 0 ? 25 : _pn;
+						_pn = _pn < LOWLIMIT && _pn > 0 ? LOWLIMIT : _pn;
 						if(difference > 0 && _pn > 0)
 							reqJSON( strsub , "pn10=", ofToString( _pn ), UP);
 					}
