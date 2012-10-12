@@ -141,6 +141,7 @@ void testApp::setup()
 			Panel2->addRadioElement(77,"II");
 			Panel2->addRadioElement(77,"III");
 			Panel2->addRadioElement(77,"IV");
+			Panel2->addRadioElement(77,"salute");
 		Panel2->addButton("Go",100,20,"TRIGGER"/*"SWITCH"*/,true, 78, &myValue78);
 		#endif	
 		/*
@@ -865,6 +866,22 @@ void testApp::update(){
 				break;
 			case 3:
 				while( (*it).find("zkk0")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
+						it++;
+					}
+				}
+				ContinueTimer();
+				break;
+			case 4:
+				while( (*it).find("zoh0")==string::npos )
 				{
 					if(it == motorMember.end())
 					{
@@ -2298,6 +2315,11 @@ void testApp::parseMaJSON(string ss) {
 		myValue55 = msgRx;
 	}
 	else if (msgRx.length() == 3 && msgRx.find("zkk")!=string::npos)
+	{
+		trigIndex = -1;
+		myValue55 = msgRx;
+	}
+	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
 	{
 		trigIndex = -1;
 		myValue55 = msgRx;
