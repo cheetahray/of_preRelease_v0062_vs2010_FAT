@@ -21,13 +21,13 @@
 //#define _NOTURN_
 //#define _GUAN_
 //#define _LUMI_
-
+//#define PUTA
 
 #ifndef _IR_
 //#define _KINECT_
 #endif
 
-#define _PLAY_
+//#define _PLAY_
 //#define _MOVIE_
 
 #include "ofMain.h"
@@ -37,6 +37,10 @@
 #include "json.h"
 #include <iostream>
 #include "ofxTimer.h"
+
+#ifdef PUTA
+#include "ofxOsc.h"
+#endif
 
 class testApp : public ofSimpleApp
 {
@@ -166,13 +170,18 @@ class testApp : public ofSimpleApp
 		#endif
 
 		float 			synthPosition;
-		double			totalSec;
-
 		ofTrueTypeFont  franklinBook;
 
 		time_t rawtime;
 		struct tm * timeinfo;
 		char timebuffer [2][4];
+
+		#ifdef PUTA
+		ofxOscReceiver	receiver;
+
+		int			current_msg_string;
+		string		msg_strings[32];
+		#endif
 		
 };
 

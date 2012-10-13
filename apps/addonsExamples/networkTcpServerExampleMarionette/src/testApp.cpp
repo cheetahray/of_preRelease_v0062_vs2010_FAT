@@ -259,6 +259,11 @@ void testApp::setup()
 	kinectConnected = kinectClient.setup("127.0.0.1",11999);
 	kinectClient.setVerbose(true);
 	#endif
+	#ifdef PUTA
+	receiver.setup( PORT );
+
+	current_msg_string = 0;
+	#endif
 	InPn = true;
 	timer.setup(0,false);
 	ofAddListener(timer.TIMER_REACHED, this, &testApp::Interval);
@@ -399,53 +404,29 @@ void testApp::update(){
 
 		}
 		#endif
-		/*			
-		if(!msgRx.empty())
+		
+		#ifdef PUTA
+		while( receiver.hasWaitingMessages() )
 		{
+			// get the next message
+			ofxOscMessage m;
+			receiver.getNextMessage( &m );
 
-			found=msgRx.find("9 : ");
-			if (found!=string::npos && msgRx.at(found + 4) != 'X' )
+			// check for mouse moved message
+			if ( m.getAddress() == "/mouse/position" )
 			{
-				xxxx[9] = ofToFloat(msgRx.substr(found + 4,9));
-				found=msgRx.find("\t",found+1);
-				yyyy[9] = ofToFloat(msgRx.substr(found + 1,9));
-				found=msgRx.find("\t",found+1);
-				zzzz[9] = ofToFloat(msgRx.substr(found + 1,9));
-				lValue9 = mapRay(zzzz[9],25,90,-13000,100000);
-				if(0 == olValue9)
-				{
-					olValue9 = lValue9;
-				}
-				if(lValue9 != olValue9)
-				{
-					//reqAT(T9,"T9IFOFF", LEFT);
-					reqSlider(T9,IMA_STR, lValue9,LEFT);
-					olValue9 = lValue9;
-				}
+				// both the arguments are int32's
+				mouseX = m.getArgAsInt32( 0 );
+				mouseY = m.getArgAsInt32( 1 );
 			}
-
-			found=msgRx.find("15 : ");
-			if (found!=string::npos && msgRx.at(found + 5) != 'X' )
+			// check for mouse button message
+			else if ( m.getAddress() == "/mouse/button" )
 			{
-				xxxx[15] = ofToFloat(msgRx.substr(found + 4,9));
-				found=msgRx.find("\t",found+1);
-				yyyy[15] = ofToFloat(msgRx.substr(found + 1,9));
-				found=msgRx.find("\t",found+1);
-				zzzz[15] = ofToFloat(msgRx.substr(found + 1,9));
-				rValue9 = mapRay(zzzz[15],30,100,-10000,103000);
-				if(0 == orValue9)
-				{
-					orValue9 = rValue9;
-				}
-				if(rValue9 != orValue9)
-				{
-					//reqAT(T9,"T9IFOFF", LEFT);
-					reqSlider(T9, IMA_STR, rValue9, RIGHT);
-					orValue9 = rValue9;
-				}
+				// the single argument is a string
+				mouseButtonState = m.getArgAsString( 0 ) ;
 			}
 		}
-		*/
+		#endif
 
 		//ACTIVATING FUNCTION FROM A BUTTON PRESS:
 		//ideally i would like to use an event, but for now:
@@ -513,7 +494,6 @@ void testApp::update(){
 				#endif
 				trigIndex = 53;
 				myValue54 = 0;
-				totalSec = 0;
 				preventStupid = false;
 				motorMember = root.getMemberNames();
 				it = motorMember.begin();
@@ -526,7 +506,6 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -826,7 +805,6 @@ void testApp::update(){
 		{
 			trigIndex = 53;
 			myValue54 = 0;
-			totalSec = 0;
 			preventStupid = false;
 			motorMember = root.getMemberNames();
 			it = motorMember.begin();
@@ -842,7 +820,6 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -858,7 +835,6 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -874,7 +850,6 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -890,7 +865,6 @@ void testApp::update(){
 					}
 					else
 					{
-						totalSec += root[(*it)][INTERVAL].asDouble()/1000;
 						it++;
 					}
 				}
@@ -1615,7 +1589,6 @@ void testApp::draw(){
 				#endif
 				trigIndex = 53;
 				myValue54 = 0;
-				totalSec = 0;
 				preventStupid = false;
 				motorMember = root.getMemberNames();
 				it = motorMember.begin();
@@ -2304,27 +2277,24 @@ void testApp::parseMaJSON(string ss) {
 		}
 		vocals.setPosition(0.785939);
 	}
-	else if (msgRx.length() == 2 && msgRx.find("zb")!=string::npos)
+	else 
+	#endif 
+	if (msgRx.length() == 2 && msgRx.find("zb")!=string::npos)
 	{
 		trigIndex = -1;
-		myValue55 = msgRx;
 	}
 	else if (msgRx.length() == 3 && msgRx.find("zfa")!=string::npos)
 	{
 		trigIndex = -1;
-		myValue55 = msgRx;
 	}
 	else if (msgRx.length() == 3 && msgRx.find("zkk")!=string::npos)
 	{
 		trigIndex = -1;
-		myValue55 = msgRx;
 	}
 	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
 	{
 		trigIndex = -1;
-		myValue55 = msgRx;
 	}
-	#endif
 	//vector<string>::iterator it;
 	//seq = root[ss][SEQUENCE].asString();
 
