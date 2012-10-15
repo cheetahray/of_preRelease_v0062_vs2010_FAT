@@ -1170,20 +1170,6 @@
 		"?t9pe" : [ 110379, 108628 ],
 		"Inter" : 11029
 	},
-	"8a1" : 
-	{
-		"?t0pe" : null,
-		"?t10pe" : null,
-		"?t1pe" : null,
-		"?t2pe" : null,
-		"?t3pe" : null,
-		"?t4pe" : null,
-		"?t5pe" : null,
-		"?t6pe" : null,
-		"?t7pe" : null,
-		"?t8pe" : null,
-		"?t9pe" : null
-	},
 	"8ab" : 
 	{
 		"?t0pe" : [ 72344, 90898, 355000 ],
