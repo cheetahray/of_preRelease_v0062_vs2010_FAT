@@ -1,20 +1,5 @@
 
 {
-	"br" : 
-	{
-		"?t0pe" : [ null, null, null ],
-		"?t10pe" : [ null, null ],
-		"?t1pe" : [ null, null, null ],
-		"?t2pe" : [ null, null, null ],
-		"?t3pe" : [ null, null, null ],
-		"?t4pe" : [ null, null, null ],
-		"?t5pe" : [ null, null, null ],
-		"?t6pe" : [ null, null, null ],
-		"?t7pe" : [ null, null ],
-		"?t8pe" : [ null, null ],
-		"?t9pe" : [ null, null ],
-		"Inter" : null
-	},
 	"y0" : 
 	{
 		"?t0pe" : [ 0, 0, 0 ],

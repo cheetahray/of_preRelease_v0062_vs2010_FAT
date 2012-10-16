@@ -21,7 +21,7 @@
 //#define _NOTURN_
 //#define _GUAN_
 //#define _LUMI_
-//#define PUTA
+#define PUTA
 
 #ifndef _IR_
 //#define _KINECT_
@@ -179,7 +179,7 @@ class testApp : public ofSimpleApp
 		#ifdef PUTA
 		ofxOscReceiver	receiver;
 
-		int			current_msg_string;
+		int			current_msg_string, lastxxxx;
 		string		msg_strings[32];
 		#endif
 		
