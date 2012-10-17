@@ -42,6 +42,8 @@
 #include "ofxOsc.h"
 #endif
 
+#define baoPig
+
 class testApp : public ofSimpleApp
 {
 
@@ -183,6 +185,9 @@ class testApp : public ofSimpleApp
 		string		msg_strings[32];
 		#endif
 		
+		#ifdef baoPig
+		string msgadd;	
+		#endif
 };
 
 #endif

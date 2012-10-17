@@ -1887,7 +1887,12 @@ void testApp::draw(){
 	}
 	#endif
 	
-	franklinBook.drawString(msgRx, 800, 650);	
+	franklinBook.drawString(msgRx, 800, 650);
+
+	#ifdef baoPig
+	franklinBook.drawString(msgRx, 600, 650);
+	#endif
+
 	#ifdef _MOVIE_
 	#ifndef _ILAN_
 		vocals.draw(700, 20);
@@ -2369,6 +2374,20 @@ void testApp::parseMaJSON(string ss) {
 	{
 		trigIndex = -1;
 	}
+	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
+	{
+		trigIndex = -1;
+	}
+	#ifdef baoPig
+	else if (msgRx.length() == 3 && msgRx.find("7ab")!=string::npos)
+	{
+		msgadd = "Bao";
+	}
+	else if (msgRx.length() == 4 && msgRx.find("znc2")!=string::npos)
+	{
+		msgadd = "Pig";
+	}
+	#endif
 	//vector<string>::iterator it;
 	//seq = root[ss][SEQUENCE].asString();
 
