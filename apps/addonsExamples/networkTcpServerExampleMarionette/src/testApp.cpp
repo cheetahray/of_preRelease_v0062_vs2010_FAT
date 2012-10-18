@@ -59,7 +59,7 @@ tid
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	franklinBook.loadFont("frabk.ttf", 128);
+	franklinBook.loadFont("frabk.ttf", 72);
 	
 	ofBackground(127,127,127);
 	readJSON();
@@ -1887,10 +1887,10 @@ void testApp::draw(){
 	}
 	#endif
 	
-	franklinBook.drawString(msgRx, 800, 650);
+	franklinBook.drawString(msgRx, 800, 600);
 
 	#ifdef baoPig
-	franklinBook.drawString(msgRx, 600, 650);
+	franklinBook.drawString(msgadd, 800, 700);
 	#endif
 
 	#ifdef _MOVIE_
