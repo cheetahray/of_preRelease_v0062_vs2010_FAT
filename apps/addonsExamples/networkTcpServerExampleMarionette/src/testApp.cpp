@@ -109,17 +109,6 @@ void testApp::setup()
 	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
 		
 		Panel2->addRadio("Hands and Legs",25, 11, 58, &myValue58);
-			/*
-            Panel2->addRadioElement(58,"Right Hand");
-            Panel2->addRadioElement(58,"Left Wave");
-            Panel2->addRadioElement(58,"Left Hand");
-            Panel2->addRadioElement(58,"Right Leg");
-			Panel2->addRadioElement(58,"Left Leg");
-            Panel2->addRadioElement(58,"Surrender");
-            Panel2->addRadioElement(58,"Salute");
-			Panel2->addRadioElement(58,"Kick");
-			Panel2->addRadioElement(58,"HandShaking");
-			*/
 			Panel2->addRadioElement(58,"But");
             Panel2->addRadioElement(58,"Shoulder");
             Panel2->addRadioElement(58,"Knee");
@@ -142,6 +131,7 @@ void testApp::setup()
 			Panel2->addRadioElement(77,"III");
 			Panel2->addRadioElement(77,"IV");
 			Panel2->addRadioElement(77,"salute");
+			Panel2->addRadioElement(77,"The End");
 		Panel2->addButton("Go",100,20,"TRIGGER"/*"SWITCH"*/,true, 78, &myValue78);
 		#endif	
 		/*
@@ -931,6 +921,21 @@ void testApp::update(){
 				break;
 			case 4:
 				while( (*it).find("zoh0")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						it++;
+					}
+				}
+				ContinueTimer();
+				break;
+			case 5:
+				while( (*it).find("zph0")==string::npos )
 				{
 					if(it == motorMember.end())
 					{
@@ -2374,7 +2379,7 @@ void testApp::parseMaJSON(string ss) {
 	{
 		trigIndex = -1;
 	}
-	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
+	else if (msgRx.length() == 3 && msgRx.find("zph")!=string::npos)
 	{
 		trigIndex = -1;
 	}
