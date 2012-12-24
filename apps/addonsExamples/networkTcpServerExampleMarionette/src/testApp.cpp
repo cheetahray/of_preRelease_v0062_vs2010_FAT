@@ -93,6 +93,7 @@ void testApp::setup()
 		Panel1->addButton("Get Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 34, &myValue34);
 	    Panel1->addButton("Get DownI",100,20,"TRIGGER"/*"SWITCH"*/,true, 35, &myValue35);
 	    Panel1->addButton("Get Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 36, &myValue36);
+		Panel1->addButton("Next Step",100,20,"TRIGGER"/*"SWITCH"*/,true, 79, &myValue79);
 	    
 	GuiPanel*  Panel2 = gui->addPanel("TOP",350, 500,1000,500);
 
@@ -130,6 +131,7 @@ void testApp::setup()
 			Panel2->addRadioElement(77,"II");
 			Panel2->addRadioElement(77,"III");
 			Panel2->addRadioElement(77,"IV");
+			Panel2->addRadioElement(77,"standup");
 			Panel2->addRadioElement(77,"salute");
 			Panel2->addRadioElement(77,"The End");
 		Panel2->addButton("Go",100,20,"TRIGGER"/*"SWITCH"*/,true, 78, &myValue78);
@@ -254,7 +256,6 @@ void testApp::setup()
 
 	current_msg_string = 0;
 	#endif
-	InPn = true;
 	timer.setup(0,false);
 	ofAddListener(timer.TIMER_REACHED, this, &testApp::Interval);
 
@@ -425,6 +426,7 @@ void testApp::update(){
 							it++;
 						}
 					}
+					InPn = 1;
 					ContinueTimer();
 					cout << "Segment One.";
 				}
@@ -447,6 +449,7 @@ void testApp::update(){
 							it++;
 						}
 					}
+					InPn = 1;
 					ContinueTimer();
 					cout << "Segment Two.";
 				}
@@ -469,6 +472,7 @@ void testApp::update(){
 							it++;
 						}
 					}
+					InPn = 1;
 					ContinueTimer();
 					cout << "Segment Three.";
 				}
@@ -573,6 +577,38 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
+				ContinueTimer();
+		}
+		else if (gui->listenForTrigger(79) == true)
+		{
+				#ifdef _LUMI_
+				if(true == weConnected)
+				{
+					//tcpClient.send("!");
+					RGB = 2;
+				}
+				#else
+					RGB = 2;
+				#endif
+				trigIndex = 53;
+				myValue54 = 0;
+				preventStupid = false;
+				motorMember = root.getMemberNames();
+				it = motorMember.begin();
+				while( (*it).find(myValue55)==string::npos || (*it).length() != myValue55.length() )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						it++;
+					}
+				}
+				InPn = 2;
 				ContinueTimer();
 		}
 		#ifndef _ILAN_
@@ -887,6 +923,7 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
 				ContinueTimer();
 				break;
 			case 2:
@@ -902,6 +939,7 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
 				ContinueTimer();
 				break;
 			case 3:
@@ -917,10 +955,11 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
 				ContinueTimer();
 				break;
 			case 4:
-				while( (*it).find("zoh0")==string::npos )
+				while( (*it).find("znd20")==string::npos )
 				{
 					if(it == motorMember.end())
 					{
@@ -932,9 +971,26 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
 				ContinueTimer();
 				break;
 			case 5:
+				while( (*it).find("zoh1")==string::npos )
+				{
+					if(it == motorMember.end())
+					{
+						it = motorMember.begin();
+						break;
+					}
+					else
+					{
+						it++;
+					}
+				}
+				InPn = 1;
+				ContinueTimer();
+				break;
+			case 6:
 				while( (*it).find("zph0")==string::npos )
 				{
 					if(it == motorMember.end())
@@ -947,6 +1003,7 @@ void testApp::update(){
 						it++;
 					}
 				}
+				InPn = 1;
 				ContinueTimer();
 				break;
 			}
@@ -1886,8 +1943,8 @@ void testApp::draw(){
 			if(13 == result)
 			{
 				readyBreak = true;
-			}
-		}
+			}	
+		}	
 
 	}
 	#endif
@@ -1895,12 +1952,12 @@ void testApp::draw(){
 	franklinBook.drawString(msgRx, 800, 600);
 
 	#ifdef baoPig
-	franklinBook.drawString(msgadd, 800, 700);
+	franklinBook.drawString(msgadd, 800, 700);	
 	#endif
 
 	#ifdef _MOVIE_
-	#ifndef _ILAN_
-		vocals.draw(700, 20);
+	#ifndef _ILAN_	
+		vocals.draw(700, 20);		
 	#else
 		vocals.draw(25, 10);
 	#endif
@@ -1937,6 +1994,34 @@ void testApp::keyReleased  (int key)
 		reqAT(T1,"mr-2000",RIGHT);
 		ofSleepMillis(100);
 		*/
+	}
+	else if(key == 'u')
+	{
+			myValue54 = 0;
+			//reqBatch("mr-2000",ALL);
+			
+			reqAT(T4,"mr-2000",UP);
+			reqAT(T5,"mr-2000",UP);
+			reqAT(T6,"mr-2000",UP);
+
+			reqAT(T0,"mr-2000",LEFT);
+			reqAT(T0,"mr-2000",RIGHT);
+			reqAT(T1,"mr-2000",LEFT);
+			reqAT(T1,"mr-2000",RIGHT);
+			reqAT(T2,"mr-2000",LEFT);
+			reqAT(T2,"mr-2000",RIGHT);
+			reqAT(T3,"mr-2000",LEFT);
+			reqAT(T3,"mr-2000",RIGHT);
+			reqAT(T4,"mr-2000",LEFT);
+			reqAT(T4,"mr-2000",RIGHT);
+			reqAT(T5,"mr-2000",LEFT);
+			reqAT(T5,"mr-2000",RIGHT);
+			reqAT(T7,"mr-2000",LEFT);
+			reqAT(T7,"mr-2000",RIGHT);
+			reqAT(T8,"mr-2000",LEFT);
+			reqAT(T8,"mr-2000",RIGHT);
+			reqAT(T10,"mr-2000",LEFT);
+			reqAT(T10,"mr-2000",RIGHT);
 	}
 }
 
@@ -2375,7 +2460,11 @@ void testApp::parseMaJSON(string ss) {
 	{
 		trigIndex = -1;
 	}
-	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
+	else if (msgRx.length() == 4 && msgRx.find("znd2")!=string::npos)
+	{
+		trigIndex = -1;
+	}
+	else if (msgRx.length() == 4 && msgRx.find("zoh0")!=string::npos)
 	{
 		trigIndex = -1;
 	}
@@ -2490,6 +2579,40 @@ void testApp::MaTimer()
 	if(thatInt > 0)
 	{
 		timer.setTimer(thatInt-PnInterval);
+		timer.startTimer();
+		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
+			parseMaJSON(*it);
+		#ifdef _LUMI_
+		tcpClient.send("setdmx(" + ofToString(RGB++) + "," + ofToString(rgbValue) + ")");
+		#elif _DMX_
+		if(5 == RGB)
+			RGB = 2;
+		if ((*it).find("zz")!=string::npos)
+			sendDMX("o");
+		else if(true == oneTwentySeven)
+		{
+			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(0,127)) + "w");
+			oneTwentySeven = !oneTwentySeven;
+		}
+		else
+		{
+			sendDMX(ofToString(thatInt) + "t" + ofToString(RGB++) + "c" + ofToString(ofRandom(128,255)) + "w");
+			oneTwentySeven = !oneTwentySeven;
+		}
+		#endif    
+		//else
+			//parseJSON(*it, thisInt / root[*it][SPEEDIVIDER].asInt() );
+	}
+	connectTime = ofGetElapsedTimeMillis();
+}
+
+void testApp::NextTimer()
+{
+
+	thatInt = root[*it][INTERVAL].asInt();
+	if(thatInt > 0)
+	{
+		timer.setTimer(2000);
 		timer.startTimer();
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
@@ -2717,17 +2840,40 @@ void testApp::Interval(ofEventArgs &e)
 
 void testApp::PnMaExchange()
 {
-	if(true == InPn)
+	if(0 == InPn)
+	{
+		ContinueTimer();
+		InPn = 1;
+	}
+	else if(1 == InPn)
 	{
 		MaTimer();
 		++it;
-		InPn = false;
-	}
-	else
+		InPn = 0;
+	} 
+	else if(2 == InPn)
 	{
 		ContinueTimer();
-		InPn = true;
+		InPn = 3;
 	}
+	else if(3 == InPn)
+	{
+		NextTimer();
+		++it;
+		InPn = 4;
+	}
+	else if(4 == InPn)
+	{
+		ContinueTimer();
+		InPn = 5;
+	}
+	else if(5 == InPn)
+	{
+		MaTimer();
+		//++it;
+		InPn = -1;
+	}
+	
 }
 
 float testApp::mapRay(float value, float dL, float dR, float mL, float mR)
