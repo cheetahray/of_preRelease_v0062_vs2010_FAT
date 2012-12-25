@@ -1421,7 +1421,7 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 3:
-				reqAT(T6,"mr-2000",UP);
+				reqAT(T6,"mr-500",UP);
 				ofSleepMillis(100);
 				break;
 			case 4:
@@ -1449,7 +1449,7 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 3:
-				reqAT(T6,"mr2000",UP);
+				reqAT(T6,"mr500",UP);
 				ofSleepMillis(100);
 				break;
 			case 4:
@@ -2873,7 +2873,29 @@ void testApp::PnMaExchange()
 		//++it;
 		InPn = -1;
 	}
-	
+	else if(-1 == InPn)
+	{
+			myValue54 = 0;
+			reqAT(T4,"pn10=100",UP);
+			ofSleepMillis(100);
+			reqAT(T5,"pn10=100",UP);
+			ofSleepMillis(100);
+			reqAT(T6,"pn10=100",UP);
+			ofSleepMillis(100);
+			reqBatch("pn10=100",LEFT);
+			ofSleepMillis(750);
+			reqBatch("pn10=100",RIGHT);
+			ofSleepMillis(750);
+			/*
+			reqBatch("pn05=H0101",ALL);
+			ofSleepMillis(1500);
+			reqBatch("pn11=10",ALL);
+			ofSleepMillis(1500);
+			reqBatch("pn24=2000",ALL);
+			ofSleepMillis(1500);
+			*/
+			preventStupid = true;
+	}
 }
 
 float testApp::mapRay(float value, float dL, float dR, float mL, float mR)
