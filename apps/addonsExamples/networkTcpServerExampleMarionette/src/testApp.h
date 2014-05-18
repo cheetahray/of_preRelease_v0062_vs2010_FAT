@@ -87,8 +87,8 @@ class testApp : public ofSimpleApp
 
 		GuiHandler*         gui;
 
-        bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, oneTwentySeven, myValue73, myValue74, myValue75, myValue76;
-		bool	myValue34, myValue35, myValue36, myValue37, myValue60, myValue61, readyBreak, waitRes, timeOutContinue, myValue64, myValue32, myValue33, myValue39, myValue42, myValue69, myValue70, myValue71, myValue72;
+        bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, oneTwentySeven, myValue73, myValue75, myValue76;
+		bool	myValue34, myValue35, myValue36, myValue37, myValue60, myValue61, readyBreak, waitRes, timeOutContinue, myValue64, myValue32, myValue33, myValue39, myValue42, myValue69, myValue71, myValue72;
         bool	myValue78, myValue79;
 		int     upValue0,ouValue0;
         int     upValue1,ouValue1;
@@ -120,7 +120,7 @@ class testApp : public ofSimpleApp
 		int     rValue9,orValue9;
 		int     rValue10,orValue10;
 		
-        int which, myValue54, myValue58, myValue65, myValue66, myValue67, myValue68, trigIndex, myValue40, thatInt;
+        int which, myValue54, myValue58, myValue65, myValue67, myValue68, trigIndex, myValue40, thatInt;
 		int myValue77, InPn;
 		/*
         bool toggle1a;

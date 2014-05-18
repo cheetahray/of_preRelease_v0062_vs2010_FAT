@@ -76,7 +76,7 @@ void testApp::setup()
 	gui = new GuiHandler;
 	int idx = 0;
 
-	GuiPanel*  Panel1 = gui->addPanel("Button",0,500,350,500);
+	GuiPanel*  Panel1 = gui->addPanel("Button", 0,0, 200,700);
 		#ifndef _ILAN_		
         Panel1->addButton(STOP_STR,100,20,"TRIGGER"/*"SWITCH"*/,true, 2, &myValue2);
 		Panel1->addRadio("Record?",10, 2, 54, &myValue54);
@@ -95,21 +95,44 @@ void testApp::setup()
 	    Panel1->addButton("Get Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 36, &myValue36);
 		Panel1->addButton("Next Step",100,20,"TRIGGER"/*"SWITCH"*/,true, 79, &myValue79);
 	    
-	GuiPanel*  Panel2 = gui->addPanel("TOP",350, 500,1000,500);
-
-        //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
-        Panel2->addIntSlider("0. Horizontal", 300, 10, root[FIRSTINDEX]["?t0pe"][2].asInt(), 741660, 4, &upValue0);
-        Panel2->addIntSlider("1. Vertical", 300, 10, root[FIRSTINDEX]["?t1pe"][2].asInt(), 297719, 5, &upValue1);
-		Panel2->addIntSlider("2. Head Rotation", 300, 10, root[FIRSTINDEX]["?t2pe"][2].asInt(), 9997, 6, &upValue2);
-        Panel2->addIntSlider("3. Body Rotation", 300, 10, root[FIRSTINDEX]["?t3pe"][2].asInt(), 118832, 7, &upValue3);
-		Panel2->addIntSlider("4. Right Head", 300, 10, root[FIRSTINDEX]["?t4pe"][2].asInt(), 200000, 8, &upValue4);
-		Panel2->addIntSlider("5. Left Head", 300, 10, root[FIRSTINDEX]["?t5pe"][2].asInt(), 200000, 9, &upValue5);
-		Panel2->addIntSlider("6. Back Head", 300, 10, root[FIRSTINDEX]["?t6pe"][2].asInt(), 200000, 10, &upValue6);
+	GuiPanel*  Panel2 = gui->addPanel("TOP", 200, 0, 1100,700);
+		Panel2->addRadio("LeftI",25, 11, 65, &myValue65);
+			Panel2->addRadioElement(65,"l_ankle");
+            Panel2->addRadioElement(65,"l_but");
+            Panel2->addRadioElement(65,"l_shoulder");
+			Panel2->addRadioElement(65,"l_chest");
+            Panel2->addRadioElement(65,"l_knee");
+            Panel2->addRadioElement(65,"l_foot");
+			Panel2->addRadioElement(65,"l_elbow");
+            Panel2->addRadioElement(65,"l_leg");
+            Panel2->addRadioElement(65,"l_hand");
+			Panel2->addRadioElement(65,"R brain");
+            Panel2->addRadioElement(65,"L brain");
+			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 69, &myValue69);
+			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 73, &myValue73);
+		Panel2->addRadio("RightI",25, 7, 67, &myValue67);
+			Panel2->addRadioElement(67,"ankle");
+            Panel2->addRadioElement(67,"but");
+            Panel2->addRadioElement(67,"shoulder");
+			Panel2->addRadioElement(67,"back");
+            Panel2->addRadioElement(67,"knee");
+            Panel2->addRadioElement(67,"foot");
+			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 71, &myValue71);
+			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 75, &myValue75);
+		Panel2->addRadio("RightII",25, 7, 68, &myValue68);
+			Panel2->addRadioElement(68,"elbow");
+            Panel2->addRadioElement(68,"leg");
+            Panel2->addRadioElement(68,"hand");
+            Panel2->addRadioElement(68,"B brain");
+			Panel2->addRadioElement(68,"R brain");
+			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 72, &myValue72);
+			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 76, &myValue76);
+		
         //Panel2->addButton("Reset H",100,20,"TRIGGER"/*"SWITCH"*/,true, 33, &myValue33);
 		Panel2->addButton("NOP",100,20,"TRIGGER"/*"SWITCH"*/,true, 64, &myValue64);
 	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
 		
-		Panel2->addRadio("Hands and Legs",25, 11, 58, &myValue58);
+		Panel2->addRadio("Both Hands and Legs",25, 11, 58, &myValue58);
 			Panel2->addRadioElement(58,"But");
             Panel2->addRadioElement(58,"Shoulder");
             Panel2->addRadioElement(58,"Knee");
@@ -144,7 +167,7 @@ void testApp::setup()
             Panel3->bindKey2(10,'[');
 		*/
 
-	GuiPanel*  Panel3 = gui->addPanel("LEFT", 0,0,350,500);
+	GuiPanel*  Panel3 = gui->addPanel("LEFT",0,700,350,500);
 		#ifndef _ILAN_
         //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
         Panel3->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][idx].asInt(), 136666, 11, &lValue0);
@@ -166,7 +189,7 @@ void testApp::setup()
 		Panel3->addButton("Command",100,20,"TRIGGER"/*"SWITCH"*/,true, 39, &myValue39);
 		Panel3->addButton("Go to Pose",100,20,"TRIGGER"/*"SWITCH"*/,true, 57, &myValue57);
 	    
-	GuiPanel*  Panel4 = gui->addPanel("RIGHT", 350, 0,350,500);
+	GuiPanel*  Panel4 = gui->addPanel("RIGHT",350, 700,1000,500);
 
         //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
         Panel4->addIntSlider("0. Foot Back", 300, 10, root[FIRSTINDEX]["?t0pe"][1].asInt(), 125666, 21, &rValue0);
@@ -189,41 +212,16 @@ void testApp::setup()
 		Panel3->addButton(STOP_STR,100,20,"TRIGGER"/*"SWITCH"*/,true, 2, &myValue2);
 		#endif
 	
-	GuiPanel*  Panel5 = gui->addPanel("Single", 700,0,350,500);
-		Panel5->addRadio("LeftI",25, 7, 65, &myValue65);
-			Panel5->addRadioElement(65,"ankle");
-            Panel5->addRadioElement(65,"but");
-            Panel5->addRadioElement(65,"shoulder");
-			Panel5->addRadioElement(65,"chest");
-            Panel5->addRadioElement(65,"knee");
-            Panel5->addRadioElement(65,"foot");
-			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 69, &myValue69);
-			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 73, &myValue73);
-		Panel5->addRadio("LeftII",25, 7, 66, &myValue66);
-			Panel5->addRadioElement(66,"elbow");
-            Panel5->addRadioElement(66,"leg");
-            Panel5->addRadioElement(66,"hand");
-			Panel5->addRadioElement(66,"R brain");
-            Panel5->addRadioElement(66,"L brain");
-			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 70, &myValue70);
-			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 74, &myValue74);
-		Panel5->addRadio("RightI",25, 7, 67, &myValue67);
-			Panel5->addRadioElement(67,"ankle");
-            Panel5->addRadioElement(67,"but");
-            Panel5->addRadioElement(67,"shoulder");
-			Panel5->addRadioElement(67,"back");
-            Panel5->addRadioElement(67,"knee");
-            Panel5->addRadioElement(67,"foot");
-			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 71, &myValue71);
-			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 75, &myValue75);
-		Panel5->addRadio("RightII",25, 7, 68, &myValue68);
-			Panel5->addRadioElement(68,"elbow");
-            Panel5->addRadioElement(68,"leg");
-            Panel5->addRadioElement(68,"hand");
-            Panel5->addRadioElement(68,"B brain");
-			Panel5->addRadioElement(68,"R brain");
-			Panel5->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 72, &myValue72);
-			Panel5->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 76, &myValue76);
+	GuiPanel*  Panel5 = gui->addPanel("Single", 700,700,350,500);
+		//Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
+        Panel5->addIntSlider("0. Horizontal", 300, 10, root[FIRSTINDEX]["?t0pe"][2].asInt(), 741660, 4, &upValue0);
+        Panel5->addIntSlider("1. Vertical", 300, 10, root[FIRSTINDEX]["?t1pe"][2].asInt(), 297719, 5, &upValue1);
+		Panel5->addIntSlider("2. Head Rotation", 300, 10, root[FIRSTINDEX]["?t2pe"][2].asInt(), 9997, 6, &upValue2);
+        Panel5->addIntSlider("3. Body Rotation", 300, 10, root[FIRSTINDEX]["?t3pe"][2].asInt(), 118832, 7, &upValue3);
+		Panel5->addIntSlider("4. Right Head", 300, 10, root[FIRSTINDEX]["?t4pe"][2].asInt(), 200000, 8, &upValue4);
+		Panel5->addIntSlider("5. Left Head", 300, 10, root[FIRSTINDEX]["?t5pe"][2].asInt(), 200000, 9, &upValue5);
+		Panel5->addIntSlider("6. Back Head", 300, 10, root[FIRSTINDEX]["?t6pe"][2].asInt(), 200000, 10, &upValue6);
+        
 	#ifdef _TWO_
 	serialL.setup(/**/"\\\\.\\COM24",9600);  						  // windows example
 	serialR.setup(/**/"\\\\.\\COM22",9600);  						  // windows example
@@ -1244,6 +1242,26 @@ void testApp::update(){
 				reqAT(T5,"mr-2000",LEFT);
 				ofSleepMillis(100);
 				break;
+			case 6:
+				reqAT(T7,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 7:
+				reqAT(T8,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 8:
+				reqAT(T10,"mr-2000",LEFT);
+				ofSleepMillis(100);
+				break;
+			case 9:
+				reqAT(T4,"mr-500",UP);
+				ofSleepMillis(100);
+				break;
+			case 10:
+				reqAT(T5,"mr-500",UP);
+				ofSleepMillis(100);
+				break;
 			}
 		}
 		else if (gui->listenForTrigger(73) == true)
@@ -1276,65 +1294,25 @@ void testApp::update(){
 				reqAT(T5,"mr2000",LEFT);
 				ofSleepMillis(100);
 				break;
-			}
-		}
-		else if (gui->listenForTrigger(70) == true)
-		{
-			myValue54 = 0;
-			preventStupid = false;
-			switch(myValue66)
-			{
-			case 0:
-				reqAT(T7,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T8,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T10,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T4,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T5,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
-			case 5:
-				break;
-			}
-		}
-		else if (gui->listenForTrigger(74) == true)
-		{
-			myValue54 = 0;
-			preventStupid = false;
-			switch(myValue66)
-			{
-			case 0:
+			case 6:
 				reqAT(T7,"mr2000",LEFT);
 				ofSleepMillis(100);
 				break;
-			case 1:
+			case 7:
 				reqAT(T8,"mr2000",LEFT);
 				ofSleepMillis(100);
 				break;
-			case 2:
+			case 8:
 				reqAT(T10,"mr2000",LEFT);
 				ofSleepMillis(100);
 				break;
-			case 3:
+			case 9:
 				reqAT(T4,"mr500",UP);
 				ofSleepMillis(100);
 				break;
-			case 4:
+			case 10:
 				reqAT(T5,"mr500",UP);
 				ofSleepMillis(100);
-				break;
-			case 5:
 				break;
 			}
 		}
