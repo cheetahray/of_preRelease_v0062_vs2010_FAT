@@ -147,7 +147,7 @@ class testApp : public ofSimpleApp
 		#ifdef _IR_
 		ofSerial serialA;
 		#endif
-		string msgRx, myValue50, myValue55, myValue62, lastss, myValue63, myValue38;
+		string msgRx, myValue50, myValue55, myValue62, lastss, myValue63, myValue38, myValue80;
 		unsigned char bytes[bytesRequired];
 		char tmpBytes[bytesRequired];
 		char jsonBytes[bytesRequired];

@@ -87,13 +87,18 @@ void testApp::setup()
 		Panel1->addTextField("Motor Index",140,20, FIRSTINDEX, 55, &myValue55);
 		#endif	
 		Panel1->addButton("Action!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 53, &myValue53);
-		#ifndef _ILAN_		
+		Panel1->addButton("Go to Pose",100,20,"TRIGGER"/*"SWITCH"*/,true, 57, &myValue57);
+	    Panel1->addButton("Next Step",100,20,"TRIGGER"/*"SWITCH"*/,true, 79, &myValue79);
+	    #ifndef _ILAN_		
         Panel1->addTextField("Velocity",140,20, "150", 50, &myValue50);
 		Panel1->addButton("Set PN Speed",100,20,"TRIGGER"/*"SWITCH"*/,true, 56, &myValue56);
 		Panel1->addButton("Get Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 34, &myValue34);
 	    Panel1->addButton("Get DownI",100,20,"TRIGGER"/*"SWITCH"*/,true, 35, &myValue35);
-	    Panel1->addButton("Get Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 36, &myValue36);
-		Panel1->addButton("Next Step",100,20,"TRIGGER"/*"SWITCH"*/,true, 79, &myValue79);
+	    Panel1->addButton("Get DownII",100,20,"TRIGGER"/*"SWITCH"*/,true, 60, &myValue60);
+		Panel1->addButton("Get Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 36, &myValue36);
+		Panel1->addButton("Get UpII",100,20,"TRIGGER"/*"SWITCH"*/,true, 37, &myValue37);
+	    Panel1->addButton("Get UpIII",100,20,"TRIGGER"/*"SWITCH"*/,true, 59, &myValue59);
+		Panel1->addButton("Home",100,20,"TRIGGER"/*"SWITCH"*/,true, 61, &myValue61);
 	    
 	GuiPanel*  Panel2 = gui->addPanel("TOP", 200, 0, 1100,700);
 		Panel2->addRadio("LeftI",25, 11, 65, &myValue65);
@@ -110,29 +115,22 @@ void testApp::setup()
             Panel2->addRadioElement(65,"L brain");
 			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 69, &myValue69);
 			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 73, &myValue73);
-		Panel2->addRadio("RightI",25, 7, 67, &myValue67);
-			Panel2->addRadioElement(67,"ankle");
-            Panel2->addRadioElement(67,"but");
-            Panel2->addRadioElement(67,"shoulder");
-			Panel2->addRadioElement(67,"back");
-            Panel2->addRadioElement(67,"knee");
-            Panel2->addRadioElement(67,"foot");
+		Panel2->addRadio("RightI",25, 11, 67, &myValue67);
+			Panel2->addRadioElement(67,"r_ankle");
+            Panel2->addRadioElement(67,"r_but");
+            Panel2->addRadioElement(67,"r_shoulder");
+			Panel2->addRadioElement(67,"r_back");
+            Panel2->addRadioElement(67,"r_knee");
+            Panel2->addRadioElement(67,"r_foot");
+			Panel2->addRadioElement(67,"r_elbow");
+            Panel2->addRadioElement(67,"r_leg");
+            Panel2->addRadioElement(67,"r_hand");
+            Panel2->addRadioElement(67,"B brain");
+			Panel2->addRadioElement(67,"R brain");
 			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 71, &myValue71);
 			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 75, &myValue75);
-		Panel2->addRadio("RightII",25, 7, 68, &myValue68);
-			Panel2->addRadioElement(68,"elbow");
-            Panel2->addRadioElement(68,"leg");
-            Panel2->addRadioElement(68,"hand");
-            Panel2->addRadioElement(68,"B brain");
-			Panel2->addRadioElement(68,"R brain");
-			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 72, &myValue72);
-			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 76, &myValue76);
 		
-        //Panel2->addButton("Reset H",100,20,"TRIGGER"/*"SWITCH"*/,true, 33, &myValue33);
-		Panel2->addButton("NOP",100,20,"TRIGGER"/*"SWITCH"*/,true, 64, &myValue64);
-	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
-		
-		Panel2->addRadio("Both Hands and Legs",25, 11, 58, &myValue58);
+        Panel2->addRadio("Both Hands and Legs",25, 11, 58, &myValue58);
 			Panel2->addRadioElement(58,"But");
             Panel2->addRadioElement(58,"Shoulder");
             Panel2->addRadioElement(58,"Knee");
@@ -147,8 +145,13 @@ void testApp::setup()
 		Panel2->bindKey(58,OF_KEY_RIGHT);
         Panel2->bindKey2(58,OF_KEY_LEFT);
 		//Panel2->addButton("Do it!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 32, &myValue32);
-		Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 32, &myValue32);
 		Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 42, &myValue42);
+		Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 32, &myValue32);
+		Panel2->addTextField("PosNum",140,20, "", 80, &myValue80);
+		//Panel2->addButton("Reset H",100,20,"TRIGGER"/*"SWITCH"*/,true, 33, &myValue33);
+		Panel2->addButton("NOP",100,20,"TRIGGER"/*"SWITCH"*/,true, 64, &myValue64);
+	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
+		
 		Panel2->addRadio("Segments",25, 11, 77, &myValue77);
 			Panel2->addRadioElement(77,"I");
 			Panel2->addRadioElement(77,"II");
@@ -158,6 +161,14 @@ void testApp::setup()
 			Panel2->addRadioElement(77,"salute");
 			Panel2->addRadioElement(77,"The End");
 		Panel2->addButton("Go",100,20,"TRIGGER"/*"SWITCH"*/,true, 78, &myValue78);
+
+		Panel2->addRadio("UP/LEFT/RIGHT",25, 4, 40, &myValue40);
+            Panel2->addRadioElement(40,"UP");
+            Panel2->addRadioElement(40,"LEFT");
+            Panel2->addRadioElement(40,"RIGHT");
+        Panel2->addTextField("CommandLine",140,20, "", 38, &myValue38);
+		Panel2->addButton("Command",100,20,"TRIGGER"/*"SWITCH"*/,true, 39, &myValue39);
+		
 		#endif	
 		/*
         GuiPanel*  Panel3 = gui->addPanel("panel 3",640,70,250,250);
@@ -181,14 +192,7 @@ void testApp::setup()
         Panel3->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][idx].asInt(), 168700, 19, &lValue8);
         Panel3->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][idx].asInt(), 115000, 20, &lValue9);
         Panel3->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][idx].asInt(), 203000, 41, &lValue10);
-		Panel3->addRadio("UP/LEFT/RIGHT",25, 4, 40, &myValue40);
-            Panel3->addRadioElement(40,"UP");
-            Panel3->addRadioElement(40,"LEFT");
-            Panel3->addRadioElement(40,"RIGHT");
-        Panel3->addTextField("CommandLine",140,20, "", 38, &myValue38);
-		Panel3->addButton("Command",100,20,"TRIGGER"/*"SWITCH"*/,true, 39, &myValue39);
-		Panel3->addButton("Go to Pose",100,20,"TRIGGER"/*"SWITCH"*/,true, 57, &myValue57);
-	    
+		
 	GuiPanel*  Panel4 = gui->addPanel("RIGHT",350, 700,1000,500);
 
         //Panel2->addFloatSlider("slider1",140,10, 26.8, 100, 4, &myValue4);
@@ -203,11 +207,7 @@ void testApp::setup()
         Panel4->addIntSlider("8. Foot Side", 300, 10, root[FIRSTINDEX]["?t8pe"][1].asInt(), 168700, 29, &rValue8);
         Panel4->addIntSlider("9. Hand Forward/Backward", 300, 10, root[FIRSTINDEX]["?t9pe"][1].asInt(), 115000, 30, &rValue9);
         Panel4->addIntSlider("10. Hand UP/Down", 300, 10, root[FIRSTINDEX]["?t10pe"][1].asInt(), 216000, 31, &rValue10);
-		Panel4->addButton("Get DownII",100,20,"TRIGGER"/*"SWITCH"*/,true, 60, &myValue60);
-		Panel4->addButton("Get UpII",100,20,"TRIGGER"/*"SWITCH"*/,true, 37, &myValue37);
-	    Panel4->addButton("Get UpIII",100,20,"TRIGGER"/*"SWITCH"*/,true, 59, &myValue59);
-		Panel4->addButton("Home",100,20,"TRIGGER"/*"SWITCH"*/,true, 61, &myValue61);
-	    //Panel4->addIntSlider("10. Heand UP/Down", 300, 10, 10000, 20000, 31, &rValue10);
+		//Panel4->addIntSlider("10. Heand UP/Down", 300, 10, 10000, 20000, 31, &rValue10);
 		#else
 		Panel3->addButton(STOP_STR,100,20,"TRIGGER"/*"SWITCH"*/,true, 2, &myValue2);
 		#endif
@@ -1216,224 +1216,424 @@ void testApp::update(){
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			switch(myValue65)
+			if(myValue80.find("")==string::npos)
 			{
-			case 0:
-				reqAT(T0,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T1,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T2,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T3,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T4,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 5:
-				reqAT(T5,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 6:
-				reqAT(T7,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 7:
-				reqAT(T8,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 8:
-				reqAT(T10,"mr-2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 9:
-				reqAT(T4,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
-			case 10:
-				reqAT(T5,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
+				switch(myValue65)
+				{
+				case 0:
+					reqAT(T0,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,"mr-2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T4,"mr-500",UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T5,"mr-500",UP);
+					ofSleepMillis(100);
+					break;
+				}
+			}
+			else
+			{
+				myValue80 = "mr" + myValue80;
+				switch(myValue65)
+				{
+				case 0:
+					reqAT(T0,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T4, myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T5, myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				}
 			}
 		}
 		else if (gui->listenForTrigger(73) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			switch(myValue65)
+			if(myValue80.find("")==string::npos)
 			{
-			case 0:
-				reqAT(T0,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T1,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T2,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T3,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T4,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 5:
-				reqAT(T5,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 6:
-				reqAT(T7,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 7:
-				reqAT(T8,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 8:
-				reqAT(T10,"mr2000",LEFT);
-				ofSleepMillis(100);
-				break;
-			case 9:
-				reqAT(T4,"mr500",UP);
-				ofSleepMillis(100);
-				break;
-			case 10:
-				reqAT(T5,"mr500",UP);
-				ofSleepMillis(100);
-				break;
+				switch(myValue65)
+				{
+				case 0:
+					reqAT(T0,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,"mr2000",LEFT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T4,"mr500",UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T5,"mr500",UP);
+					ofSleepMillis(100);
+					break;
+				}
+			}
+			else
+			{
+				myValue80 = "mr" + myValue80;
+				switch(myValue65)
+				{
+				case 0:
+					reqAT(T0,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,myValue80,LEFT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T4, myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T5, myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				}
 			}
 		}
 		else if (gui->listenForTrigger(71) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			switch(myValue67)
+			if(myValue80.find("")==string::npos)
 			{
-			case 0:
-				reqAT(T0,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T1,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T2,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T3,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T4,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 5:
-				reqAT(T5,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
+				switch(myValue67)
+				{
+				case 0:
+					reqAT(T0,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,"mr-2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T6,"mr-500",UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T2,"mr-500",UP);
+					ofSleepMillis(100);
+					break;
+				}
+			}
+			else
+			{
+				myValue80 = "mr" + myValue80;
+				switch(myValue67)
+				{
+				case 0:
+					reqAT(T0,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T6,myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T2,myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				}
 			}
 		}
 		else if (gui->listenForTrigger(75) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			switch(myValue67)
+			if(myValue80.find("")==string::npos)
 			{
-			case 0:
-				reqAT(T0,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T1,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T2,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T3,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T4,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 5:
-				reqAT(T5,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
+				switch(myValue67)
+				{
+				case 0:
+					reqAT(T0,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,"mr2000",RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T6,"mr500",UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T2,"mr500",UP);
+					ofSleepMillis(100);
+					break;
+				}
 			}
-		}
-		else if (gui->listenForTrigger(72) == true)
-		{
-			myValue54 = 0;
-			preventStupid = false;
-			switch(myValue68)
+			else
 			{
-			case 0:
-				reqAT(T7,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T8,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T10,"mr-2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T6,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T2,"mr-500",UP);
-				ofSleepMillis(100);
-				break;
-			}
-		}
-		else if (gui->listenForTrigger(76) == true)
-		{
-			myValue54 = 0;
-			preventStupid = false;
-			switch(myValue68)
-			{
-			case 0:
-				reqAT(T7,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 1:
-				reqAT(T8,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 2:
-				reqAT(T10,"mr2000",RIGHT);
-				ofSleepMillis(100);
-				break;
-			case 3:
-				reqAT(T6,"mr500",UP);
-				ofSleepMillis(100);
-				break;
-			case 4:
-				reqAT(T2,"mr500",UP);
-				ofSleepMillis(100);
-				break;
+				myValue80 = "mr" + myValue80;
+				switch(myValue67)
+				{
+				case 0:
+					reqAT(T0,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 1:
+					reqAT(T1,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 2:
+					reqAT(T2,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 3:
+					reqAT(T3,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 4:
+					reqAT(T4,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 5:
+					reqAT(T5,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 6:
+					reqAT(T7,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 7:
+					reqAT(T8,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 8:
+					reqAT(T10,myValue80,RIGHT);
+					ofSleepMillis(100);
+					break;
+				case 9:
+					reqAT(T6,myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				case 10:
+					reqAT(T2,myValue80,UP);
+					ofSleepMillis(100);
+					break;
+				}
 			}
 		}
 		else if (gui->listenForTrigger(52) == true)
