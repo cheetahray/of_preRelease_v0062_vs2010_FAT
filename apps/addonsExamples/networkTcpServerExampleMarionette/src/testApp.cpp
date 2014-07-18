@@ -27,7 +27,8 @@
 #define LFCR "\r\n"
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
-#define JSON "json.txt"
+#define JSON "json - 1.txt"
+#define FIRSTINDEX "yz"
 #define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
@@ -37,7 +38,6 @@
 #define LOWLIMIT 3
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define FIRSTINDEX "7a0"
 #define TIMEINT 31
 #define PnInterval 500
 #define secShift 83
@@ -101,7 +101,7 @@ void testApp::setup()
 		Panel1->addButton("Home",100,20,"TRIGGER"/*"SWITCH"*/,true, 61, &myValue61);
 	    
 	GuiPanel*  Panel2 = gui->addPanel("TOP", 200, 0, 1100,700);
-		Panel2->addRadio("LeftI",25, 11, 65, &myValue65);
+		Panel2->addRadio("LeftI",25, 13, 65, &myValue65);
 			Panel2->addRadioElement(65,"l_ankle");
             Panel2->addRadioElement(65,"l_but");
             Panel2->addRadioElement(65,"l_shoulder");
@@ -115,7 +115,7 @@ void testApp::setup()
             Panel2->addRadioElement(65,"L brain");
 			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 69, &myValue69);
 			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 73, &myValue73);
-		Panel2->addRadio("RightI",25, 11, 67, &myValue67);
+		Panel2->addRadio("RightI",25, 13, 67, &myValue67);
 			Panel2->addRadioElement(67,"r_ankle");
             Panel2->addRadioElement(67,"r_but");
             Panel2->addRadioElement(67,"r_shoulder");
@@ -1216,7 +1216,7 @@ void testApp::update(){
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			if(myValue80.find("")==string::npos)
+			if(myValue80.size()==0)
 			{
 				switch(myValue65)
 				{
@@ -1316,13 +1316,14 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				}
+				myValue80 = myValue80.substr(2);
 			}
 		}
 		else if (gui->listenForTrigger(73) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			if(myValue80.find("")==string::npos)
+			if(myValue80.size()==0)
 			{
 				switch(myValue65)
 				{
@@ -1422,13 +1423,14 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				}
+				myValue80 = myValue80.substr(2);
 			}
 		}
 		else if (gui->listenForTrigger(71) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			if(myValue80.find("")==string::npos)
+			if(myValue80.size()==0)
 			{
 				switch(myValue67)
 				{
@@ -1528,13 +1530,14 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				}
+				myValue80 = myValue80.substr(2);
 			}
 		}
 		else if (gui->listenForTrigger(75) == true)
 		{
 			myValue54 = 0;
 			preventStupid = false;
-			if(myValue80.find("")==string::npos)
+			if(myValue80.size()==0)
 			{
 				switch(myValue67)
 				{
@@ -1634,6 +1637,7 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				}
+				myValue80 = myValue80.substr(2);
 			}
 		}
 		else if (gui->listenForTrigger(52) == true)
