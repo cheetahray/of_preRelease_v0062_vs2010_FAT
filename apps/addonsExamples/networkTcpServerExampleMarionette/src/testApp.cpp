@@ -27,8 +27,8 @@
 #define LFCR "\r\n"
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
-#define JSON "json - 1.txt"
-#define FIRSTINDEX "yz"
+#define JSON "json.txt"
+#define FIRSTINDEX "ah0"
 #define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
