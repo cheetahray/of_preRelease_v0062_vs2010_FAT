@@ -28,7 +28,7 @@
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define FIRSTINDEX "ah0"
+#define FIRSTINDEX "a0c"
 #define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
@@ -628,9 +628,9 @@ void testApp::update(){
 			reqAT(T6,myValue50,UP);
 			ofSleepMillis(100);
 			reqBatch(myValue50,LEFT);
-			ofSleepMillis(750);
+			ofSleepMillis(2500);
 			reqBatch(myValue50,RIGHT);
-			ofSleepMillis(750);
+			ofSleepMillis(2500);
 			/*
 			reqBatch("pn05=H0101",ALL);
 			ofSleepMillis(1500);
