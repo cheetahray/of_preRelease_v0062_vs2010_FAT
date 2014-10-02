@@ -28,7 +28,7 @@
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define FIRSTINDEX "bx"//"a0c"
+#define FIRSTINDEX "a0c"//"a0c"
 #define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
@@ -126,7 +126,7 @@ void testApp::setup()
             Panel2->addRadioElement(67,"r_leg");
             Panel2->addRadioElement(67,"r_hand");
             Panel2->addRadioElement(67,"B brain");
-			Panel2->addRadioElement(67,"R brain");
+			Panel2->addRadioElement(67,"C brain");
 			Panel2->addButton("Up",100,20,"TRIGGER"/*"SWITCH"*/,true, 71, &myValue71);
 			Panel2->addButton("Down",100,20,"TRIGGER"/*"SWITCH"*/,true, 75, &myValue75);
 		
@@ -2243,7 +2243,7 @@ void testApp::reqQuestion(string a, int which){
 
 void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 {
-	if(realCmd.at(0) != 't' && realCmd.at(0) != 'T')
+	if(realCmd.at(0) != 't' && realCmd.at(0) != 'T' && realCmd.at(0) != '?')
 	{
 		realCmd.insert(0,"t0");
 	}
