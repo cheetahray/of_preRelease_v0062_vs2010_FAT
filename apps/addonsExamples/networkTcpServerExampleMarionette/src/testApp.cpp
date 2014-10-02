@@ -28,7 +28,7 @@
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define FIRSTINDEX "a0c"
+#define FIRSTINDEX "bx"//"a0c"
 #define DownDown "mr1000"
 #define UP 0
 #define LEFT 1
@@ -524,27 +524,7 @@ void testApp::update(){
 			ofSleepMillis(1500);
 			if(false == preventStupid)
 			{
-				reqAT(T0,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T1,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T2,"pn10=25",UP);
-				ofSleepMillis(100);
-				reqAT(T3,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T4,myValue50.insert(0,"pn10="),UP);
-				ofSleepMillis(100);
-				reqAT(T5,myValue50,UP);
-				ofSleepMillis(100);
-				reqAT(T6,myValue50,UP);
-				ofSleepMillis(100);
-				reqBatch(myValue50,LEFT);
-				ofSleepMillis(750);
-				reqBatch(myValue50,RIGHT);
-				ofSleepMillis(750);
-				reqBatch("save",ALL);
-				ofSleepMillis(1500);
-				preventStupid = true;
+				set150();
 			}
 		}
 		else if (gui->listenForTrigger(53) == true)
@@ -612,35 +592,7 @@ void testApp::update(){
 		#ifndef _ILAN_
 		else if (gui->listenForTrigger(56) == true)
 		{
-			myValue54 = 0;
-			reqAT(T0,"pn10=50",UP);
-			ofSleepMillis(100);
-			reqAT(T1,"pn10=50",UP);
-			ofSleepMillis(100);
-			reqAT(T2,"pn10=25",UP);
-			ofSleepMillis(100);
-			reqAT(T3,"pn10=50",UP);
-			ofSleepMillis(100);
-			reqAT(T4,myValue50.insert(0,"pn10="),UP);
-			ofSleepMillis(100);
-			reqAT(T5,myValue50,UP);
-			ofSleepMillis(100);
-			reqAT(T6,myValue50,UP);
-			ofSleepMillis(100);
-			reqBatch(myValue50,LEFT);
-			ofSleepMillis(2500);
-			reqBatch(myValue50,RIGHT);
-			ofSleepMillis(2500);
-			/*
-			reqBatch("pn05=H0101",ALL);
-			ofSleepMillis(1500);
-			reqBatch("pn11=10",ALL);
-			ofSleepMillis(1500);
-			reqBatch("pn24=2000",ALL);
-			ofSleepMillis(1500);
-			*/
-			reqBatch("save",ALL);
-			preventStupid = true;
+			set150();
 		}
 		else if (gui->listenForTrigger(59) == true)
 		{
@@ -2291,6 +2243,10 @@ void testApp::reqQuestion(string a, int which){
 
 void testApp::tenSix(string realCmd, int frontback, int baseIdx)
 {
+	if(realCmd.at(0) != 't' && realCmd.at(0) != 'T')
+	{
+		realCmd.insert(0,"t0");
+	}
 	int guan = realCmd.at(baseIdx) - '0'; 
 	switch(guan)
 	{
@@ -2841,26 +2797,7 @@ void testApp::Interval(ofEventArgs &e)
 			#endif
 			if(false == preventStupid)
 			{
-				reqAT(T0,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T1,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T2,"pn10=25",UP);
-				ofSleepMillis(100);
-				reqAT(T3,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T4,myValue50.insert(0,"pn10="),UP);
-				ofSleepMillis(100);
-				reqAT(T5,myValue50,UP);
-				ofSleepMillis(100);
-				reqAT(T6,myValue50,UP);
-				ofSleepMillis(100);
-				reqBatch(myValue50,LEFT);
-				ofSleepMillis(750);
-				reqBatch(myValue50,RIGHT);
-				ofSleepMillis(750);
-				reqBatch("save",ALL);
-				preventStupid = true;
+				set150();
 			}
 			trigIndex = -1;
 			#ifdef _PLAY_
@@ -2990,26 +2927,7 @@ void testApp::Interval(ofEventArgs &e)
 			#endif
 			if(false == preventStupid)
 			{
-				reqAT(T0,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T1,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T2,"pn10=25",UP);
-				ofSleepMillis(100);
-				reqAT(T3,"pn10=50",UP);
-				ofSleepMillis(100);
-				reqAT(T4,myValue50.insert(0,"pn10="),UP);
-				ofSleepMillis(100);
-				reqAT(T5,myValue50,UP);
-				ofSleepMillis(100);
-				reqAT(T6,myValue50,UP);
-				ofSleepMillis(100);
-				reqBatch(myValue50,LEFT);
-				ofSleepMillis(750);
-				reqBatch(myValue50,RIGHT);
-				ofSleepMillis(750);
-				reqBatch("save",ALL);
-				preventStupid = true;
+				set150();
 			}
 			trigIndex = -1;
 			#ifdef _PLAY_
@@ -3057,26 +2975,7 @@ void testApp::PnMaExchange()
 	}
 	else if(-1 == InPn)
 	{
-			myValue54 = 0;
-			reqAT(T4,"pn10=100",UP);
-			ofSleepMillis(100);
-			reqAT(T5,"pn10=100",UP);
-			ofSleepMillis(100);
-			reqAT(T6,"pn10=100",UP);
-			ofSleepMillis(100);
-			reqBatch("pn10=100",LEFT);
-			ofSleepMillis(750);
-			reqBatch("pn10=100",RIGHT);
-			ofSleepMillis(750);
-			/*
-			reqBatch("pn05=H0101",ALL);
-			ofSleepMillis(1500);
-			reqBatch("pn11=10",ALL);
-			ofSleepMillis(1500);
-			reqBatch("pn24=2000",ALL);
-			ofSleepMillis(1500);
-			*/
-			preventStupid = true;
+			set150();
 	}
 }
 
@@ -3142,4 +3041,80 @@ void testApp::reqflush(int which)
 		break;
 	}
 
+}
+
+void testApp::set150()
+{
+	myValue54 = 0;
+			reqAT(T0,"pn10=50",UP);
+			ofSleepMillis(100);
+			reqAT(T1,"pn10=50",UP);
+			ofSleepMillis(100);
+			reqAT(T2,"pn10=25",UP);
+			ofSleepMillis(100);
+			reqAT(T3,"pn10=50",UP);
+			ofSleepMillis(100);
+			if(myValue50.at(0) != 'p')
+				reqAT(T4,myValue50.insert(0,"pn10="),UP);
+			else
+				reqAT(T4,myValue50,UP);
+			ofSleepMillis(100);
+			reqAT(T5,myValue50,UP);
+			ofSleepMillis(100);
+			reqAT(T6,myValue50,UP);
+			ofSleepMillis(100);
+			reqAT(T0,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T1,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T2,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T3,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T4,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T5,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T6,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T7,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T8,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T9,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T10,myValue50,LEFT);
+			ofSleepMillis(100);
+			reqAT(T0,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T1,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T2,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T3,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T4,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T5,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T6,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T7,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T8,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T9,myValue50,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T10,myValue50,RIGHT);
+			ofSleepMillis(100);
+			/*
+			reqBatch("pn05=H0101",ALL);
+			ofSleepMillis(1500);
+			reqBatch("pn11=10",ALL);
+			ofSleepMillis(1500);
+			reqBatch("pn24=2000",ALL);
+			ofSleepMillis(1500);
+			*/
+			reqBatch("save",ALL);
+			preventStupid = true;
 }

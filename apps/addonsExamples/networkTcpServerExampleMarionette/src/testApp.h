@@ -84,7 +84,7 @@ class testApp : public ofSimpleApp
 		void reqflush(int which);
 		void PnMaExchange();
 		float mapRay(float value, float dL, float dR, float mL, float mR);
-
+		void set150();
 		GuiHandler*         gui;
 
         bool    myValue1,myValue2,myValue3,myValue4,myValue5, myValue51, myValue52, myValue53, myValue56, myValue57, myValue59, preventStupid, oneTwentySeven, myValue73, myValue75, myValue76;
