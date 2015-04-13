@@ -30,6 +30,7 @@
 #define JSON "json.txt"
 #define FIRSTINDEX "a0c"//"a0c"
 #define DownDown "mr1000"
+#define DownAll "mr13000"
 #define UP 0
 #define LEFT 1
 #define RIGHT 2
@@ -99,7 +100,7 @@ void testApp::setup()
 		Panel1->addButton("Get UpII",100,20,"TRIGGER"/*"SWITCH"*/,true, 37, &myValue37);
 	    Panel1->addButton("Get UpIII",100,20,"TRIGGER"/*"SWITCH"*/,true, 59, &myValue59);
 		Panel1->addButton("Home",100,20,"TRIGGER"/*"SWITCH"*/,true, 61, &myValue61);
-	    
+	    Panel1->addButton("Get DownIV",100,20,"TRIGGER"/*"SWITCH"*/,true, 74, &myValue74);
 	GuiPanel*  Panel2 = gui->addPanel("TOP", 200, 0, 1100,700);
 		Panel2->addRadio("LeftI",25, 13, 65, &myValue65);
 			Panel2->addRadioElement(65,"l_ankle");
@@ -745,6 +746,52 @@ void testApp::update(){
 			reqAT(T10,DownDown,LEFT);
 			ofSleepMillis(100);
 			reqAT(T10,DownDown,RIGHT);
+
+		}
+		else if (gui->listenForTrigger(74) == true)
+		{
+			myValue54 = 0;
+			reqAT(T4,DownAll,UP);
+			ofSleepMillis(100);
+			reqAT(T5,DownAll,UP);
+			ofSleepMillis(100);
+			reqAT(T6,DownAll,UP);
+			ofSleepMillis(100);
+			reqAT(T0,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T0,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T1,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T1,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T2,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T2,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T3,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T3,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T4,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T4,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T5,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T5,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T7,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T7,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T8,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T8,DownAll,RIGHT);
+			ofSleepMillis(100);
+			reqAT(T10,DownAll,LEFT);
+			ofSleepMillis(100);
+			reqAT(T10,DownAll,RIGHT);
 
 		}
 		else if (gui->listenForTrigger(34) == true)
