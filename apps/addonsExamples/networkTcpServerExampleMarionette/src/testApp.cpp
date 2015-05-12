@@ -39,7 +39,7 @@
 #define LOWLIMIT 3
 //dl,dn,ds,ed
 #define MIDDLE 0
-#define TIMEINT 31
+#define TIMEINT 32
 #define PnInterval 500
 #define secShift 83
 /*
@@ -587,7 +587,7 @@ void testApp::update(){
 						it++;
 					}
 				}
-				InPn = 2;
+				InPn = 3;
 				ContinueTimer();
 		}
 		#ifndef _ILAN_
@@ -1038,9 +1038,9 @@ void testApp::update(){
 				*/
 				break;
 			case 2:
-				reqAT(T4,"mr2000",LEFT);
+				reqAT(T4,"mr1000",LEFT);
 				ofSleepMillis(100);
-				reqAT(T4,"mr2000",RIGHT);
+				reqAT(T4,"mr1000",RIGHT);
 				ofSleepMillis(100);
 				/*
 				while((*it).at(0) != 'c')
@@ -1100,9 +1100,9 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 8:
-				reqAT(T4,"mr2000",UP);
+				reqAT(T4,"mr500",UP);
 				ofSleepMillis(100);
-				reqAT(T5,"mr2000",UP);
+				reqAT(T5,"mr500",UP);
 				ofSleepMillis(100);
 				break;
 			}
@@ -1141,9 +1141,9 @@ void testApp::update(){
 				*/
 				break;
 			case 2:
-				reqAT(T4,"mr-2000",LEFT);
+				reqAT(T4,"mr-1000",LEFT);
 				ofSleepMillis(100);
-				reqAT(T4,"mr-2000",RIGHT);
+				reqAT(T4,"mr-1000",RIGHT);
 				ofSleepMillis(100);
 				/*
 				while((*it).at(0) != 'c')
@@ -1203,9 +1203,9 @@ void testApp::update(){
 				ofSleepMillis(100);
 				break;
 			case 8:
-				reqAT(T4,"mr-2000",UP);
+				reqAT(T4,"mr-500",UP);
 				ofSleepMillis(100);
-				reqAT(T5,"mr-2000",UP);
+				reqAT(T5,"mr-500",UP);
 				ofSleepMillis(100);
 				break;
 			}
@@ -1228,7 +1228,7 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				case 2:
-					reqAT(T2,"mr-2000",LEFT);
+					reqAT(T2,"mr-1000",LEFT);
 					ofSleepMillis(100);
 					break;
 				case 3:
@@ -1335,7 +1335,7 @@ void testApp::update(){
 					ofSleepMillis(100);
 					break;
 				case 2:
-					reqAT(T2,"mr2000",LEFT);
+					reqAT(T2,"mr1000",LEFT);
 					ofSleepMillis(100);
 					break;
 				case 3:
@@ -2797,7 +2797,7 @@ void testApp::NextTimer()
 	thatInt = root[*it][INTERVAL].asInt();
 	if(thatInt > 0)
 	{
-		timer.setTimer(2000);
+		timer.setTimer(thatInt-PnInterval);//(2000);
 		timer.startTimer();
 		//if(root[*it][SPEEDIVIDER].isNull() == true || root[*it][SPEEDIVIDER].empty() == true)
 			parseMaJSON(*it);
@@ -2997,12 +2997,12 @@ void testApp::PnMaExchange()
 		MaTimer();
 		++it;
 		InPn = 0;
-	} 
+	}/* 
 	else if(2 == InPn)
 	{
 		ContinueTimer();
 		InPn = 3;
-	}
+	}*/
 	else if(3 == InPn)
 	{
 		NextTimer();
