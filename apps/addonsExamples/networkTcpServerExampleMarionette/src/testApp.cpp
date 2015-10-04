@@ -154,10 +154,10 @@ void testApp::setup()
 	    Panel2->addButton("Max Currency",100,20,"TRIGGER"/*"SWITCH"*/,true, 51, &myValue51);
 		
 		Panel2->addRadio("Segments",25, 11, 77, &myValue77);
+			Panel2->addRadioElement(77,"Nothing");
 			Panel2->addRadioElement(77,"I");
-			Panel2->addRadioElement(77,"II");
+			Panel2->addRadioElement(77,"Jordan");
 			Panel2->addRadioElement(77,"III");
-			Panel2->addRadioElement(77,"IV");
 			Panel2->addRadioElement(77,"standup");
 			Panel2->addRadioElement(77,"salute");
 			Panel2->addRadioElement(77,"The End");
@@ -2170,9 +2170,9 @@ void testApp::keyReleased  (int key)
 		myValue54 = 0;
 		reqBatch("mr-2000",ALL);
 		/*
-		reqAT(T1,"mr-2000",LEFT);
+		reqAT(T0,"mr-2000",LEFT);
 		ofSleepMillis(100);
-		reqAT(T1,"mr-2000",RIGHT);
+		reqAT(T4,"mr-2000",LEFT);
 		ofSleepMillis(100);
 		*/
 	}
