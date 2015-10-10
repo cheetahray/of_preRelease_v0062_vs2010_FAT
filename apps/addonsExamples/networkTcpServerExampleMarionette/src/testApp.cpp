@@ -51,7 +51,8 @@ pn23
 pn24
 pn50
 tid
-
+7a92
+a0bb
 */
 #define CntShiftLog 38
 //#define SERVER "192.168.11.40"
@@ -2577,16 +2578,16 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 27; // 後退 << 2 掛點
+						timeInt /= 28; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 27; // 後退 << 2 掛點
+						timeInt /= 28; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 27; // 轉頭 >> 2 還是掛點
+						timeInt /= 28; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 27; // 轉身怕掉下來
+						timeInt /= 29; // 轉身怕掉下來
 						break;
 					default:
 						timeInt /= TIMEINT;
