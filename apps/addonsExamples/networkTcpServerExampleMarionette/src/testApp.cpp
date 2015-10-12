@@ -2578,16 +2578,16 @@ void testApp::parsePnJSON(string ss, int thisInt) {
 					switch(strsub.at(1))
 					{
 					case '0':
-						timeInt /= 28; // 後退 << 2 掛點
+						timeInt /= 29; // 後退 << 2 掛點
 						break;
 					case '1':
-						timeInt /= 28; // 後退 << 2 掛點
+						timeInt /= 29; // 後退 << 2 掛點
 						break;
 					case '2':
-						timeInt /= 28; // 轉頭 >> 2 還是掛點
+						timeInt /= 29; // 轉頭 >> 2 還是掛點
 						break;
 					case '3':
-						timeInt /= 29; // 轉身怕掉下來
+						timeInt /= 32; // 轉身怕掉下來
 						break;
 					default:
 						timeInt /= TIMEINT;
