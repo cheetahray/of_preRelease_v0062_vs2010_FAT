@@ -973,7 +973,7 @@ void testApp::update(){
 				ContinueTimer();
 				break;
 			case 5:
-				while( (*it).find("zoh1")==string::npos )
+				while( (*it).find("zoh0")==string::npos )
 				{
 					if(it == motorMember.end())
 					{
@@ -2131,10 +2131,10 @@ void testApp::draw(){
 	}
 	#endif
 	
-	franklinBook.drawString(msgRx, 800, 600);
+	franklinBook.drawString(msgRx, 500, 600);
 
 	#ifdef baoPig
-	franklinBook.drawString(msgadd, 800, 700);	
+	franklinBook.drawString(msgadd, 500, 700);	
 	#endif
 
 	#ifdef _MOVIE_
@@ -2650,7 +2650,7 @@ void testApp::parseMaJSON(string ss) {
 	{
 		trigIndex = -1;
 	}
-	else if (msgRx.length() == 4 && msgRx.find("zoh0")!=string::npos)
+	else if (msgRx.length() == 3 && msgRx.find("zoh")!=string::npos)
 	{
 		trigIndex = -1;
 	}
