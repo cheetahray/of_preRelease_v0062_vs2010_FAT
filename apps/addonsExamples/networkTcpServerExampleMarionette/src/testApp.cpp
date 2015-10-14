@@ -239,7 +239,7 @@ void testApp::setup()
 	upValue0=ouValue0=upValue1=ouValue1=upValue2=ouValue2=upValue3=ouValue3=upValue4=ouValue4=upValue5=ouValue5=upValue6=ouValue6=lValue0=olValue0=lValue1=olValue1=lValue2=olValue2=lValue3=olValue3=lValue4=olValue4=lValue5=olValue5=lValue6=olValue6=lValue7=olValue7=lValue8=olValue8=lValue9=olValue9=lValue10=olValue10=rValue0=orValue0=rValue1=orValue1=rValue2=orValue2=rValue3=orValue3=rValue4=orValue4=rValue5=orValue5=rValue6=orValue6=rValue7=orValue7=rValue8=orValue8=rValue9=orValue9=rValue10=orValue10=0;
 	preventStupid = readyBreak = waitRes = false;	
 	trigIndex = -1;
-	deltaTime = connectTime = 0, lastxxxx = 0;
+	deltaTime = connectTime = 0;
 	#ifdef _LUMI_
 	weConnected = tcpClient.setup(SERVER,PORT);
 	tcpClient.setVerbose(true);
@@ -253,7 +253,7 @@ void testApp::setup()
 	#endif
 	#ifdef PUTA
 	receiver.setup( PORT );
-
+	lastxxxx = 0
 	current_msg_string = 0;
 	#endif
 	timer.setup(0,false);

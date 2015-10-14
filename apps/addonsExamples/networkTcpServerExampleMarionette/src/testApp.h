@@ -21,7 +21,7 @@
 //#define _NOTURN_
 //#define _GUAN_
 //#define _LUMI_
-#define PUTA
+//#define PUTA
 
 #ifndef _IR_
 //#define _KINECT_
