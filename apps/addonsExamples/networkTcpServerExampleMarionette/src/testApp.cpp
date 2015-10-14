@@ -28,7 +28,7 @@
 #define INTERVAL "Inter"
 #define SPEEDIVIDER "SpeedDivider"
 #define JSON "json.txt"
-#define FIRSTINDEX "a0c"//"a0c"
+#define FIRSTINDEX "7a0"//"a0c"
 #define DownDown "mr1000"
 #define DownAll "mr13000"
 #define UP 0
@@ -88,7 +88,7 @@ void testApp::setup()
 	    Panel1->addTextField(INTERVAL,140,20, ofToString(root[FIRSTINDEX][INTERVAL].asInt() + 1), 62, &myValue62);
 		Panel1->addTextField("Motor Index",140,20, FIRSTINDEX, 55, &myValue55);
 		#endif	
-		Panel1->addButton("Action!!",100,20,"TRIGGER"/*"SWITCH"*/,true, 53, &myValue53);
+		Panel1->addButton("Queue One",100,20,"TRIGGER"/*"SWITCH"*/,true, 53, &myValue53);
 		Panel1->addButton("Go to Pose",100,20,"TRIGGER"/*"SWITCH"*/,true, 57, &myValue57);
 	    Panel1->addButton("Next Step",100,20,"TRIGGER"/*"SWITCH"*/,true, 79, &myValue79);
 	    #ifndef _ILAN_		
@@ -156,9 +156,9 @@ void testApp::setup()
 		
 		Panel2->addRadio("Segments",25, 11, 77, &myValue77);
 			Panel2->addRadioElement(77,"Nothing");
-			Panel2->addRadioElement(77,"I");
-			Panel2->addRadioElement(77,"Jordan");
-			Panel2->addRadioElement(77,"III");
+			Panel2->addRadioElement(77,"50");
+			Panel2->addRadioElement(77,"52");
+			Panel2->addRadioElement(77,"57");
 			Panel2->addRadioElement(77,"standup");
 			Panel2->addRadioElement(77,"salute");
 			Panel2->addRadioElement(77,"The End");
